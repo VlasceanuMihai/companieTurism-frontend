@@ -11,7 +11,7 @@ function LoginComponent() {
                     Sign In
                 </span>
                 <div className="wrap-input">
-                    <input className="input" type="text" name="username" placeholder="Username"></input>
+                    <input className="input" type="email" name="username" placeholder="Username"></input>
                     <span className="focus-input"></span>
                 </div>
                 <div className="wrap-input">
@@ -19,7 +19,7 @@ function LoginComponent() {
                     <span className="focus-input"></span>
                 </div>
                 <div className="forgotPassword-text">
-                    <a href="" className="text1">Forgot password ?</a>
+                    <a href="https://google.ro" className="text1">Forgot password ?</a>
 
                 </div>
                 <div className="login-form-btn-container">
