@@ -1,7 +1,53 @@
-import React from "react";
+import React, { useState } from "react";
 import "./loginComponent.css";
+import AuthenticationService from "../../auth/AuthenticationService";
+import { useHistory } from "react-router";
 
 function LoginComponent() {
+  const { executeAuthentication, successfulLogin } = AuthenticationService();
+  let history = useHistory();
+
+  const [userData, setUserData] = useState({
+    username: "",
+    password: "",
+    hasLoginFailed: false,
+    showSuccessMessage: false,
+  });
+
+  function handleChange(event) {
+    event.preventDefault();
+    setUserData((userData) => ({
+      ...userData,
+      [event.target.name]: event.target.value,
+    }));
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    executeAuthentication(userData.username, userData.password)
+      .then((response) => {
+        console.log("response.data.token: ", response.data.token);
+        successfulLogin(userData.username, response.data.token);
+        history.push("/admin/employees");
+        setUserData({
+          username: "",
+          password: "",
+          hasLoginFailed: false,
+          showSuccessMessage: true,
+        });
+      })
+      .catch((error) => {
+        console.log("Invalid credentials.");
+        setUserData({
+          username: "",
+          password: "",
+          hasLoginFailed: true,
+          showSuccessMessage: false,
+        });
+      });
+  }
+
   return (
     <div className="limiter">
       <div className="login-container">
@@ -16,6 +62,8 @@ function LoginComponent() {
                 placeholder="Username"
                 required
                 autoFocus
+                value={userData.email}
+                onChange={handleChange}
               ></input>
               <span className="focus-input"></span>
             </div>
@@ -23,10 +71,11 @@ function LoginComponent() {
               <input
                 className="input"
                 type="password"
-                name="username"
+                name="password"
                 placeholder="Password"
                 required
-                autoFocus
+                value={userData.password}
+                onChange={handleChange}
               ></input>
               <span className="focus-input"></span>
             </div>
@@ -36,7 +85,16 @@ function LoginComponent() {
               </a>
             </div>
             <div className="login-form-btn-container">
-              <button className="login-form-btn">Sign in</button>
+              <button className="login-form-btn" onClick={handleSubmit}>
+                Sign in
+              </button>
+            </div>
+            <div>
+              {userData.hasLoginFailed && (
+                <div className="alert alert-warning">
+                  Invalid username/password.
+                </div>
+              )}
             </div>
           </form>
         </div>
@@ -46,29 +104,3 @@ function LoginComponent() {
 }
 
 export default LoginComponent;
-
-// id="email"
-//               name="email"
-//               type="email"
-//               label="Email"
-//               variant="standard"
-//               margin="normal"
-//               required
-//               fullWidth
-//               autoComplete="email"
-//               autoFocus
-//               value={userData.email}
-//               onChange={handleChange}
-//             />
-//             <TextField
-//               id="password"
-//               name="password"
-//               type="password"
-//               label="Password"
-//               variant="standard"
-//               margin="normal"
-//               required
-//               fullWidth
-//               autoComplete="current-password"
-//               value={userData.password}
-//               onChange={handleChange}

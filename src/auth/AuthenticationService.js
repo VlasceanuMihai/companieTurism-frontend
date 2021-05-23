@@ -1,13 +1,13 @@
 import axios from "axios";
-import { useDispatch } from "react-redux";
-import { useHistory } from "react-router";
+// import { useDispatch } from "react-redux";
+// import { useHistory } from "react-router";
 import { executeAuthenticationApi } from "../api/Endpoints";
 
 const USER_TOKEN = "user_token";
 
 function AuthenticationService() {
-  const history = useHistory();
-  const dispatch = useDispatch();
+//   const history = useHistory();
+//   const dispatch = useDispatch();
 
   function createToken(token) {
     let userToken = "Bearer " + token;
@@ -55,6 +55,14 @@ function AuthenticationService() {
     }
     return user;
   }
+
+  return {
+    executeAuthentication,
+    successfulLogin,
+    setupAxiosInterceptors,
+    isUserLoggedIn,
+    getLoggedInUser,
+  };
 }
 
 export default AuthenticationService;
