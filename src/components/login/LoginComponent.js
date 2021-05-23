@@ -89,6 +89,13 @@ function LoginComponent() {
                 Sign in
               </button>
             </div>
+            <div>
+              {userData.hasLoginFailed && (
+                <div className="alert alert-warning">
+                  Invalid username/password.
+                </div>
+              )}
+            </div>
           </form>
         </div>
       </div>
