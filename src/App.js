@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Switch, withRouter } from "react-router-dom";
 import "./App.css";
 import LoginComponent from "./components/login/LoginComponent";
-import AuthenticatedRoute from "./auth/AuthenticatedRoute";
+// import AuthenticatedRoute from "./auth/AuthenticatedRoute";
 
 const App = withRouter(({ location }) => {
   return (
