@@ -1,8 +1,11 @@
+import "./employeesComponenet.css";
+import NavbarComponent from "../navbar/NavbarComponent"
+//import 
 function EmployeesComponent(){
     return(
-        <div>
-            Employees
-        </div>
+       <NavbarComponent>
+
+       </NavbarComponent>
     );
 
 }
