@@ -1,0 +1,42 @@
+.navBar {
+  position: relative;
+  background-color: #948e8c;
+  z-index: 1;
+  text-align: center;
+  text-decoration: none;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+#userIcon {
+  float: right;
+  position: relative;
+  font-size: 20px;
+  padding: 0;
+  top: 4px;
+  margin-right: 40px;
+}
+
+.logout {
+  float: right;
+  position: relative;
+  margin-left: 0;
+  margin-right: -35px;
+}
+
+a {
+  float: left;
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  padding: 10px 10px;
+  font-size: 12px;
+  margin-left: 50px;
+  font-weight: 600;
+  background-color: transparent;
+}
+
+a:hover {
+  color: #abe4e4;
+}
+/*# sourceMappingURL=NavbarComponent.css.map */
