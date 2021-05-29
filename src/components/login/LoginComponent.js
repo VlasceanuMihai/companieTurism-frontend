@@ -62,7 +62,7 @@ function LoginComponent() {
                 placeholder="Username"
                 required
                 autoFocus
-                value={userData.email}
+                value={userData.username}
                 onChange={handleChange}
               ></input>
               <span className="focus-input"></span>
