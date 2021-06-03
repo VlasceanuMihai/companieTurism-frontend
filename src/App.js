@@ -4,6 +4,7 @@ import "./App.css";
 import AuthenticatedRoute from "./auth/AuthenticatedRoute";
 import LoginComponent from "./components/login/LoginComponent";
 import EmployeesComponent from "./components/menu/employees/EmployeesComponent";
+import TableComponent from "./components/menu/table/TableComponent"
 // import AuthenticatedRoute from "./auth/AuthenticatedRoute";
 
 const App = withRouter(({ location }) => {
@@ -12,6 +13,7 @@ const App = withRouter(({ location }) => {
       <Route path="/login" exact component={LoginComponent} />
       <Route path="/signin" exact component={LoginComponent} />
       <Route path="/" exact component={LoginComponent} />
+      <Route path="/table" exact component={TableComponent} />
       <Route
         path="/admin/employees"
         exact

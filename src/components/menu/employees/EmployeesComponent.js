@@ -1,10 +1,18 @@
 import NavbarComponent from "../navbar/NavbarComponent"
-//import 
+import TableComponent from "../table/TableComponent"
+
 function EmployeesComponent(){
     return(
-       <NavbarComponent>
+       <div>
+           <NavbarComponent>
 
-       </NavbarComponent>
+           </NavbarComponent>
+           <TableComponent>
+               
+           </TableComponent>
+       </div>
+    
+    
     );
 
 }
