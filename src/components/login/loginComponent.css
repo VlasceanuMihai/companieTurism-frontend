@@ -57,8 +57,8 @@
 }
 
 .login-form-title {
-  font-size: 30px;
-  font-weight: 600;
+  font-size: 60px;
+  font-weight: 700;
   color: white;
   line-height: 1.2;
   text-align: center;
@@ -67,7 +67,7 @@
   width: 500px;
   top: 0;
   left: 0;
-  background-color: #e8d5c7;
+  background: linear-gradient(45deg, #F1CDB9 10%, #b6aeab 90%);
   padding-top: 50px;
   padding-bottom: 40px;
 }
@@ -138,9 +138,8 @@
 }
 
 .forgotPassword-text {
-  padding-bottom: 23px;
   padding-top: 13px;
-  text-align: right !important;
+  float: right;
 }
 
 .text1 {
@@ -148,6 +147,12 @@
   color: #abe4e4;
   line-height: 1.4;
   text-decoration: none;
+}
+
+.text1:hover {
+  color: #2d3b3b;
+  -webkit-transition: 1s ease;
+  transition: 1s ease;
 }
 
 .login-form-btn-container {
@@ -188,5 +193,14 @@
 
 .login-form-btn:hover {
   background-color: #2d3b3b;
+  -webkit-transition: 1s ease;
+  transition: 1s ease;
+}
+
+.alert {
+  color: rgba(255, 0, 0, 0.562);
+  margin-top: 10px;
+  font-weight: 600;
+  font-size: 12px;
 }
 /*# sourceMappingURL=loginComponent.css.map */

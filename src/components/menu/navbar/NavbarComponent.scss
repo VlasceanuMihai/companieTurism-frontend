@@ -1,6 +1,6 @@
 .navBar {
   position: relative;
-  background-color: #948e8c;
+  background: linear-gradient(45deg, #F1CDB9 10%, #b6aeab 90%);
   z-index: 1;
   text-align: center;
   text-decoration: none;
@@ -25,7 +25,7 @@
 
 a {
   float: left;
-  color: white;
+  color: rgb(0, 0, 0);
   text-decoration: none;
   text-align: center;
   padding: 10px 10px;
@@ -36,5 +36,5 @@ a {
 }
 
 a:hover {
-  color: #abe4e4;
+  color: #ffffff;
 }
