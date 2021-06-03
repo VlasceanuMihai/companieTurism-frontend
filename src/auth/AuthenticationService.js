@@ -1,13 +1,14 @@
 import axios from "axios";
-// import { useDispatch } from "react-redux";
-// import { useHistory } from "react-router";
-import { executeAuthenticationApi } from "../api/Endpoints";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router";
+import { executeAuthenticationApi } from "../api/AuthApi";
+import { logoutReset } from "../redux/actions/adminActions";
 
 const USER_TOKEN = "user_token";
 
 function AuthenticationService() {
-//   const history = useHistory();
-//   const dispatch = useDispatch();
+  const history = useHistory();
+  const dispatch = useDispatch();
 
   function createToken(token) {
     let userToken = "Bearer " + token;
@@ -24,12 +25,12 @@ function AuthenticationService() {
     setupAxiosInterceptors();
   }
 
-  //   function logout(){
-  //       console.log("Successful logout!");
-  //       sessionStorage.removeItem(USER_TOKEN);
-  //       dispatch()
-  //       history.push("/login");
-  //   }
+  function logout() {
+    console.log("Successful logout!");
+    sessionStorage.removeItem(USER_TOKEN);
+    dispatch(logoutReset());
+    history.push("/login");
+  }
 
   function setupAxiosInterceptors() {
     axios.interceptors.request.use((config) => {
@@ -62,6 +63,7 @@ function AuthenticationService() {
     setupAxiosInterceptors,
     isUserLoggedIn,
     getLoggedInUser,
+    logout,
   };
 }
 

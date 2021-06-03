@@ -4,12 +4,8 @@ import TableComponent from "../table/TableComponent"
 function EmployeesComponent(){
     return(
        <div>
-           <NavbarComponent>
-
-           </NavbarComponent>
-           <TableComponent>
-               
-           </TableComponent>
+           <NavbarComponent/>
+           <TableComponent/>
        </div>
     
     
