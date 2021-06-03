@@ -32,7 +32,7 @@ const useStyles = makeStyles({
       top: 3,
   },
   tablerow:{
-    backgroundColor: '#948e8c',    
+    background: 'linear-gradient(45deg, #F1CDB9 10%, #b6aeab 90%)',    
   }
 });
 const useStyles1 = makeStyles((theme) => ({
