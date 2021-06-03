@@ -92,7 +92,7 @@ function LoginComponent() {
             <div>
               {userData.hasLoginFailed && (
                 <div className="alert alert-warning">
-                  Invalid username/password.
+                  Invalid username/password !
                 </div>
               )}
             </div>
