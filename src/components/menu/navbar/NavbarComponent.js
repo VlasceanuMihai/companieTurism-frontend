@@ -19,7 +19,7 @@ function NavbarComponent() {
         <a id="userIcon" href="" target="_blank">
           <i class="far fa-user-circle"></i>
         </a>
-        <a class="logout" onClick={logout}>
+        <a class="logout" href="" onClick={handleLogout}>
           Log out
         </a>
       </div>

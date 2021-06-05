@@ -35,7 +35,7 @@ function AuthenticationService() {
   function setupAxiosInterceptors() {
     axios.interceptors.request.use((config) => {
       if (isUserLoggedIn()) {
-        config.headers.autohrization = sessionStorage.getItem(USER_TOKEN);
+        config.headers.authorization = sessionStorage.getItem(USER_TOKEN);
       }
       return config;
     });
