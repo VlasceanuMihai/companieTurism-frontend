@@ -4,9 +4,9 @@ import AuthenticationService from "../auth/AuthenticationService";
 function AdminService() {
   const { setupAxiosInterceptors } = AuthenticationService();
 
-  function getEmployees() {
+  function getEmployees(params) {
     setupAxiosInterceptors();
-    return getEmployeesApi();
+    return getEmployeesApi(params);
   }
 
   return {
