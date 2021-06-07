@@ -186,7 +186,7 @@ function BasicTable({ employees, ...rest }) {
       <Table className={classes.table} aria-label="simple-table">
         <TableHead>
           <TableRow className={classes.tablerow}>
-            <TableCell>Id</TableCell>
+            <TableCell>Id_Angajat</TableCell>
             <TableCell align="center">Nume</TableCell>
             <TableCell align="center">Prenume</TableCell>
             <TableCell align="center">CNP</TableCell>
