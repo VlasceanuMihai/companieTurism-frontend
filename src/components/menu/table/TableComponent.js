@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 import {
@@ -13,12 +13,13 @@ import {
   Paper,
   IconButton,
 } from "@material-ui/core";
-import SettingsIcon from '@material-ui/icons/Settings';
-import EditIcon from '@material-ui/icons/Edit';
-import FirstPageIcon from '@material-ui/icons/FirstPage';
-import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
-import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
-import LastPageIcon from '@material-ui/icons/LastPage';
+import SettingsIcon from "@material-ui/icons/Settings";
+import EditIcon from "@material-ui/icons/Edit";
+import AdminService from "../../../services/AdminService";
+import FirstPageIcon from "@material-ui/icons/FirstPage";
+import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
+import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
+import LastPageIcon from "@material-ui/icons/LastPage";
 
 const useStylesPagination = makeStyles((theme) => ({
   root: {
@@ -119,160 +120,66 @@ TablePaginationActions.propTypes = {
   rowsPerPage: PropTypes.number.isRequired,
 };
 
-function createData(
-  id,
-  nume,
-  prenume,
-  cnp,
-  email,
-  nrtel,
-  tipcontr,
-  dataangj,
-  salariu
-) {
-  return { id, nume, prenume, cnp, email, nrtel, tipcontr, dataangj, salariu };
-}
-
-const rows = [
-  createData(
-    101,
-    "Popescu",
-    "Maricel",
-    1940308425561,
-    "maricelsefu@gmail.com",
-    "0732545878",
-    "Nedeterminat",
-    "08/02/2007",
-    "5000Lei"
-  ),
-  createData(
-    102,
-    "Popa",
-    "Marius",
-    1940308425561,
-    "maricelsefu@gmail.com",
-    "0732545744",
-    "Nedeterminat",
-    "08/02/2007",
-    "5000Lei"
-  ),
-  createData(
-    103,
-    "Popescu",
-    "Maricel",
-    1940308425561,
-    "maricelsefu@gmail.com",
-    "0732545878",
-    "Nedeterminat",
-    "08/02/2007",
-    "5000Lei"
-  ),
-  createData(
-    104,
-    "Popescu",
-    "Maricel",
-    1940308425561,
-    "maricelsefu@gmail.com",
-    "0732545878",
-    "Nedeterminat",
-    "08/02/2007",
-    "5000Lei"
-  ),
-  createData(
-    105,
-    "Popescu",
-    "Maricel",
-    1940308425561,
-    "maricelsefu@gmail.com",
-    "0732545878",
-    "Nedeterminat",
-    "08/02/2007",
-    "5000Lei"
-  ),
-  createData(
-    106,
-    "Popescu",
-    "Maricel",
-    1940308425561,
-    "maricelsefu@gmail.com",
-    "0732545878",
-    "Nedeterminat",
-    "08/02/2007",
-    "5000Lei"
-  ),
-  createData(
-    107,
-    "Popescu",
-    "Maricel",
-    1940308425561,
-    "maricelsefu@gmail.com",
-    "0732545878",
-    "Nedeterminat",
-    "08/02/2007",
-    "5000Lei"
-  ),
-  createData(
-    108,
-    "Popescu",
-    "Maricel",
-    1940308425561,
-    "maricelsefu@gmail.com",
-    "0732545878",
-    "Nedeterminat",
-    "08/02/2007",
-    "5000Lei"
-  ),
-  createData(
-    109,
-    "Popescu",
-    "Maricel",
-    1940308425561,
-    "maricelsefu@gmail.com",
-    "0732545878",
-    "Nedeterminat",
-    "08/02/2007",
-    "5000Lei"
-  ),
-  createData(
-    110,
-    "Popescu",
-    "Maricel",
-    1940308425561,
-    "maricelsefu@gmail.com",
-    "0732545878",
-    "Nedeterminat",
-    "08/02/2007",
-    "5000Lei"
-  ),
-  createData(
-    110,
-    "Popescu",
-    "Maricel",
-    1940308425561,
-    "maricelsefu@gmail.com",
-    "0732545878",
-    "Nedeterminat",
-    "08/02/2007",
-    "5000Lei"
-  ),
-].sort((a, b) => (a.id < b.id ? -1 : 1));
-
-function BasicTable(className, employees, ...rest ) {
+function BasicTable({ employees, ...rest }) {
   const classes = useStyles();
+  // const { getEmployees } = AdminService();
+  // const [employeesData, setEmployeesData] = useState(employees);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(2);
+
+  // const lastIndex = currentPage * rowsPerPage;
+  // const firstIndex = lastIndex - rowsPerPage;
+  // const totalPages = employeesData / rowsPerPage;
 
   // const emptyRows =
   //   rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
+  // const getRequestParams = (pageParam, pageSizeParam) => {
+  //   let params = {};
+
+  //   if (pageParam) {
+  //     params["page"] = pageParam - 1;
+  //   }
+
+  //   if (pageSizeParam) {
+  //     params["size"] = pageSizeParam;
+  //   }
+
+  //   return params;
+  // };
+
+  // const getEmployeesBasedOnParams = () => {
+  //   const params = getRequestParams(currentPage, rowsPerPage);
+  //   console.log(params);
+
+  //   getEmployees(params)
+  //     .then((response) => {
+  //       console.log("Employees: ", response.data);
+  //       setEmployeesData(response.data);
+  //       console.log("Total pages: ", response.data.totalPages);
+  //     })
+  //     .catch((error) => {
+  //       console.log("Error: ", error);
+  //     });
+  // };
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
+    // getEmployeesBasedOnParams();
   };
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
+    setRowsPerPage(+event.target.value);
     setPage(0);
+    console.log("Page --- ", page);
+    console.log("RowsPerPage --- ", rowsPerPage);
+    // getEmployeesBasedOnParams();
   };
+
+  // useEffect(() => {
+  //   console.log("Rows per page: ", rowsPerPage)
+  //   // getEmployeesBasedOnParams();
+  // }, [rowsPerPage]);
 
   return (
     <TableContainer component={Paper} className={classes.paper}>
@@ -295,21 +202,24 @@ function BasicTable(className, employees, ...rest ) {
         </TableHead>
         <TableBody>
           {(rowsPerPage > 0
-            ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-            : rows
-          ).map((row) => (
-            <TableRow key={row.id}>
+            ? employees.slice(
+                page * rowsPerPage,
+                page * rowsPerPage + rowsPerPage
+              )
+            : employees
+          ).map((employee, index) => (
+            <TableRow key={employee.id}>
               <TableCell component="th" scope="row">
-                {row.id}
+                {employee.id}
               </TableCell>
-              <TableCell align="center">{row.nume}</TableCell>
-              <TableCell align="center">{row.prenume}</TableCell>
-              <TableCell align="center">{row.cnp}</TableCell>
-              <TableCell align="center">{row.email}</TableCell>
-              <TableCell align="center">{row.nrtel}</TableCell>
-              <TableCell align="center">{row.tipcontr}</TableCell>
-              <TableCell align="center">{row.dataangj}</TableCell>
-              <TableCell align="center">{row.salariu}</TableCell>
+              <TableCell align="center">{employee.lastName}</TableCell>
+              <TableCell align="center">{employee.firstName}</TableCell>
+              <TableCell align="center">{employee.cnp}</TableCell>
+              <TableCell align="center">{employee.email}</TableCell>
+              <TableCell align="center">{employee.phoneNumber}</TableCell>
+              <TableCell align="center">{employee.employeeType}</TableCell>
+              <TableCell align="center">{employee.dateOfEmployment}</TableCell>
+              <TableCell align="center">{employee.wage}</TableCell>
               <TableCell align="center">
                 <EditIcon></EditIcon>
               </TableCell>
@@ -319,9 +229,9 @@ function BasicTable(className, employees, ...rest ) {
         <TableFooter>
           <TableRow>
             <TablePagination
-              rowsPerPageOptions={[5, 10]}
+              rowsPerPageOptions={[2, 4]}
               colSpan={11}
-              count={rows.length}
+              count={employees.length}
               rowsPerPage={rowsPerPage}
               page={page}
               SelectProps={{

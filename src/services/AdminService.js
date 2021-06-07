@@ -1,16 +1,25 @@
-import { getEmployeesApi } from "../api/adminApi/AdminApi";
+import {
+  getEmployeesByPageableApi,
+  getAllEmployeesApi,
+} from "../api/adminApi/AdminApi";
 import AuthenticationService from "../auth/AuthenticationService";
 
 function AdminService() {
   const { setupAxiosInterceptors } = AuthenticationService();
 
-  function getEmployees(params) {
+  function getEmployeesByPageable(params) {
     setupAxiosInterceptors();
-    return getEmployeesApi(params);
+    return getEmployeesByPageableApi(params);
+  }
+
+  function getAllEmployees() {
+    setupAxiosInterceptors();
+    return getAllEmployeesApi();
   }
 
   return {
-    getEmployees,
+    getEmployeesByPageable,
+    getAllEmployees,
   };
 }
 
