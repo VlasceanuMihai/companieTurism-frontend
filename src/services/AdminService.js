@@ -1,6 +1,7 @@
 import {
   getEmployeesByPageableApi,
   getAllEmployeesApi,
+  getAllDocumentsApi,
 } from "../api/adminApi/AdminApi";
 import AuthenticationService from "../auth/AuthenticationService";
 
@@ -17,9 +18,15 @@ function AdminService() {
     return getAllEmployeesApi();
   }
 
+  function getAllDocuments() {
+    setupAxiosInterceptors();
+    return getAllDocumentsApi();
+  }
+
   return {
     getEmployeesByPageable,
     getAllEmployees,
+    getAllDocuments
   };
 }
 

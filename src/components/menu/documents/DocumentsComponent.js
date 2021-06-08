@@ -2,38 +2,38 @@
 import { useEffect, useState } from "react";
 import AdminService from "../../../services/AdminService";
 import NavbarComponent from "../navbar/NavbarComponent";
-import TableComponent from "./TableEmployeesComponent";
+import DataTableComponent from "./TableDocumentsComponent";
 import AddButtonComponent from "../addButton/AddButtonComponent";
 
-function EmployeesComponent() {
-  const { getAllEmployees } = AdminService();
-  const [employees, setEmployees] = useState(null);
-  const [employeesError, setEmployeesError] = useState(null);
+function DocumentsComponent() {
+  const { getAllDocuments } = AdminService();
+  const [documents, setDocuments] = useState(null);
+  const [documentsError, setDocumentsError] = useState(null);
 
   useEffect(() => {
     // let params = {};
     // params["page"] = 0;
     // params["size"] = 4;
 
-    getAllEmployees()
+    getAllDocuments()
       .then((response) => {
         console.log(response.data);
-        setEmployees(response.data);
+        setDocuments(response.data);
       })
       .catch((error) => {
         console.log(error);
-        setEmployeesError(error.response);
+        setDocumentsError(error.response);
       });
   }, []);
 
   return (
     <div>
       <NavbarComponent />
-      {<AddButtonComponent name={"Adaugare angajat"} />}
-      {employeesError !== null && <div>{employeesError}</div>}
-      {employees && <TableComponent employees={employees} />}
+      {<AddButtonComponent name={"Adaugare document"} />}
+      {documentsError !== null && <div>{documentsError}</div>}
+      {documents && <DataTableComponent data={documents} />}
     </div>
   );
 }
 
-export default EmployeesComponent;
+export default DocumentsComponent;

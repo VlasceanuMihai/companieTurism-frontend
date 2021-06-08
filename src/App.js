@@ -4,6 +4,7 @@ import "./App.css";
 import AuthenticatedRoute from "./auth/AuthenticatedRoute";
 import LoginComponent from "./components/login/LoginComponent";
 import EmployeesComponent from "./components/menu/employees/EmployeesComponent";
+import DocumentsComponent from "./components/menu/documents/DocumentsComponent";
 
 const App = withRouter(({ location }) => {
   return (
@@ -25,6 +26,11 @@ const App = withRouter(({ location }) => {
               path="/admin/employees"
               exact
               component={EmployeesComponent}
+            />
+            <AuthenticatedRoute
+              path="/admin/documents"
+              exact
+              component={DocumentsComponent}
             />
           </Switch>
         </Route>
