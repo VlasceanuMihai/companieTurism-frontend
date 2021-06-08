@@ -10,7 +10,13 @@ export const getAdminProfileApi = async () => {
 };
 
 /* GET */
-// Get employees
-export const getEmployeesApi = async (params) => {
-  return await axios.get(`${BASE_API}/admin/v1/employees`, {params});
+// Get employees by pageable
+export const getEmployeesByPageableApi = async (params) => {
+  return await axios.get(`${BASE_API}/admin/v1/employees`, { params });
+};
+
+/* GET */
+// Get all employees
+export const getAllEmployeesApi = async () => {
+  return await axios.get(`${BASE_API}/admin/v1/getAllEmployees`);
 };
