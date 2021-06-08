@@ -20,8 +20,12 @@ export const getAllEmployeesApi = async () => {
   return await axios.get(`${BASE_API}/admin/v1/getAllEmployees`);
 };
 
-
 // Get all documents
 export const getAllDocumentsApi = async () => {
   return await axios.get(`${BASE_API}/admin/v1/getAllDocuments`);
+};
+
+// Get all flights
+export const getAllFlightsApi = async () => {
+  return await axios.get(`${BASE_API}/admin/v1/flights`);
 };

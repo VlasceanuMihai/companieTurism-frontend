@@ -45,7 +45,7 @@ const useStyles = makeStyles({
   },
 });
 
-function TableDocumentsComponent({ data, ...rest }) {
+function TableFlightsComponent({ data, ...rest }) {
   const classes = useStyles();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(2);
@@ -64,10 +64,12 @@ function TableDocumentsComponent({ data, ...rest }) {
       <Table className={classes.table} aria-label="simple-table">
         <TableHead>
           <TableRow className={classes.tablerow}>
-            <TableCell>Id_Document</TableCell>
-            <TableCell align="center">Nume angajat</TableCell>
-            <TableCell align="center">Prenume angajat</TableCell>
-            <TableCell align="center">Nume document</TableCell>
+            <TableCell>Id_Zbor</TableCell>
+            <TableCell align="center">Aeroport plecare</TableCell>
+            <TableCell align="center">Data plecare</TableCell>
+            <TableCell align="center">Aeroport sosire</TableCell>
+            <TableCell align="center">Data sosire</TableCell>
+            <TableCell align="center">Companie</TableCell>
             <TableCell align="center">
               <SettingsIcon className={classes.SettingsIcon}></SettingsIcon>
             </TableCell>
@@ -82,9 +84,11 @@ function TableDocumentsComponent({ data, ...rest }) {
               <TableCell component="th" scope="row">
                 {element.id}
               </TableCell>
-              <TableCell align="center">{element.employeeFirstName}</TableCell>
-              <TableCell align="center">{element.employeeLastName}</TableCell>
-              <TableCell align="center">{element.documentName}</TableCell>
+              <TableCell align="center">{element.airportDeparture}</TableCell>
+              <TableCell align="center">{element.dateOfDeparture}</TableCell>
+              <TableCell align="center">{element.airportArrival}</TableCell>
+              <TableCell align="center">{element.dateOfArrival}</TableCell>
+              <TableCell align="center">{element.company}</TableCell>
               <TableCell align="center">
                 <EditIcon></EditIcon>
               </TableCell>
@@ -114,7 +118,7 @@ function TableDocumentsComponent({ data, ...rest }) {
   );
 }
 
-TableDocumentsComponent.propTypes = {
+TableFlightsComponent.propTypes = {
   employees: PropTypes.array.isRequired,
 };
 
@@ -188,4 +192,4 @@ TablePaginationActions.propTypes = {
   rowsPerPage: PropTypes.number.isRequired,
 };
 
-export default TableDocumentsComponent;
+export default TableFlightsComponent;
