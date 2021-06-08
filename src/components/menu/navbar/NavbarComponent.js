@@ -11,7 +11,7 @@ function NavbarComponent() {
   return (
     <div class="navBar">
       <div class="header-left">
-        <a href="/home">Home</a>
+        <a href="/admin/home">Home</a>
         <a href="/admin/employees">Angajati</a>
         <a href="/admin/documents">Documente</a>
         <a href="/admin/flights">Zboruri</a>

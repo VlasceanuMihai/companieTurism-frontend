@@ -5,6 +5,7 @@ import AuthenticatedRoute from "./auth/AuthenticatedRoute";
 import LoginComponent from "./components/login/LoginComponent";
 import EmployeesComponent from "./components/menu/employees/EmployeesComponent";
 import DocumentsComponent from "./components/menu/documents/DocumentsComponent";
+import HomeComponent from "./components/menu/home/HomeComponent";
 
 const App = withRouter(({ location }) => {
   return (
@@ -23,6 +24,11 @@ const App = withRouter(({ location }) => {
             />
             {/* TODO: Aici vin toate AuthenticatedRoute */}
             <AuthenticatedRoute
+              path="/admin/home"
+              exact
+              component={HomeComponent}
+            />
+            <AuthenticatedRoute
               path="/admin/employees"
               exact
               component={EmployeesComponent}
@@ -35,6 +41,7 @@ const App = withRouter(({ location }) => {
           </Switch>
         </Route>
       </Switch>
+      {/* <FooterComponent></FooterComponent> */}
     </div>
   );
 });
