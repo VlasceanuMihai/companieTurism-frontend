@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import AdminService from "../../../services/AdminService";
 import NavbarComponent from "../navbar/NavbarComponent";
 import TableComponent from "./TableEmployeesComponent";
-import AddButtonComponent from "../addButton/AddButtonComponent";
+import AddButtonComponent from "../buttons/AddButtonComponent";
 
 function EmployeesComponent() {
   const { getAllEmployees } = AdminService();

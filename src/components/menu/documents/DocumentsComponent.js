@@ -2,8 +2,8 @@
 import { useEffect, useState } from "react";
 import AdminService from "../../../services/AdminService";
 import NavbarComponent from "../navbar/NavbarComponent";
-import DataTableComponent from "./TableDocumentsComponent";
-import AddButtonComponent from "../addButton/AddButtonComponent";
+import TableDocumentsComponent from "./TableDocumentsComponent";
+import AddButtonComponent from "../buttons/AddButtonComponent";
 
 function DocumentsComponent() {
   const { getAllDocuments } = AdminService();
@@ -31,7 +31,7 @@ function DocumentsComponent() {
       <NavbarComponent />
       {<AddButtonComponent name={"Adaugare document"} />}
       {documentsError !== null && <div>{documentsError}</div>}
-      {documents && <DataTableComponent data={documents} />}
+      {documents && <TableDocumentsComponent data={documents} />}
     </div>
   );
 }
