@@ -42,10 +42,6 @@ const useStyles = makeStyles({
     top: 3,
   },
   tablerow: {
-    backgroundColor: "#948e8c",
-    color: "white",
-  },
-  tablerow: {
     background: "linear-gradient(45deg, #F1CDB9 10%, #b6aeab 90%)",
   },
 });
