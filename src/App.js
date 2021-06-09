@@ -10,6 +10,8 @@ import FlightsComponent from "./components/menu/flights/FlightsComponent";
 import HotelsComponent from "./components/menu/hotels/HotelsComponent";
 import RegistrationEmployeeComponent from "./components/menu/employees/RegistrationEmployeeComponent";
 
+
+
 const App = withRouter(({ location }) => {
   return (
     <div className="App">
