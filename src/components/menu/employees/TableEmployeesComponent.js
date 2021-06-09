@@ -118,7 +118,7 @@ TablePaginationActions.propTypes = {
   rowsPerPage: PropTypes.number.isRequired,
 };
 
-function BasicTable({ employees, ...rest }) {
+function TableEmployeesComponent({ employees, ...rest }) {
   const classes = useStyles();
   // const { getEmployees } = AdminService();
   // const [employeesData, setEmployeesData] = useState(employees);
@@ -250,8 +250,8 @@ function BasicTable({ employees, ...rest }) {
   );
 }
 
-BasicTable.propTypes = {
+TableEmployeesComponent.propTypes = {
   employees: PropTypes.array.isRequired,
 };
 
-export default BasicTable;
+export default TableEmployeesComponent;
