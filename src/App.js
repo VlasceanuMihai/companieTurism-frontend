@@ -7,6 +7,7 @@ import EmployeesComponent from "./components/menu/employees/EmployeesComponent";
 import DocumentsComponent from "./components/menu/documents/DocumentsComponent";
 import HomeComponent from "./components/menu/home/HomeComponent";
 import FlightsComponent from "./components/menu/flights/FlightsComponent";
+import HotelsComponent from "./components/menu/hotels/HotelsComponent";
 
 const App = withRouter(({ location }) => {
   return (
@@ -43,6 +44,11 @@ const App = withRouter(({ location }) => {
               path="/admin/flights"
               exact
               component={FlightsComponent}
+            />
+            <AuthenticatedRoute
+              path="/admin/hotels"
+              exact
+              component={HotelsComponent}
             />
           </Switch>
         </Route>

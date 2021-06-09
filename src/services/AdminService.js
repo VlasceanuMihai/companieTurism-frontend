@@ -1,13 +1,20 @@
 import {
+  getAdminProfileApi,
   getEmployeesByPageableApi,
   getAllEmployeesApi,
   getAllDocumentsApi,
   getAllFlightsApi,
+  getAllHotelsApi,
 } from "../api/adminApi/AdminApi";
 import AuthenticationService from "../auth/AuthenticationService";
 
 function AdminService() {
   const { setupAxiosInterceptors } = AuthenticationService();
+
+  function getAdminProfile() {
+    setupAxiosInterceptors();
+    return getAdminProfileApi();
+  }
 
   function getEmployeesByPageable(params) {
     setupAxiosInterceptors();
@@ -29,11 +36,18 @@ function AdminService() {
     return getAllFlightsApi();
   }
 
+  function getAllHotels() {
+    setupAxiosInterceptors();
+    return getAllHotelsApi();
+  }
+
   return {
+    getAdminProfile,
     getEmployeesByPageable,
     getAllEmployees,
     getAllDocuments,
     getAllFlights,
+    getAllHotels,
   };
 }
 
