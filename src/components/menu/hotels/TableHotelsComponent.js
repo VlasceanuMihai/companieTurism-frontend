@@ -12,6 +12,7 @@ import {
   TableFooter,
   Paper,
   IconButton,
+  ButtonGroup,
 } from "@material-ui/core";
 import SettingsIcon from "@material-ui/icons/Settings";
 import EditIcon from "@material-ui/icons/Edit";
@@ -75,9 +76,6 @@ function TableFlightsComponent({ data, ...rest }) {
             <TableCell align="center">
               <SettingsIcon className={classes.SettingsIcon}></SettingsIcon>
             </TableCell>
-            <TableCell align="center">
-              <SettingsIcon className={classes.SettingsIcon}></SettingsIcon>
-            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -100,10 +98,10 @@ function TableFlightsComponent({ data, ...rest }) {
               </TableCell>
               <TableCell align="center">{element.employee.email}</TableCell>
               <TableCell align="center">
-                <EditIcon></EditIcon>
-              </TableCell>
-              <TableCell align="center">
-                <DeleteIcon></DeleteIcon>
+                <ButtonGroup>
+                  <EditIcon />
+                  <DeleteIcon />
+                </ButtonGroup>
               </TableCell>
             </TableRow>
           ))}

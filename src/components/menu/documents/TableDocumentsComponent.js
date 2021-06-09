@@ -12,10 +12,11 @@ import {
   TableFooter,
   Paper,
   IconButton,
+  ButtonGroup,
 } from "@material-ui/core";
 import SettingsIcon from "@material-ui/icons/Settings";
 import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from '@material-ui/icons/Delete';
+import DeleteIcon from "@material-ui/icons/Delete";
 import FirstPageIcon from "@material-ui/icons/FirstPage";
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
@@ -72,9 +73,6 @@ function TableDocumentsComponent({ data, ...rest }) {
             <TableCell align="center">
               <SettingsIcon className={classes.SettingsIcon}></SettingsIcon>
             </TableCell>
-            <TableCell align="center">
-              <SettingsIcon className={classes.SettingsIcon}></SettingsIcon>
-            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -90,10 +88,10 @@ function TableDocumentsComponent({ data, ...rest }) {
               <TableCell align="center">{element.employeeLastName}</TableCell>
               <TableCell align="center">{element.documentName}</TableCell>
               <TableCell align="center">
-                <EditIcon></EditIcon>
-              </TableCell>
-              <TableCell align="center">
-                <DeleteIcon></DeleteIcon>
+                <ButtonGroup>
+                  <EditIcon />
+                  <DeleteIcon />
+                </ButtonGroup>
               </TableCell>
             </TableRow>
           ))}

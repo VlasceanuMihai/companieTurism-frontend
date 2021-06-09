@@ -12,10 +12,11 @@ import {
   TableFooter,
   Paper,
   IconButton,
+  ButtonGroup,
 } from "@material-ui/core";
 import SettingsIcon from "@material-ui/icons/Settings";
 import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from '@material-ui/icons/Delete';
+import DeleteIcon from "@material-ui/icons/Delete";
 // import AdminService from "../../../services/AdminService";
 import FirstPageIcon from "@material-ui/icons/FirstPage";
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
@@ -195,9 +196,6 @@ function BasicTable({ employees, ...rest }) {
             <TableCell align="center">
               <SettingsIcon className={classes.SettingsIcon}></SettingsIcon>
             </TableCell>
-            <TableCell align="center">
-              <SettingsIcon className={classes.SettingsIcon}></SettingsIcon>
-            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -221,10 +219,10 @@ function BasicTable({ employees, ...rest }) {
               <TableCell align="center">{employee.dateOfEmployment}</TableCell>
               <TableCell align="center">{employee.wage}</TableCell>
               <TableCell align="center">
-                <EditIcon></EditIcon>
-              </TableCell>
-              <TableCell align="center">
-                <DeleteIcon></DeleteIcon>
+                <ButtonGroup>
+                  <EditIcon />
+                  <DeleteIcon />
+                </ButtonGroup>
               </TableCell>
             </TableRow>
           ))}
