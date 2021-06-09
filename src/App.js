@@ -8,6 +8,7 @@ import DocumentsComponent from "./components/menu/documents/DocumentsComponent";
 import HomeComponent from "./components/menu/home/HomeComponent";
 import FlightsComponent from "./components/menu/flights/FlightsComponent";
 import HotelsComponent from "./components/menu/hotels/HotelsComponent";
+import RegistrationEmployeeComponent from "./components/menu/employees/RegistrationEmployeeComponent";
 
 const App = withRouter(({ location }) => {
   return (
@@ -23,6 +24,11 @@ const App = withRouter(({ location }) => {
               path={["/login", "/signin", "/"]}
               exact
               component={LoginComponent}
+            />
+            <Route
+              path={"/form"}
+              exact
+              component={RegistrationEmployeeComponent}
             />
             {/* TODO: Aici vin toate AuthenticatedRoute */}
             <AuthenticatedRoute
@@ -60,28 +66,28 @@ const App = withRouter(({ location }) => {
 
 export default App;
 
-// return (
-//   <div className="App">
-//     <Switch>
-//       {/* TODO: De adaugat /404 -> ErrorComponent */}
-//       <Route>
-//         {location.pathname !== `/login` &&
-//           location.pathname !== `/signin` &&
-//           location.pathname !== `/`}
-//         <Switch>
-//           <Route
-//             path={["/login", "/signin", "/"]}
-//             exact
-//             component={LoginComponent}
-//           />
-//           {/* TODO: Aici vin toate AuthenticatedRoute */}
-//           <AuthenticatedRoute
-//             path="/admin/employees"
-//             exact
-//             component={EmployeesComponent}
-//           />
-//         </Switch>
-//       </Route>
-//     </Switch>
-//   </div>
-// );
+// <Route
+//               path={"/admin/home"}
+//               exact
+//               component={HomeComponent}
+//             />
+//             <Route
+//               path={"/admin/employees"}
+//               exact
+//               component={EmployeesComponent}
+//             />
+//             <Route
+//               path={"/admin/documents"}
+//               exact
+//               component={DocumentsComponent}
+//             />
+//             <Route
+//               path={"/admin/flights"}
+//               exact
+//               component={FlightsComponent}
+//             />
+//             <Route
+//               path={"/admin/hotels"}
+//               exact
+//               component={HotelsComponent}
+//             />

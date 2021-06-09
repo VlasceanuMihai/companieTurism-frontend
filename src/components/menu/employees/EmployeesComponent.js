@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import AdminService from "../../../services/AdminService";
 import NavbarComponent from "../navbar/NavbarComponent";
-import TableComponent from "./TableEmployeesComponent";
+import TableEmployeesComponent from "./TableEmployeesComponent";
 import AddButtonComponent from "../buttons/AddButtonComponent";
 
 function EmployeesComponent() {
@@ -31,7 +31,7 @@ function EmployeesComponent() {
       <NavbarComponent />
       {<AddButtonComponent name={"Adaugare angajat"} />}
       {employeesError !== null && <div>{employeesError}</div>}
-      {employees && <TableComponent employees={employees} />}
+      {employees && <TableEmployeesComponent employees={employees} />}
     </div>
   );
 }
