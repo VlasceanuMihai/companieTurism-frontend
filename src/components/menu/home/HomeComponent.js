@@ -18,9 +18,7 @@ function HomeComponent() {
             <Jumbotron>
               <h1>
                 Hello, guys!
-                <p>
-                  Lucrare de licenta Ghita Andrei Rafael - Companie turism
-                </p>
+                <p>Lucrare de licenta Ghita Andrei Rafael - Companie turism</p>
               </h1>
             </Jumbotron>
           </Col>

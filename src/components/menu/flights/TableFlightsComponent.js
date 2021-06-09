@@ -15,6 +15,7 @@ import {
 } from "@material-ui/core";
 import SettingsIcon from "@material-ui/icons/Settings";
 import EditIcon from "@material-ui/icons/Edit";
+import DeleteIcon from "@material-ui/icons/Delete";
 import FirstPageIcon from "@material-ui/icons/FirstPage";
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
@@ -48,7 +49,7 @@ const useStyles = makeStyles({
 function TableFlightsComponent({ data, ...rest }) {
   const classes = useStyles();
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(2);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -73,6 +74,9 @@ function TableFlightsComponent({ data, ...rest }) {
             <TableCell align="center">
               <SettingsIcon className={classes.SettingsIcon}></SettingsIcon>
             </TableCell>
+            <TableCell align="center">
+              <SettingsIcon className={classes.SettingsIcon}></SettingsIcon>
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -92,13 +96,16 @@ function TableFlightsComponent({ data, ...rest }) {
               <TableCell align="center">
                 <EditIcon></EditIcon>
               </TableCell>
+              <TableCell align="center">
+                <DeleteIcon></DeleteIcon>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
         <TableFooter>
           <TableRow>
             <TablePagination
-              rowsPerPageOptions={[2, 4]}
+              rowsPerPageOptions={[10, 20, 50]}
               colSpan={11}
               count={data.length}
               rowsPerPage={rowsPerPage}

@@ -15,6 +15,7 @@ import {
 } from "@material-ui/core";
 import SettingsIcon from "@material-ui/icons/Settings";
 import EditIcon from "@material-ui/icons/Edit";
+import DeleteIcon from '@material-ui/icons/Delete';
 // import AdminService from "../../../services/AdminService";
 import FirstPageIcon from "@material-ui/icons/FirstPage";
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
@@ -121,7 +122,7 @@ function BasicTable({ employees, ...rest }) {
   // const { getEmployees } = AdminService();
   // const [employeesData, setEmployeesData] = useState(employees);
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(2);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   // const lastIndex = currentPage * rowsPerPage;
   // const firstIndex = lastIndex - rowsPerPage;
@@ -194,6 +195,9 @@ function BasicTable({ employees, ...rest }) {
             <TableCell align="center">
               <SettingsIcon className={classes.SettingsIcon}></SettingsIcon>
             </TableCell>
+            <TableCell align="center">
+              <SettingsIcon className={classes.SettingsIcon}></SettingsIcon>
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -219,13 +223,16 @@ function BasicTable({ employees, ...rest }) {
               <TableCell align="center">
                 <EditIcon></EditIcon>
               </TableCell>
+              <TableCell align="center">
+                <DeleteIcon></DeleteIcon>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
         <TableFooter>
           <TableRow>
             <TablePagination
-              rowsPerPageOptions={[2, 4]}
+              rowsPerPageOptions={[10, 20, 50]}
               colSpan={11}
               count={employees.length}
               rowsPerPage={rowsPerPage}

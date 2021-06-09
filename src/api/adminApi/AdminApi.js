@@ -29,3 +29,8 @@ export const getAllDocumentsApi = async () => {
 export const getAllFlightsApi = async () => {
   return await axios.get(`${BASE_API}/admin/v1/flights`);
 };
+
+// Get all hotels
+export const getAllHotelsApi = async () => {
+  return await axios.get(`${BASE_API}/admin/v1/getAllHotels`);
+};

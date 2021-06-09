@@ -15,7 +15,7 @@ import {
 } from "@material-ui/core";
 import SettingsIcon from "@material-ui/icons/Settings";
 import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from '@material-ui/icons/Delete';
+import DeleteIcon from "@material-ui/icons/Delete";
 import FirstPageIcon from "@material-ui/icons/FirstPage";
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
@@ -46,7 +46,7 @@ const useStyles = makeStyles({
   },
 });
 
-function TableDocumentsComponent({ data, ...rest }) {
+function TableFlightsComponent({ data, ...rest }) {
   const classes = useStyles();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -65,10 +65,13 @@ function TableDocumentsComponent({ data, ...rest }) {
       <Table className={classes.table} aria-label="simple-table">
         <TableHead>
           <TableRow className={classes.tablerow}>
-            <TableCell>Id_Document</TableCell>
-            <TableCell align="center">Nume angajat</TableCell>
-            <TableCell align="center">Prenume angajat</TableCell>
-            <TableCell align="center">Nume document</TableCell>
+            <TableCell>Id_Hotel</TableCell>
+            <TableCell align="center">Nume hotel</TableCell>
+            <TableCell align="center">Stele</TableCell>
+            <TableCell align="center">Tara</TableCell>
+            <TableCell align="center">Oras</TableCell>
+            <TableCell align="center">Scenariu covid</TableCell>
+            <TableCell align="center">Angajat</TableCell>
             <TableCell align="center">
               <SettingsIcon className={classes.SettingsIcon}></SettingsIcon>
             </TableCell>
@@ -86,9 +89,16 @@ function TableDocumentsComponent({ data, ...rest }) {
               <TableCell component="th" scope="row">
                 {element.id}
               </TableCell>
-              <TableCell align="center">{element.employeeFirstName}</TableCell>
-              <TableCell align="center">{element.employeeLastName}</TableCell>
-              <TableCell align="center">{element.documentName}</TableCell>
+              <TableCell align="center">{element.hotelName}</TableCell>
+              <TableCell align="center">{element.hotelRating}</TableCell>
+              <TableCell align="center">
+                {element.destination.country}
+              </TableCell>
+              <TableCell align="center">{element.destination.city}</TableCell>
+              <TableCell align="center">
+                {element.destination.covidScenario}
+              </TableCell>
+              <TableCell align="center">{element.employee.email}</TableCell>
               <TableCell align="center">
                 <EditIcon></EditIcon>
               </TableCell>
@@ -121,7 +131,7 @@ function TableDocumentsComponent({ data, ...rest }) {
   );
 }
 
-TableDocumentsComponent.propTypes = {
+TableFlightsComponent.propTypes = {
   employees: PropTypes.array.isRequired,
 };
 
@@ -195,4 +205,4 @@ TablePaginationActions.propTypes = {
   rowsPerPage: PropTypes.number.isRequired,
 };
 
-export default TableDocumentsComponent;
+export default TableFlightsComponent;
