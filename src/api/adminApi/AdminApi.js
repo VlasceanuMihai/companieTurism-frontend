@@ -34,3 +34,8 @@ export const getAllFlightsApi = async () => {
 export const getAllHotelsApi = async () => {
   return await axios.get(`${BASE_API}/admin/v1/getAllHotels`);
 };
+
+// Delete employee
+export const deleteEmployeeApi = async (employeeId) => {
+  return await axios.delete(`${BASE_API}/admin/v1/deleteEmployee/` + employeeId);
+};

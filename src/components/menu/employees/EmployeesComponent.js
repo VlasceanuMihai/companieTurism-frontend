@@ -11,10 +11,6 @@ function EmployeesComponent() {
   const [employeesError, setEmployeesError] = useState(null);
 
   useEffect(() => {
-    // let params = {};
-    // params["page"] = 0;
-    // params["size"] = 4;
-
     getAllEmployees()
       .then((response) => {
         console.log(response.data);
@@ -31,7 +27,7 @@ function EmployeesComponent() {
       <NavbarComponent />
       {<AddButtonComponent name={"Adaugare angajat"} />}
       {employeesError !== null && <div>{employeesError}</div>}
-      {employees && <TableEmployeesComponent employees={employees} />}
+      {employees && <TableEmployeesComponent data={employees} />}
     </div>
   );
 }

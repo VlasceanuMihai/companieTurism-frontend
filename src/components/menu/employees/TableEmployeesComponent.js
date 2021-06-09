@@ -1,4 +1,5 @@
-import { useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useState } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 import {
@@ -13,11 +14,12 @@ import {
   Paper,
   IconButton,
   ButtonGroup,
+  Button,
 } from "@material-ui/core";
 import SettingsIcon from "@material-ui/icons/Settings";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
-// import AdminService from "../../../services/AdminService";
+import AdminService from "../../../services/AdminService";
 import FirstPageIcon from "@material-ui/icons/FirstPage";
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
@@ -47,6 +49,119 @@ const useStyles = makeStyles({
     background: "linear-gradient(45deg, #F1CDB9 10%, #b6aeab 90%)",
   },
 });
+
+function TableEmployeesComponent({ data, ...rest }) {
+  const classes = useStyles();
+  const { deleteEmployeeById } = AdminService();
+  const [employees, setEmployees] = useState(data);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
+
+  const deleteEmployee = (event, employeeId) => {
+    deleteEmployeeById(employeeId)
+      .then((response) => {
+        console.log(response.status);
+        if (response.status === 200) {
+          alert("Employee - " + employeeId + " successful deleted.");
+          window.location.reload();
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        alert(error);
+      });
+  };
+
+  // useEffect(() => {
+  //   console.log("useEffect --- ", employees);
+  // }, [employees]);
+
+  return (
+    <TableContainer component={Paper} className={classes.paper}>
+      <Table className={classes.table} aria-label="simple-table">
+        <TableHead>
+          <TableRow className={classes.tablerow}>
+            <TableCell>Id_Angajat</TableCell>
+            <TableCell align="center">Nume</TableCell>
+            <TableCell align="center">Prenume</TableCell>
+            <TableCell align="center">CNP</TableCell>
+            <TableCell align="center">Email</TableCell>
+            <TableCell align="center">Telefon</TableCell>
+            <TableCell align="center">Tip Contract</TableCell>
+            <TableCell align="center">Data Angajarii</TableCell>
+            <TableCell align="center">Salariu</TableCell>
+            <TableCell align="center">
+              <SettingsIcon className={classes.SettingsIcon}></SettingsIcon>
+            </TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {(rowsPerPage > 0
+            ? data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+            : data
+          ).map((element, index) => (
+            <TableRow key={element.id}>
+              <TableCell component="th" scope="row">
+                {element.id}
+              </TableCell>
+              <TableCell align="center">{element.lastName}</TableCell>
+              <TableCell align="center">{element.firstName}</TableCell>
+              <TableCell align="center">{element.cnp}</TableCell>
+              <TableCell align="center">{element.email}</TableCell>
+              <TableCell align="center">{element.phoneNumber}</TableCell>
+              <TableCell align="center">{element.employeeType}</TableCell>
+              <TableCell align="center">{element.dateOfEmployment}</TableCell>
+              <TableCell align="center">{element.wage}</TableCell>
+              <TableCell align="center">
+                <ButtonGroup>
+                  <Button>
+                    <EditIcon />
+                  </Button>
+                  <Button>
+                    <DeleteIcon
+                      onClick={() => deleteEmployee(this, element.id)}
+                    />
+                  </Button>
+                </ButtonGroup>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+        <TableFooter>
+          <TableRow>
+            <TablePagination
+              rowsPerPageOptions={[10, 20, 50]}
+              colSpan={11}
+              count={employees.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              SelectProps={{
+                inputProps: { "aria-label": "rows per page" },
+                native: true,
+              }}
+              onChangePage={handleChangePage}
+              onChangeRowsPerPage={handleChangeRowsPerPage}
+              ActionsComponent={TablePaginationActions}
+            />
+          </TableRow>
+        </TableFooter>
+      </Table>
+    </TableContainer>
+  );
+}
+
+TableEmployeesComponent.propTypes = {
+  employees: PropTypes.array.isRequired,
+};
 
 function TablePaginationActions(props) {
   const classes = useStylesPagination();
@@ -116,142 +231,6 @@ TablePaginationActions.propTypes = {
   onChangePage: PropTypes.func.isRequired,
   page: PropTypes.number.isRequired,
   rowsPerPage: PropTypes.number.isRequired,
-};
-
-function TableEmployeesComponent({ employees, ...rest }) {
-  const classes = useStyles();
-  // const { getEmployees } = AdminService();
-  // const [employeesData, setEmployeesData] = useState(employees);
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
-
-  // const lastIndex = currentPage * rowsPerPage;
-  // const firstIndex = lastIndex - rowsPerPage;
-  // const totalPages = employeesData / rowsPerPage;
-
-  // const emptyRows =
-  //   rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
-
-  // const getRequestParams = (pageParam, pageSizeParam) => {
-  //   let params = {};
-
-  //   if (pageParam) {
-  //     params["page"] = pageParam - 1;
-  //   }
-
-  //   if (pageSizeParam) {
-  //     params["size"] = pageSizeParam;
-  //   }
-
-  //   return params;
-  // };
-
-  // const getEmployeesBasedOnParams = () => {
-  //   const params = getRequestParams(currentPage, rowsPerPage);
-  //   console.log(params);
-
-  //   getEmployees(params)
-  //     .then((response) => {
-  //       console.log("Employees: ", response.data);
-  //       setEmployeesData(response.data);
-  //       console.log("Total pages: ", response.data.totalPages);
-  //     })
-  //     .catch((error) => {
-  //       console.log("Error: ", error);
-  //     });
-  // };
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-    // getEmployeesBasedOnParams();
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-    console.log("Page --- ", page);
-    console.log("RowsPerPage --- ", rowsPerPage);
-    // getEmployeesBasedOnParams();
-  };
-
-  // useEffect(() => {
-  //   console.log("Rows per page: ", rowsPerPage)
-  //   // getEmployeesBasedOnParams();
-  // }, [rowsPerPage]);
-
-  return (
-    <TableContainer component={Paper} className={classes.paper}>
-      <Table className={classes.table} aria-label="simple-table">
-        <TableHead>
-          <TableRow className={classes.tablerow}>
-            <TableCell>Id_Angajat</TableCell>
-            <TableCell align="center">Nume</TableCell>
-            <TableCell align="center">Prenume</TableCell>
-            <TableCell align="center">CNP</TableCell>
-            <TableCell align="center">Email</TableCell>
-            <TableCell align="center">Telefon</TableCell>
-            <TableCell align="center">Tip Contract</TableCell>
-            <TableCell align="center">Data Angajarii</TableCell>
-            <TableCell align="center">Salariu</TableCell>
-            <TableCell align="center">
-              <SettingsIcon className={classes.SettingsIcon}></SettingsIcon>
-            </TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {(rowsPerPage > 0
-            ? employees.slice(
-                page * rowsPerPage,
-                page * rowsPerPage + rowsPerPage
-              )
-            : employees
-          ).map((employee, index) => (
-            <TableRow key={employee.id}>
-              <TableCell component="th" scope="row">
-                {employee.id}
-              </TableCell>
-              <TableCell align="center">{employee.lastName}</TableCell>
-              <TableCell align="center">{employee.firstName}</TableCell>
-              <TableCell align="center">{employee.cnp}</TableCell>
-              <TableCell align="center">{employee.email}</TableCell>
-              <TableCell align="center">{employee.phoneNumber}</TableCell>
-              <TableCell align="center">{employee.employeeType}</TableCell>
-              <TableCell align="center">{employee.dateOfEmployment}</TableCell>
-              <TableCell align="center">{employee.wage}</TableCell>
-              <TableCell align="center">
-                <ButtonGroup>
-                  <EditIcon />
-                  <DeleteIcon />
-                </ButtonGroup>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-        <TableFooter>
-          <TableRow>
-            <TablePagination
-              rowsPerPageOptions={[10, 20, 50]}
-              colSpan={11}
-              count={employees.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              SelectProps={{
-                inputProps: { "aria-label": "rows per page" },
-                native: true,
-              }}
-              onChangePage={handleChangePage}
-              onChangeRowsPerPage={handleChangeRowsPerPage}
-              ActionsComponent={TablePaginationActions}
-            />
-          </TableRow>
-        </TableFooter>
-      </Table>
-    </TableContainer>
-  );
-}
-
-TableEmployeesComponent.propTypes = {
-  employees: PropTypes.array.isRequired,
 };
 
 export default TableEmployeesComponent;
