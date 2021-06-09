@@ -11,6 +11,7 @@ import AuthenticationService from "../auth/AuthenticationService";
 function AdminService() {
   const { setupAxiosInterceptors } = AuthenticationService();
 
+  // Handle API calls
   function getAdminProfile() {
     setupAxiosInterceptors();
     return getAdminProfileApi();
