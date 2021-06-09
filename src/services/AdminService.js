@@ -5,6 +5,7 @@ import {
   getAllDocumentsApi,
   getAllFlightsApi,
   getAllHotelsApi,
+  deleteEmployeeApi,
 } from "../api/adminApi/AdminApi";
 import AuthenticationService from "../auth/AuthenticationService";
 
@@ -42,6 +43,11 @@ function AdminService() {
     return getAllHotelsApi();
   }
 
+  function deleteEmployeeById(employeeId) {
+    setupAxiosInterceptors();
+    return deleteEmployeeApi(employeeId);
+  }
+
   return {
     getAdminProfile,
     getEmployeesByPageable,
@@ -49,6 +55,7 @@ function AdminService() {
     getAllDocuments,
     getAllFlights,
     getAllHotels,
+    deleteEmployeeById,
   };
 }
 
