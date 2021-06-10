@@ -11,10 +11,6 @@ function DocumentsComponent() {
   const [documentsError, setDocumentsError] = useState(null);
 
   useEffect(() => {
-    // let params = {};
-    // params["page"] = 0;
-    // params["size"] = 4;
-
     getAllDocuments()
       .then((response) => {
         console.log(response.data);

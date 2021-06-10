@@ -13,6 +13,7 @@ import {
   Paper,
   IconButton,
   ButtonGroup,
+  Button,
 } from "@material-ui/core";
 import SettingsIcon from "@material-ui/icons/Settings";
 import EditIcon from "@material-ui/icons/Edit";
@@ -21,6 +22,7 @@ import FirstPageIcon from "@material-ui/icons/FirstPage";
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import LastPageIcon from "@material-ui/icons/LastPage";
+import AdminService from "../../../services/AdminService";
 
 const useStylesPagination = makeStyles((theme) => ({
   root: {
@@ -49,6 +51,7 @@ const useStyles = makeStyles({
 
 function TableDocumentsComponent({ data, ...rest }) {
   const classes = useStyles();
+  const { deleteDocumentById } = AdminService();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
@@ -59,6 +62,20 @@ function TableDocumentsComponent({ data, ...rest }) {
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
+  };
+
+  const deleteDocument = (event, documentId) => {
+    deleteDocumentById(documentId)
+      .then((response) => {
+        if (response.status === 200) {
+          alert("Document - " + documentId + " successful deleted.");
+          window.location.reload();
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        alert(error);
+      });
   };
 
   return (
@@ -89,8 +106,14 @@ function TableDocumentsComponent({ data, ...rest }) {
               <TableCell align="center">{element.documentName}</TableCell>
               <TableCell align="center">
                 <ButtonGroup>
-                  <EditIcon />
-                  <DeleteIcon />
+                  <Button>
+                    <EditIcon />
+                  </Button>
+                  <Button>
+                    <DeleteIcon
+                      onClick={() => deleteDocument(this, element.id)}
+                    />
+                  </Button>
                 </ButtonGroup>
               </TableCell>
             </TableRow>

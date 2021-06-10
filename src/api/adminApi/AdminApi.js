@@ -35,7 +35,28 @@ export const getAllHotelsApi = async () => {
   return await axios.get(`${BASE_API}/admin/v1/getAllHotels`);
 };
 
+/* DELETE */
+
 // Delete employee
 export const deleteEmployeeApi = async (employeeId) => {
-  return await axios.delete(`${BASE_API}/admin/v1/deleteEmployee/` + employeeId);
+  return await axios.delete(
+    `${BASE_API}/admin/v1/deleteEmployee/` + employeeId
+  );
+};
+
+// Delete document
+export const deleteDocumentApi = async (documentId) => {
+  return await axios.delete(
+    `${BASE_API}/admin/v1/deleteDocument/` + documentId
+  );
+};
+
+// Delete flight
+export const deleteFlightApi = async (flightId) => {
+  return await axios.delete(`${BASE_API}/admin/v1/deleteFlight/` + flightId);
+};
+
+// Delete hotel
+export const deleteHotelApi = async (hotelId) => {
+  return await axios.delete(`${BASE_API}/admin/v1/deleteHotel/` + hotelId);
 };
