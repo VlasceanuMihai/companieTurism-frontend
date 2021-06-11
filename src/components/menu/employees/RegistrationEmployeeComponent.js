@@ -1,11 +1,15 @@
-import React from "react";
+/* eslint-disable no-dupe-keys */
+import React, { useState } from "react";
+import { useHistory } from "react-router";
 import { makeStyles } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
-import InputLabel from "@material-ui/core/InputLabel";
+// import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
-import FormHelperText from "@material-ui/core/FormHelperText";
+// import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
+import NavbarComponent from "../../menu/navbar/NavbarComponent";
+import AdminService from "../../../services/AdminService";
 
 const useStyles = makeStyles({
   paper: {
@@ -51,126 +55,221 @@ const useStyles = makeStyles({
 
 export default function RegistrationEmployeeComponent() {
   const classes = useStyles();
-  const [age, setAge] = React.useState("");
+  let history = useHistory();
+  const { createEmployee } = AdminService();
+  const [employeeData, setEmployeeData] = useState({
+    lastName: "",
+    firstName: "",
+    cnp: "",
+    phoneNumber: "",
+    email: "",
+    password: "",
+    dateOfEmployment: "",
+    employeeType: "SUCURSALA",
+    wage: "",
+  });
 
-  const handleChange = (event) => {
+  function handleChange(event) {
     event.preventDefault();
-    setAge(event.target.value);
-  };
+
+    console.log(
+      "Field: " + [event.target.name] + " -> value: " + event.target.value
+    );
+    setEmployeeData((employeeData) => ({
+      ...employeeData,
+      [event.target.name]: event.target.value,
+    }));
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    console.log("Body: ", employeeData);
+    createEmployee({
+      lastName: employeeData.lastName,
+      firstName: employeeData.firstName,
+      cnp: employeeData.cnp,
+      phoneNumber: employeeData.phoneNumber,
+      email: employeeData.email,
+      password: employeeData.password,
+      dateOfEmployment: employeeData.dateOfEmployment,
+      employeeType: employeeData.employeeType,
+      wage: employeeData.wage,
+    })
+      .then((response) => {
+        console.log("Create new employee with cnp: " + employeeData.cnp);
+        if (response.status === 200) {
+          alert("Create new employee with cnp: " + employeeData.cnp);
+          history.push("/admin/employees");
+          setEmployeeData({
+            lastName: "",
+            firstName: "",
+            cnp: "",
+            phoneNumber: "",
+            email: "",
+            password: "",
+            dateOfEmployment: "",
+            employeeType: "",
+            wage: "",
+          });
+        }
+      })
+      .catch((error) => {
+        console.log("Error: ", error);
+        alert("Error: ", error);
+      });
   };
 
   return (
-    <div className={classes.paper}>
-      <div className={classes.container}>
-        <form>
-          <div>Date Angajat</div>
-          <br />
-          <div class="form-row">
-            <div class="form-group col-md-6">
-              <input
-                type="text"
-                id="nume"
-                class="form-control"
-                placeholder="Nume"
-                required
-                autoFocus
-              />
+    <div>
+      <NavbarComponent />
+      <div className={classes.paper}>
+        <div className={classes.container}>
+          <form>
+            <div>Date Angajat</div>
+            <br />
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <input
+                  type="text"
+                  id="nume"
+                  name="lastName"
+                  class="form-control"
+                  placeholder="Nume"
+                  required
+                  autoFocus
+                  defaultValue={employeeData.lastName || ""}
+                  onChange={handleChange}
+                />
+              </div>
+              <div class="form-group col-md-6">
+                <input
+                  type="text"
+                  id="prenume"
+                  name="firstName"
+                  class="form-control"
+                  placeholder="Prenume"
+                  required
+                  defaultValue={employeeData.firstName}
+                  onChange={handleChange}
+                />
+              </div>
             </div>
-            <div class="form-group col-md-6">
-              <input
-                type="text"
-                id="prenume"
-                class="form-control"
-                placeholder="Prenume"
-                required
-              />
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <input
+                  type="text"
+                  id="cnp"
+                  class="form-control"
+                  placeholder="CNP"
+                  name="cnp"
+                  required
+                  defaultValue={employeeData.cnp}
+                  onChange={handleChange}
+                />
+              </div>
+              <div class="form-group col-md-6">
+                <input
+                  type="tel"
+                  id="numarTelefon"
+                  class="form-control"
+                  placeholder="Numar Telefon"
+                  name="phoneNumber"
+                  required
+                  defaultValue={employeeData.phoneNumber}
+                  onChange={handleChange}
+                />
+              </div>
             </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group col-md-6">
+            <br />
+            <div class="form-group">
               <input
-                type="text"
-                id="cnp"
+                type="email"
+                id="email"
                 class="form-control"
-                placeholder="CNP"
+                placeholder="Email"
+                name="email"
                 required
-              />
-            </div>
-            <div class="form-group col-md-6">
-              <input
-                type="tel"
-                id="numarTelefon"
-                class="form-control"
-                placeholder="Numar Telefon"
-                required
-              />
-            </div>
-          </div>
-          <br />
-          <div class="form-group">
-            <input
-              type="email"
-              id="email"
-              class="form-control"
-              placeholder="Email"
-              required
-            />
-          </div>
-          <br />
-          <form className={classes.container2} noValidate>
-            <TextField
-              id="date"
-              label="Data Angajarii"
-              type="date"
-              defaultValue="2017-05-24"
-              className={classes.textField}
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
-          </form>
-          <div>
-            <FormControl className={classes.formControl}>
-              <Select
-                value={age}
+                defaultValue={employeeData.email}
                 onChange={handleChange}
-                displayEmpty
-                className={classes.selectEmpty}
-                inputProps={{ "aria-label": "Without label" }}
-              >
-                <MenuItem value="" disabled>
-                  Tip Contract Angajat
-                </MenuItem>
-                <MenuItem value={10}>LEAD</MenuItem>
-                <MenuItem value={20}>SUCURSALA</MenuItem>
-                <MenuItem value={30}>TRAVEL GUIDE</MenuItem>
-              </Select>
-            </FormControl>
-          </div>
-          <div class="form-group">
-            <input
-              type="text"
-              id="salariu"
-              class="form-control"
-              placeholder="Salariu Net"
-              required
-            />
-          </div>
-          <div class="form-group">
-            {/* <div class="form-check">
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="password"
+                id="password"
+                class="form-control"
+                placeholder="Parola"
+                name="password"
+                required
+                defaultValue={employeeData.password}
+                onChange={handleChange}
+              />
+            </div>
+            <br />
+            <form className={classes.container2} noValidate>
+              <TextField
+                id="date"
+                label="Data Angajarii"
+                type="date"
+                name="dateOfEmployment"
+                required
+                className={classes.textField}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                defaultValue={employeeData.dateOfEmployment}
+                onChange={handleChange}
+              />
+            </form>
+            <div>
+              <FormControl className={classes.formControl}>
+                <Select
+                  defaultValue={employeeData.employeeType}
+                  onChange={handleChange}
+                  displayEmpty
+                  name="employeeType"
+                  className={classes.selectEmpty}
+                  inputProps={{ "aria-label": "Without label" }}
+                >
+                  <MenuItem value="" disabled>
+                    Tip Contract Angajat
+                  </MenuItem>
+                  <MenuItem value={"SUCURSALA"}>SUCURSALA</MenuItem>
+                  <MenuItem value={"TRAVEL_GUIDE"}>TRAVEL GUIDE</MenuItem>
+                  <MenuItem value={"LEAD"}>LEAD</MenuItem>
+                </Select>
+              </FormControl>
+            </div>
+            <div class="form-group">
+              <input
+                type="text"
+                id="salariu"
+                class="form-control"
+                placeholder="Salariu Net"
+                name="wage"
+                required
+                defaultValue={employeeData.wage}
+                onChange={handleChange}
+              />
+            </div>
+            <div class="form-group">
+              {/* <div class="form-check">
               <input class="form-check-input" type="checkbox" id="gridCheck" />
               <label class="form-check-label" for="gridCheck">
                 Accept termenele si conditiile
               </label>
             </div> */}
-          </div>
-          <button type="submit" class="btn btn-primary">
-            Adauga angajat nou
-          </button>
-        </form>
+            </div>
+            <button
+              type="submit"
+              class="btn btn-primary"
+              onClick={handleSubmit}
+            >
+              Adauga angajat nou
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   );

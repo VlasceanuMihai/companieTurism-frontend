@@ -5,6 +5,7 @@ import {
   getAllDocumentsApi,
   getAllFlightsApi,
   getAllHotelsApi,
+  createEmployeeApi,
   deleteEmployeeApi,
   deleteDocumentApi,
   deleteFlightApi,
@@ -12,10 +13,11 @@ import {
 } from "../api/adminApi/AdminApi";
 import AuthenticationService from "../auth/AuthenticationService";
 
+// Handle API calls
 function AdminService() {
   const { setupAxiosInterceptors } = AuthenticationService();
 
-  // Handle API calls
+  // GET
   function getAdminProfile() {
     setupAxiosInterceptors();
     return getAdminProfileApi();
@@ -46,6 +48,13 @@ function AdminService() {
     return getAllHotelsApi();
   }
 
+  // POST
+  function createEmployee(body) {
+    setupAxiosInterceptors();
+    return createEmployeeApi(body);
+  }
+
+  // DELETE
   function deleteEmployeeById(employeeId) {
     setupAxiosInterceptors();
     return deleteEmployeeApi(employeeId);
@@ -73,6 +82,7 @@ function AdminService() {
     getAllDocuments,
     getAllFlights,
     getAllHotels,
+    createEmployee,
     deleteEmployeeById,
     deleteDocumentById,
     deleteFlightById,

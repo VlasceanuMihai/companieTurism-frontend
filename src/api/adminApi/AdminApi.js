@@ -38,13 +38,11 @@ export const getAllHotelsApi = async () => {
 /* POST */
 
 // Create new employee
-export const createEmployeeApi = async () => {
-  return await axios.post(`${BASE_API}/admin/v1/createEmployee`);
+export const createEmployeeApi = async (body) => {
+  return await axios.post(`${BASE_API}/admin/v1/createEmployee`, body);
 };
 
-
-
-
+// Create new document
 
 /* PUT */
 
