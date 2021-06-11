@@ -25,7 +25,7 @@ function EmployeesComponent() {
   return (
     <div>
       <NavbarComponent />
-      {<AddButtonComponent name={"Adaugare angajat"} />}
+      {<AddButtonComponent name={"Adaugare angajat"} path={"/admin/employees/form"} />}
       {employeesError !== null && <div>{employeesError}</div>}
       {employees && <TableEmployeesComponent data={employees} />}
     </div>
