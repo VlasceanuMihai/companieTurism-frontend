@@ -50,10 +50,9 @@ const useStyles = makeStyles({
   },
 });
 
-function TableEmployeesComponent({ data, ...rest }) {
+function TableEmployeesComponent({ data }) {
   const classes = useStyles();
   const { deleteEmployeeById } = AdminService();
-  const [employees, setEmployees] = useState(data);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
@@ -141,7 +140,7 @@ function TableEmployeesComponent({ data, ...rest }) {
             <TablePagination
               rowsPerPageOptions={[10, 20, 50]}
               colSpan={11}
-              count={employees.length}
+              count={data.length}
               rowsPerPage={rowsPerPage}
               page={page}
               SelectProps={{

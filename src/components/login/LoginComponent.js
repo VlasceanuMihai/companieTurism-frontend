@@ -16,6 +16,7 @@ function LoginComponent() {
 
   function handleChange(event) {
     event.preventDefault();
+
     setUserData((userData) => ({
       ...userData,
       [event.target.name]: event.target.value,
