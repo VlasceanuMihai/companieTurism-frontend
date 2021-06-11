@@ -35,6 +35,19 @@ export const getAllHotelsApi = async () => {
   return await axios.get(`${BASE_API}/admin/v1/getAllHotels`);
 };
 
+/* POST */
+
+// Create new employee
+export const createEmployeeApi = async () => {
+  return await axios.post(`${BASE_API}/admin/v1/createEmployee`);
+};
+
+
+
+
+
+/* PUT */
+
 /* DELETE */
 
 // Delete employee

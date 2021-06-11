@@ -27,11 +27,6 @@ const App = withRouter(({ location }) => {
               exact
               component={LoginComponent}
             />
-            <Route
-              path={"/form"}
-              exact
-              component={RegistrationEmployeeComponent}
-            />
             {/* TODO: Aici vin toate AuthenticatedRoute */}
             <AuthenticatedRoute
               path="/admin/home"
@@ -42,6 +37,11 @@ const App = withRouter(({ location }) => {
               path="/admin/employees"
               exact
               component={EmployeesComponent}
+            />
+            <Route
+              path={"/admin/employees/form"}
+              exact
+              component={RegistrationEmployeeComponent}
             />
             <AuthenticatedRoute
               path="/admin/documents"
