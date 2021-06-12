@@ -10,6 +10,11 @@ export const getAdminProfileApi = async () => {
   return await axios.get(`${BASE_API}/admin/v1/profile`);
 };
 
+// Get employee
+export const getEmployeeApi = async (employeeId) => {
+  return await axios.get(`${BASE_API}/admin/v1/employee/` + employeeId);
+};
+
 // Get employees by pageable
 export const getEmployeesByPageableApi = async (params) => {
   return await axios.get(`${BASE_API}/admin/v1/employees`, { params });
@@ -45,6 +50,11 @@ export const createEmployeeApi = async (body) => {
 // Create new document
 
 /* PUT */
+
+// Update employee
+export const updateEmployeeApi = async (employeeId, body) => {
+  return await axios.put(`${BASE_API}/admin/v1/updateEmployee/` + employeeId, body);
+};
 
 /* DELETE */
 

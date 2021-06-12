@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 import {
   Table,
   TableBody,
@@ -123,8 +124,16 @@ function TableEmployeesComponent({ data }) {
               <TableCell align="center">
                 <ButtonGroup>
                   <Button>
-                    <EditIcon />
+                    <Link
+                      to={"/admin/employee/" + element.id}
+                      className="btn btn-sm"
+                    >
+                      <EditIcon />
+                    </Link>
                   </Button>
+                  {/* <Button>
+                    <EditIcon />
+                  </Button> */}
                   <Button>
                     <DeleteIcon
                       onClick={() => deleteEmployee(this, element.id)}
@@ -159,7 +168,7 @@ function TableEmployeesComponent({ data }) {
 }
 
 TableEmployeesComponent.propTypes = {
-  employees: PropTypes.array.isRequired,
+  data: PropTypes.array.isRequired,
 };
 
 function TablePaginationActions(props) {

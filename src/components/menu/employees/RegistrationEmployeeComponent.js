@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-dupe-keys */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { makeStyles } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
@@ -10,7 +11,6 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import NavbarComponent from "../../menu/navbar/NavbarComponent";
 import AdminService from "../../../services/AdminService";
-
 const useStyles = makeStyles({
   paper: {
     justifyContent: "center",
@@ -53,11 +53,12 @@ const useStyles = makeStyles({
   },
 });
 
-export default function RegistrationEmployeeComponent() {
+export default function RegistrationEmployeeComponent(props) {
   const classes = useStyles();
   let history = useHistory();
-  const { createEmployee } = AdminService();
+  const { getEmployee, createEmployee, updateEmployee } = AdminService();
   const [employeeData, setEmployeeData] = useState({
+    id: "",
     lastName: "",
     firstName: "",
     cnp: "",
@@ -65,16 +66,14 @@ export default function RegistrationEmployeeComponent() {
     email: "",
     password: "",
     dateOfEmployment: "",
-    employeeType: "SUCURSALA",
+    employeeType: "",
     wage: "",
   });
+  const [showPasswordField, setShowPasswordField] = useState(true);
 
   function handleChange(event) {
     event.preventDefault();
 
-    console.log(
-      "Field: " + [event.target.name] + " -> value: " + event.target.value
-    );
     setEmployeeData((employeeData) => ({
       ...employeeData,
       [event.target.name]: event.target.value,
@@ -115,10 +114,81 @@ export default function RegistrationEmployeeComponent() {
         }
       })
       .catch((error) => {
-        console.log("Error: ", error);
-        alert("Error: ", error);
+        console.log("Error: ", error.response.data.message);
+        alert("Error: " + error.response.data.message);
       });
   };
+
+  const handleUpdate = (event) => {
+    event.preventDefault();
+
+    console.log(employeeData.id);
+    updateEmployee(employeeData.id, {
+      lastName: employeeData.lastName,
+      firstName: employeeData.firstName,
+      cnp: employeeData.cnp,
+      phoneNumber: employeeData.phoneNumber,
+      email: employeeData.email,
+      dateOfEmployment: employeeData.dateOfEmployment,
+      employeeType: employeeData.employeeType,
+      wage: employeeData.wage,
+    })
+      .then((response) => {
+        console.log("Update employee with cnp: " + employeeData.cnp);
+        if (response.status === 200) {
+          alert("Update employee with cnp: " + employeeData.cnp);
+          history.push("/admin/employees");
+          setEmployeeData({
+            lastName: "",
+            firstName: "",
+            cnp: "",
+            phoneNumber: "",
+            email: "",
+            password: "",
+            dateOfEmployment: "",
+            employeeType: "",
+            wage: "",
+          });
+        }
+      })
+      .catch((error) => {
+        console.log("Error: ", error.response.data.message);
+        alert("Error: " + error.response.data.message);
+      });
+  };
+
+  const findEmployeeById = (employeeId) => {
+    getEmployee(employeeId)
+      .then((response) => {
+        if (response.data != null) {
+          console.log("Date: ", response.data.dateOfEmployment);
+          console.log("Type: ", response.data.employeeType);
+          setEmployeeData({
+            id: response.data.id,
+            lastName: response.data.lastName,
+            firstName: response.data.firstName,
+            cnp: response.data.cnp,
+            phoneNumber: response.data.phoneNumber,
+            email: response.data.email,
+            // password: response.data.id,
+            dateOfEmployment: response.data.dateOfEmployment,
+            employeeType: response.data.employeeType,
+            wage: response.data.wage,
+          });
+        }
+      })
+      .catch((error) => {
+        console.log("Error: ", error);
+      });
+  };
+
+  useEffect(() => {
+    const employeeId = +props.match.params.id;
+    if (employeeId) {
+      setShowPasswordField(false);
+      findEmployeeById(employeeId);
+    }
+  }, []);
 
   return (
     <div>
@@ -138,6 +208,7 @@ export default function RegistrationEmployeeComponent() {
                   placeholder="Nume"
                   required
                   autoFocus
+                  autoComplete="off"
                   defaultValue={employeeData.lastName || ""}
                   onChange={handleChange}
                 />
@@ -164,6 +235,7 @@ export default function RegistrationEmployeeComponent() {
                   placeholder="CNP"
                   name="cnp"
                   required
+                  readOnly={showPasswordField === false}
                   defaultValue={employeeData.cnp}
                   onChange={handleChange}
                 />
@@ -194,18 +266,20 @@ export default function RegistrationEmployeeComponent() {
                 onChange={handleChange}
               />
             </div>
-            <div class="form-group">
-              <input
-                type="password"
-                id="password"
-                class="form-control"
-                placeholder="Parola"
-                name="password"
-                required
-                defaultValue={employeeData.password}
-                onChange={handleChange}
-              />
-            </div>
+            {showPasswordField === true && (
+              <div class="form-group">
+                <input
+                  type="password"
+                  id="password"
+                  class="form-control"
+                  placeholder="Parola"
+                  name="password"
+                  required
+                  defaultValue={employeeData.password}
+                  onChange={handleChange}
+                />
+              </div>
+            )}
             <br />
             <form className={classes.container2} noValidate>
               <TextField
@@ -264,9 +338,9 @@ export default function RegistrationEmployeeComponent() {
             <button
               type="submit"
               class="btn btn-primary"
-              onClick={handleSubmit}
+              onClick={employeeData.id ? handleUpdate : handleSubmit}
             >
-              Adauga angajat nou
+              {employeeData.id ? "Actualizare angajat" : "Adauga angajat nou"}
             </button>
           </form>
         </div>

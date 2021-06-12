@@ -1,4 +1,5 @@
 import "./NavbarComponent.css";
+import { Link } from "react-router-dom";
 import AuthenticationService from "../../../auth/AuthenticationService";
 
 function NavbarComponent() {
@@ -11,17 +12,17 @@ function NavbarComponent() {
   return (
     <div class="navBar">
       <div class="header-left">
-        <a href="/admin/home">Home</a>
-        <a href="/admin/employees">Angajati</a>
-        <a href="/admin/documents">Documente</a>
-        <a href="/admin/flights">Zboruri</a>
-        <a href="/admin/hotels">Hoteluri</a>
-        <a id="userIcon" href="" target="_blank">
+        <Link to="/admin/home">Home</Link>
+        <Link to="/admin/employees">Angajati</Link>
+        <Link to="/admin/documents">Documente</Link>
+        <Link to="/admin/flights">Zboruri</Link>
+        <Link to="/admin/hotels">Hoteluri</Link>
+        <Link to="/admin/hotels" id="userIcon" target="_blank">
           <i class="far fa-user-circle"></i>
-        </a>
-        <a class="logout" href="/login" onClick={handleLogout}>
-          Log out
-        </a>
+        </Link>
+        <Link to="/admin/hotels" class="logout" onClick={handleLogout}>
+          Logout
+        </Link>
       </div>
     </div>
   );
