@@ -1,11 +1,13 @@
 import {
   getAdminProfileApi,
+  getEmployeeApi,
   getEmployeesByPageableApi,
   getAllEmployeesApi,
   getAllDocumentsApi,
   getAllFlightsApi,
   getAllHotelsApi,
   createEmployeeApi,
+  updateEmployeeApi,
   deleteEmployeeApi,
   deleteDocumentApi,
   deleteFlightApi,
@@ -21,6 +23,11 @@ function AdminService() {
   function getAdminProfile() {
     setupAxiosInterceptors();
     return getAdminProfileApi();
+  }
+
+  function getEmployee(employeeId) {
+    setupAxiosInterceptors();
+    return getEmployeeApi(employeeId);
   }
 
   function getEmployeesByPageable(params) {
@@ -54,6 +61,13 @@ function AdminService() {
     return createEmployeeApi(body);
   }
 
+  // PUT
+  function updateEmployee(employeeId, body) {
+    setupAxiosInterceptors();
+    console.log("EmployeeId: " + employeeId);
+    return updateEmployeeApi(employeeId, body);
+  }
+
   // DELETE
   function deleteEmployeeById(employeeId) {
     setupAxiosInterceptors();
@@ -77,12 +91,14 @@ function AdminService() {
 
   return {
     getAdminProfile,
+    getEmployee,
     getEmployeesByPageable,
     getAllEmployees,
     getAllDocuments,
     getAllFlights,
     getAllHotels,
     createEmployee,
+    updateEmployee,
     deleteEmployeeById,
     deleteDocumentById,
     deleteFlightById,

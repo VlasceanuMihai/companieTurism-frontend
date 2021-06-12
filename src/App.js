@@ -43,6 +43,11 @@ const App = withRouter(({ location }) => {
               exact
               component={RegistrationEmployeeComponent}
             />
+            <Route
+              path={"/admin/employee/:id"}
+              exact
+              component={RegistrationEmployeeComponent}
+            />
             <AuthenticatedRoute
               path="/admin/documents"
               exact
