@@ -49,13 +49,20 @@ const useStyles = makeStyles({
   tablerow: {
     background: "linear-gradient(45deg, #F1CDB9 10%, #b6aeab 90%)",
   },
+  nohover:{
+    "&:hover":{
+      backgroundColor: "black",
+    },
+  },
+
+  
 });
 
 function TableEmployeesComponent({ data }) {
   const classes = useStyles();
   const { deleteEmployeeById } = AdminService();
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -124,17 +131,13 @@ function TableEmployeesComponent({ data }) {
               <TableCell align="center">
                 <ButtonGroup>
                   <Button>
-                    <Link
+                    <Link style={{marginLeft:'0',}}
                       to={"/admin/employee/" + element.id}
-                      className="btn btn-sm"
-                    >
-                      <EditIcon />
+                      className="btn btn-sm">
+                      <EditIcon/>
                     </Link>
                   </Button>
-                  {/* <Button>
-                    <EditIcon />
-                  </Button> */}
-                  <Button>
+                  <Button >
                     <DeleteIcon
                       onClick={() => deleteEmployee(this, element.id)}
                     />
@@ -147,7 +150,7 @@ function TableEmployeesComponent({ data }) {
         <TableFooter>
           <TableRow>
             <TablePagination
-              rowsPerPageOptions={[10, 20, 50]}
+              rowsPerPageOptions={[5, 10, 20]}
               colSpan={11}
               count={data.length}
               rowsPerPage={rowsPerPage}
