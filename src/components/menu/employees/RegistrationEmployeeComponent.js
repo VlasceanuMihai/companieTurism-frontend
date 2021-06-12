@@ -199,7 +199,7 @@ export default function RegistrationEmployeeComponent(props) {
       <div className={classes.paper}>
         <div className={classes.container}>
           <form>
-            <div style={{fontSize:"21px"}}>DATE ANGAJAT</div>
+            <div style={{fontSize:"21px", marginTop:"5px"}}>DATE ANGAJAT</div>
             <br />
             <div class="form-row">
               <div class="form-group col-md-6" >
@@ -283,6 +283,7 @@ export default function RegistrationEmployeeComponent(props) {
                 />
               </div>
             )}
+            <div style={{fontSize:"21px"}}>DATE CONTRACT</div>
             <br />
             <form className={classes.container2} noValidate>
               <TextField
