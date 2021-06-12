@@ -18,14 +18,16 @@ const useStyles = makeStyles({
     display: "flex",
   },
   container: {
-    width: "700px",
+    width: "900px",
     height: "600px",
     fontFamily: "roboto",
     backgroundColor: "white",
     position: "relative",
     top: "150px",
     borderRadius: "10px",
-    backgroundColor: "rgba(241, 205, 185, 0.3)",
+    background: "linear-gradient(120deg, #BFADA9, #F0E2DD 40%, #ffffff)",
+    // border:"1px solid white",
+    boxShadow: "rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px",
   },
   container2: {
     display: "flex",
@@ -34,7 +36,7 @@ const useStyles = makeStyles({
   },
   formControl: {
     position: "relative",
-    left: "230px",
+    left: "220px",
     bottom: "32px",
   },
   button: {
@@ -196,10 +198,10 @@ export default function RegistrationEmployeeComponent(props) {
       <div className={classes.paper}>
         <div className={classes.container}>
           <form>
-            <div>Date Angajat</div>
+            <div style={{fontSize:"21px"}}>DATE ANGAJAT</div>
             <br />
             <div class="form-row">
-              <div class="form-group col-md-6">
+              <div class="form-group col-md-6" >
                 <input
                   type="text"
                   id="nume"
