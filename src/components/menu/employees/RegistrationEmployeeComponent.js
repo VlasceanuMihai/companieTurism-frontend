@@ -18,23 +18,27 @@ const useStyles = makeStyles({
     display: "flex",
   },
   container: {
-    width: "700px",
+    width: "750px",
     height: "600px",
     fontFamily: "roboto",
     backgroundColor: "white",
     position: "relative",
     top: "150px",
     borderRadius: "10px",
-    backgroundColor: "rgba(241, 205, 185, 0.3)",
+    background: "linear-gradient(120deg, #BFADA9, #F0E2DD 40%, #ffffff)",
+    boxShadow:
+      "rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px",
+    display: "flex",
+    justifyContent: "center",
   },
   container2: {
     display: "flex",
     position: "relative",
-    left: "50px",
+    // left: "50px",
   },
   formControl: {
     position: "relative",
-    left: "230px",
+    left: "140px",
     bottom: "32px",
   },
   button: {
@@ -197,7 +201,9 @@ export default function RegistrationEmployeeComponent(props) {
       <div className={classes.paper}>
         <div className={classes.container}>
           <form>
-            <div>Date Angajat</div>
+            <div style={{ fontSize: "21px", marginTop: "5px" }}>
+              Date Angajat
+            </div>
             <br />
             <div class="form-row">
               <div class="form-group col-md-6">
@@ -316,29 +322,31 @@ export default function RegistrationEmployeeComponent(props) {
                 </Select>
               </FormControl>
             </div>
-            <div class="form-group">
-              <input
-                type="text"
-                id="salariu"
-                class="form-control"
-                placeholder="Salariu Net"
-                name="wage"
-                required
-                defaultValue={employeeData.wage}
-                onChange={handleChange}
-              />
+            <div
+              class="form-row"
+              style={{ display: "flex", justifyContent: "center" }}
+            >
+              <div class="form-group col-8">
+                <input
+                  type="text"
+                  id="salariu"
+                  class="form-control"
+                  placeholder="Salariu Net"
+                  name="wage"
+                  required
+                  defaultValue={employeeData.wage}
+                  onChange={handleChange}
+                />
+              </div>
             </div>
-            <div class="form-group">
-              {/* <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="gridCheck" />
-              <label class="form-check-label" for="gridCheck">
-                Accept termenele si conditiile
-              </label>
-            </div> */}
-            </div>
+            <div class="form-group"></div>
             <button
               type="submit"
               class="btn btn-primary"
+              style={{
+                background: "linear-gradient(45deg, #F1CDB9 10%, #b6aeab 90%)",
+                border: "none",
+              }}
               onClick={employeeData.id ? handleUpdate : handleSubmit}
             >
               {employeeData.id ? "Actualizare angajat" : "Adauga angajat nou"}

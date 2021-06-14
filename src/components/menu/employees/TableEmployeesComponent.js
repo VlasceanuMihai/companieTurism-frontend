@@ -49,6 +49,11 @@ const useStyles = makeStyles({
   tablerow: {
     background: "linear-gradient(45deg, #F1CDB9 10%, #b6aeab 90%)",
   },
+  nohover: {
+    "&:hover": {
+      backgroundColor: "black",
+    },
+  },
 });
 
 function TableEmployeesComponent({ data }) {
@@ -128,15 +133,13 @@ function TableEmployeesComponent({ data }) {
               <TableCell align="center">{element.wage}</TableCell>
               <TableCell align="center">
                 <ButtonGroup>
-                  <Button>
-                    <EditIcon
-                      onClick={() => pushTo("/admin/employee/" + element.id)}
-                    />
+                  <Button
+                    onClick={() => pushTo("/admin/employee/" + element.id)}
+                  >
+                    <EditIcon />
                   </Button>
-                  <Button>
-                    <DeleteIcon
-                      onClick={() => deleteEmployee(this, element.id)}
-                    />
+                  <Button onClick={() => deleteEmployee(this, element.id)}>
+                    <DeleteIcon />
                   </Button>
                 </ButtonGroup>
               </TableCell>
