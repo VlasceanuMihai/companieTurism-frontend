@@ -13,8 +13,8 @@ const useStyles = makeStyles({
     display: "flex",
   },
   container: {
-    width: "750px",
-    height: "600px",
+    width: "700px",
+    height: "300px",
     fontFamily: "roboto",
     backgroundColor: "white",
     position: "relative",
@@ -172,22 +172,24 @@ export default function RegistrationDocumentComponent(props) {
         <div className={classes.container}>
           <form>
             <div style={{ fontSize: "21px", marginTop: "5px" }}>
-              Adaugare document pentru angajat
+              Adaugare document
             </div>
             <br />
-            <div class="form-group">
-              <input
-                id="cnp"
-                name="cnp"
-                type="text"
-                class="form-control"
-                placeholder="CNP"
-                readOnly={isUpdatePage === true}
-                required
-                defaultValue={documentData.cnp}
-                onChange={handleChange}
-              />
-            </div>
+            {isUpdatePage === false && (
+              <div class="form-group">
+                <input
+                  id="cnp"
+                  name="cnp"
+                  type="text"
+                  class="form-control"
+                  placeholder="CNP"
+                  readOnly={isUpdatePage === true}
+                  required
+                  defaultValue={documentData.cnp}
+                  onChange={handleChange}
+                />
+              </div>
+            )}
             <div class="form-group">
               <input
                 id="path"

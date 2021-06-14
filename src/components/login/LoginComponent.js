@@ -30,7 +30,7 @@ function LoginComponent() {
       .then((response) => {
         console.log("response.data.token: ", response.data.token);
         successfulLogin(userData.username, response.data.token);
-        history.push("/admin/home");
+        history.push("/home");
         setUserData({
           username: "",
           password: "",

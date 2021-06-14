@@ -3,12 +3,10 @@ import {
   getEmployeeApi,
   getEmployeesByPageableApi,
   getAllEmployeesApi,
-  getAllFlightsApi,
   getAllHotelsApi,
   createEmployeeApi,
   updateEmployeeApi,
   deleteEmployeeApi,
-  deleteFlightApi,
   deleteHotelApi,
 } from "../api/adminApi/AdminApi";
 import AuthenticationService from "../auth/AuthenticationService";
@@ -38,21 +36,6 @@ function AdminService() {
     return getAllEmployeesApi();
   }
 
-  // function getDocument(documentId){
-  //   setupAxiosInterceptors();
-  //   return getDocumentApi();
-  // }
-
-  // function getAllDocuments() {
-  //   setupAxiosInterceptors();
-  //   return getAllDocumentsApi();
-  // }
-
-  function getAllFlights() {
-    setupAxiosInterceptors();
-    return getAllFlightsApi();
-  }
-
   function getAllHotels() {
     setupAxiosInterceptors();
     return getAllHotelsApi();
@@ -76,16 +59,6 @@ function AdminService() {
     return deleteEmployeeApi(employeeId);
   }
 
-  // function deleteDocumentById(documentId) {
-  //   setupAxiosInterceptors();
-  //   return deleteDocumentApi(documentId);
-  // }
-
-  function deleteFlightById(flightId) {
-    setupAxiosInterceptors();
-    return deleteFlightApi(flightId);
-  }
-
   function deleteHotelById(hotelId) {
     setupAxiosInterceptors();
     return deleteHotelApi(hotelId);
@@ -96,12 +69,10 @@ function AdminService() {
     getEmployee,
     getEmployeesByPageable,
     getAllEmployees,
-    getAllFlights,
     getAllHotels,
     createEmployee,
     updateEmployee,
     deleteEmployeeById,
-    deleteFlightById,
     deleteHotelById,
   };
 }

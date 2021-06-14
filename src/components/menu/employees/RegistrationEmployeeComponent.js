@@ -4,9 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { makeStyles } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
-// import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
-// import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import NavbarComponent from "../../menu/navbar/NavbarComponent";
@@ -217,7 +215,7 @@ export default function RegistrationEmployeeComponent(props) {
                   required
                   autoFocus
                   autoComplete="off"
-                  defaultValue={employeeData.lastName || ""}
+                  defaultValue={employeeData.lastName}
                   onChange={handleChange}
                 />
               </div>
@@ -300,7 +298,7 @@ export default function RegistrationEmployeeComponent(props) {
                 InputLabelProps={{
                   shrink: true,
                 }}
-                defaultValue={employeeData.dateOfEmployment}
+                value={employeeData.dateOfEmployment}
                 onChange={handleChange}
               />
             </form>
