@@ -74,7 +74,7 @@ function TableFlightsComponent({ data, ...rest }) {
     deleteFlightById(flightId)
       .then((response) => {
         if (response.status === 200) {
-          alert("Flight - " + flightId + " successful deleted.");
+          alert("Flight successful deleted.");
           window.location.reload();
         }
       })

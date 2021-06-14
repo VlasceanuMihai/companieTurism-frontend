@@ -1,12 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
-import AdminService from "../../../services/AdminService";
+import HotelAdminService from "../../../services/HotelAdminService";
 import NavbarComponent from "../navbar/NavbarComponent";
 import TableHotelsComponent from "./TableHotelsComponent";
 import AddButtonComponent from "../buttons/AddButtonComponent";
 
 function HotelsComponent() {
-  const { getAllHotels } = AdminService();
+  const { getAllHotels } = HotelAdminService();
   const [hotels, setHotels] = useState(null);
   const [hotelsError, setHotelsError] = useState(null);
 
@@ -22,14 +22,19 @@ function HotelsComponent() {
       });
   }, []);
 
-  return(
+  return (
     <div>
-    <NavbarComponent />
-    {<AddButtonComponent name={"Adaugare hotel"} />}
-    {hotelsError !== null && <div>{hotelsError}</div>}
-    {hotels && <TableHotelsComponent data={hotels} />}
-  </div>
-  )
+      <NavbarComponent />
+      {
+        <AddButtonComponent
+          name={"Adaugare hotel"}
+          path={"/admin/hotels/form"}
+        />
+      }
+      {hotelsError !== null && <div>{hotelsError}</div>}
+      {hotels && <TableHotelsComponent data={hotels} />}
+    </div>
+  );
 }
 
 export default HotelsComponent;

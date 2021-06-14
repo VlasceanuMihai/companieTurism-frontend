@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { useHistory } from "react-router";
 import PropTypes from "prop-types";
 import {
   Table,
@@ -22,7 +23,7 @@ import FirstPageIcon from "@material-ui/icons/FirstPage";
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import LastPageIcon from "@material-ui/icons/LastPage";
-import AdminService from "../../../services/AdminService";
+import HotelAdminService from "../../../services/HotelAdminService";
 
 const useStylesPagination = makeStyles((theme) => ({
   root: {
@@ -51,15 +52,20 @@ const useStyles = makeStyles({
 
 function TableFlightsComponent({ data, ...rest }) {
   const classes = useStyles();
-  const { deleteHotelById } = AdminService();
+  let history = useHistory();
+  const { deleteHotelById } = HotelAdminService();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const handleChangePage = (event, newPage) => {
+    event.preventDefault();
+
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (event) => {
+    event.preventDefault();
+    
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
@@ -69,7 +75,7 @@ function TableFlightsComponent({ data, ...rest }) {
       .then((response) => {
         console.log(response.status);
         if (response.status === 200) {
-          alert("Hotel - " + hotelId + " successful deleted.");
+          alert("Hotel successful deleted.");
           window.location.reload();
         }
       })
@@ -77,6 +83,10 @@ function TableFlightsComponent({ data, ...rest }) {
         console.log(error);
         alert(error);
       });
+  };
+
+  const pushTo = (path) => {
+    history.push(path);
   };
 
   return (
@@ -117,13 +127,11 @@ function TableFlightsComponent({ data, ...rest }) {
               <TableCell align="center">{element.employee.email}</TableCell>
               <TableCell align="center">
                 <ButtonGroup>
-                  <Button>
+                  <Button onClick={() => pushTo("/admin/hotel/" + element.id)}>
                     <EditIcon />
                   </Button>
-                  <Button>
-                    <DeleteIcon
-                      onClick={() => deleteHotel(this, element.id)}
-                    />
+                  <Button onClick={() => deleteHotel(this, element.id)}>
+                    <DeleteIcon />
                   </Button>
                 </ButtonGroup>
               </TableCell>
@@ -154,7 +162,7 @@ function TableFlightsComponent({ data, ...rest }) {
 }
 
 TableFlightsComponent.propTypes = {
-  employees: PropTypes.array.isRequired,
+  data: PropTypes.array.isRequired,
 };
 
 function TablePaginationActions(props) {

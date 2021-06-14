@@ -11,6 +11,7 @@ import HotelsComponent from "./components/menu/hotels/HotelsComponent";
 import RegistrationEmployeeComponent from "./components/menu/employees/RegistrationEmployeeComponent";
 import RegistrationDocumentComponent from "./components/menu/documents/RegistrationDocumentComponent";
 import RegistrationFlightComponent from "./components/menu/flights/RegistrationFlightComponent";
+import RegistrationHotelComponent from "./components/menu/hotels/RegistrationHotelComponent";
 
 const App = withRouter(({ location }) => {
   return (
@@ -78,6 +79,16 @@ const App = withRouter(({ location }) => {
               path="/admin/hotels"
               exact
               component={HotelsComponent}
+            />
+            <AuthenticatedRoute
+              path="/admin/hotels/form"
+              exact
+              component={RegistrationHotelComponent}
+            />
+            <AuthenticatedRoute
+              path="/admin/hotel/:id"
+              exact
+              component={RegistrationHotelComponent}
             />
           </Switch>
         </Route>

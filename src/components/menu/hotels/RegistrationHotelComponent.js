@@ -5,7 +5,7 @@ import { useHistory } from "react-router";
 import { makeStyles } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
 import NavbarComponent from "../../menu/navbar/NavbarComponent";
-import FlightAdminService from "../../../services/FlightAdminService";
+import HotelAdminService from "../../../services/HotelAdminService";
 
 const useStyles = makeStyles({
   paper: {
@@ -54,35 +54,37 @@ const useStyles = makeStyles({
   },
 });
 
-export default function RegistrationFlightComponent(props) {
+export default function RegistrationHotelComponent(props) {
   const classes = useStyles();
   let history = useHistory();
-  const { getFlight, createFlight, updateFlight } = FlightAdminService();
+  const { getHotel, createHotel, updateHotel } = HotelAdminService();
 
-  const [flightData, setFlightData] = useState({
-    flightId: "",
-    airportDeparture: "",
-    dateOfDeparture: "",
-    airportArrival: "",
-    dateOfArrival: "",
-    company: "",
+  const [hotelData, setHotelData] = useState({
+    hotelId: "",
+    hotelName: "",
+    rating: "",
+    destinationCountry: "",
+    destinationCity: "",
+    covidScenario: "",
     employeeCnp: "",
-    employeeFullName: "",
   });
   const [isUpdatePage, setIsUpdatePage] = useState(false);
 
-  // const initialState = {
-  //   documentId: "",
-  //   cnp: "",
-  //   path: "",
-  //   documentName: "",
-  // };
+  //   const initialState = {
+  //     hotelId: "",
+  //     hotelName: "",
+  //     rating: "",
+  //     destinationCountry: "",
+  //     destinationCity: "",
+  //     covidScenario: "",
+  //     employeeCnp: "",
+  //   };
 
   function handleChange(event) {
     event.preventDefault();
 
-    setFlightData((flightData) => ({
-      ...flightData,
+    setHotelData((hotelData) => ({
+      ...hotelData,
       [event.target.name]: event.target.value,
     }));
   }
@@ -90,29 +92,30 @@ export default function RegistrationFlightComponent(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    console.log("Body: ", flightData);
-    createFlight({
-      cnp: flightData.employeeCnp,
-      airportDeparture: flightData.airportDeparture,
-      dateOfDeparture: flightData.dateOfDeparture,
-      airportArrival: flightData.airportArrival,
-      dateOfArrival: flightData.dateOfArrival,
-      company: flightData.company,
+    console.log("Body: ", hotelData);
+    createHotel({
+      cnp: hotelData.employeeCnp,
+      hotelName: hotelData.hotelName,
+      rating: hotelData.rating,
+      destination: {
+        country: hotelData.destinationCountry,
+        city: hotelData.destinationCity,
+        covidScenario: hotelData.covidScenario,
+      },
     })
       .then((response) => {
-        console.log("Flight was created successfully!");
+        console.log("Hotel was created successfully!");
         if (response.status === 200) {
-          alert("Flight was created successfully!");
-          history.push("/admin/flights");
-          setFlightData({
-            flightId: "",
-            airportDeparture: "",
-            dateOfDeparture: "",
-            airportArrival: "",
-            dateOfArrival: "",
-            company: "",
+          alert("Hotel was created successfully!");
+          history.push("/admin/hotels");
+          setHotelData({
+            hotelId: "",
+            hotelName: "",
+            rating: "",
+            destinationCountry: "",
+            destinationCity: "",
+            covidScenario: "",
             employeeCnp: "",
-            employeeFullName: "",
           });
         }
       })
@@ -125,28 +128,29 @@ export default function RegistrationFlightComponent(props) {
   const handleUpdate = (event) => {
     event.preventDefault();
 
-    console.log(flightData.flightId);
-    updateFlight(flightData.flightId, {
-      airportDeparture: flightData.airportDeparture,
-      dateOfDeparture: flightData.dateOfDeparture,
-      airportArrival: flightData.airportArrival,
-      dateOfArrival: flightData.dateOfArrival,
-      company: flightData.company,
+    console.log(hotelData.hotelId);
+    updateHotel(hotelData.hotelId, {
+      hotelName: hotelData.hotelName,
+      rating: hotelData.rating,
+      destination: {
+        country: hotelData.destinationCountry,
+        city: hotelData.destinationCity,
+        covidScenario: hotelData.covidScenario,
+      },
     })
       .then((response) => {
-        console.log("Flight updated!");
+        console.log("Hotel updated successfully!");
         if (response.status === 200) {
-          alert("Flight updated!");
-          history.push("/admin/flights");
-          setFlightData({
-            flightId: "",
-            airportDeparture: "",
-            dateOfDeparture: "",
-            airportArrival: "",
-            dateOfArrival: "",
-            company: "",
+          alert("Flight updated successfully!");
+          history.push("/admin/hotels");
+          setHotelData({
+            hotelId: "",
+            hotelName: "",
+            rating: "",
+            destinationCountry: "",
+            destinationCity: "",
+            covidScenario: "",
             employeeCnp: "",
-            employeeFullName: "",
           });
         }
       })
@@ -156,23 +160,19 @@ export default function RegistrationFlightComponent(props) {
       });
   };
 
-  const findFlightById = (flightId) => {
-    getFlight(flightId)
+  const findHotelById = (hotelId) => {
+    getHotel(hotelId)
       .then((response) => {
         if (response.data != null) {
           //   console.log("Date: ", response.data.dateOfEmployment);
-          setFlightData({
-            flightId: response.data.id,
-            airportDeparture: response.data.airportDeparture,
-            dateOfDeparture: response.data.dateOfDeparture,
-            airportArrival: response.data.airportArrival,
-            dateOfArrival: response.data.dateOfArrival,
-            company: response.data.company,
+          setHotelData({
+            hotelId: response.data.id,
+            hotelName: response.data.name,
+            rating: response.data.rating,
+            destinationCountry: response.data.destination.country,
+            destinationCity: response.data.destination.city,
+            covidScenario: response.data.destination.covidScenario,
             employeeCnp: response.data.employee.cnp,
-            employeeFullName:
-              response.data.employee.lastName +
-              "" +
-              response.data.employee.firstName,
           });
         }
       })
@@ -182,10 +182,10 @@ export default function RegistrationFlightComponent(props) {
   };
 
   useEffect(() => {
-    const flightId = +props.match.params.id;
-    if (flightId) {
+    const hotelId = +props.match.params.id;
+    if (hotelId) {
       setIsUpdatePage(true);
-      findFlightById(flightId);
+      findHotelById(hotelId);
     }
   }, []);
 
@@ -196,7 +196,7 @@ export default function RegistrationFlightComponent(props) {
         <div className={classes.container}>
           <form>
             <div style={{ fontSize: "21px", marginTop: "5px" }}>
-              Adaugare zbor
+              Adaugare hotel
             </div>
             <br />
             {isUpdatePage === false && (
@@ -208,7 +208,7 @@ export default function RegistrationFlightComponent(props) {
                   class="form-control"
                   placeholder="CNP"
                   required
-                  defaultValue={flightData.employeeCnp}
+                  defaultValue={hotelData.employeeCnp}
                   onChange={handleChange}
                 />
               </div>
@@ -223,7 +223,7 @@ export default function RegistrationFlightComponent(props) {
                   class="form-control"
                   placeholder="Aeroport plecare"
                   required
-                  defaultValue={flightData.airportDeparture}
+                  defaultValue={hotelData.airportDeparture}
                   onChange={handleChange}
                 />
               </div>
@@ -238,7 +238,7 @@ export default function RegistrationFlightComponent(props) {
                   InputLabelProps={{
                     shrink: true,
                   }}
-                  value={flightData.dateOfDeparture}
+                  value={hotelData.dateOfDeparture}
                   onChange={handleChange}
                 />
               </form>
@@ -253,7 +253,7 @@ export default function RegistrationFlightComponent(props) {
                   class="form-control"
                   placeholder="Aeroport sosire"
                   required
-                  defaultValue={flightData.airportArrival}
+                  defaultValue={hotelData.airportArrival}
                   onChange={handleChange}
                 />
               </div>
@@ -268,7 +268,7 @@ export default function RegistrationFlightComponent(props) {
                   InputLabelProps={{
                     shrink: true,
                   }}
-                  value={flightData.dateOfArrival}
+                  value={hotelData.dateOfArrival}
                   onChange={handleChange}
                 />
               </form>
@@ -282,7 +282,7 @@ export default function RegistrationFlightComponent(props) {
                 class="form-control"
                 placeholder="Companie"
                 required
-                defaultValue={flightData.company}
+                defaultValue={hotelData.company}
                 onChange={handleChange}
               />
             </div>
@@ -295,7 +295,7 @@ export default function RegistrationFlightComponent(props) {
               }}
               onClick={isUpdatePage ? handleUpdate : handleSubmit}
             >
-              {isUpdatePage ? "Actualizare zbor" : "Adauga zbor nou"}
+              {isUpdatePage ? "Actualizare hotel" : "Adauga hotel nou"}
             </button>
           </form>
         </div>
