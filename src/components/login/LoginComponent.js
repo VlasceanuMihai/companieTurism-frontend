@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./loginComponent.css";
 import AuthenticationService from "../../auth/AuthenticationService";
 import { useHistory } from "react-router";
@@ -48,6 +48,14 @@ function LoginComponent() {
         });
       });
   }
+
+  useEffect(() => {
+    let isAuth = sessionStorage.getItem("user_token");
+    console.log(isAuth);
+    if(isAuth && isAuth !== "undefined"){
+      history.push("/home")
+    }
+  })
 
   return (
     <div className="limiter">
