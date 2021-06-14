@@ -11,6 +11,7 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import NavbarComponent from "../../menu/navbar/NavbarComponent";
 import AdminService from "../../../services/AdminService";
+
 const useStyles = makeStyles({
   paper: {
     justifyContent: "center",
@@ -208,9 +209,9 @@ export default function RegistrationEmployeeComponent(props) {
             <div class="form-row">
               <div class="form-group col-md-6">
                 <input
-                  type="text"
-                  id="nume"
+                  id="lastName"
                   name="lastName"
+                  type="text"
                   class="form-control"
                   placeholder="Nume"
                   required
@@ -223,7 +224,7 @@ export default function RegistrationEmployeeComponent(props) {
               <div class="form-group col-md-6">
                 <input
                   type="text"
-                  id="prenume"
+                  id="firstName"
                   name="firstName"
                   class="form-control"
                   placeholder="Prenume"
@@ -250,7 +251,7 @@ export default function RegistrationEmployeeComponent(props) {
               <div class="form-group col-md-6">
                 <input
                   type="tel"
-                  id="numarTelefon"
+                  id="phoneNumber"
                   class="form-control"
                   placeholder="Numar Telefon"
                   name="phoneNumber"
@@ -290,7 +291,7 @@ export default function RegistrationEmployeeComponent(props) {
             <br />
             <form className={classes.container2} noValidate>
               <TextField
-                id="date"
+                id="dateOfEmployment"
                 label="Data Angajarii"
                 type="date"
                 name="dateOfEmployment"
@@ -329,9 +330,9 @@ export default function RegistrationEmployeeComponent(props) {
               <div class="form-group col-8">
                 <input
                   type="text"
-                  id="salariu"
+                  id="wage"
                   class="form-control"
-                  placeholder="Salariu Net"
+                  placeholder="Salariu"
                   name="wage"
                   required
                   defaultValue={employeeData.wage}

@@ -10,9 +10,10 @@ import AuthenticationService from "../auth/AuthenticationService";
 function DocumentAdminService() {
   const { setupAxiosInterceptors } = AuthenticationService();
 
+  // GET
   function getDocument(documentId) {
     setupAxiosInterceptors();
-    return getDocumentApi();
+    return getDocumentApi(documentId);
   }
 
   function getAllDocuments() {
@@ -20,16 +21,19 @@ function DocumentAdminService() {
     return getAllDocumentsApi();
   }
 
+  // POST
   function createDocument(body) {
     setupAxiosInterceptors();
     return createDocumentApi(body);
   }
 
-  function updateEmployee(documentId, body) {
+  // PUT
+  function updateDocument(documentId, body) {
     setupAxiosInterceptors();
     return updateDocumentApi(documentId, body);
   }
 
+  // DELETE
   function deleteDocumentById(documentId) {
     setupAxiosInterceptors();
     return deleteDocumentApi(documentId);
@@ -39,8 +43,8 @@ function DocumentAdminService() {
     getDocument,
     getAllDocuments,
     createDocument,
-    updateEmployee,
-    deleteDocumentById
+    updateDocument,
+    deleteDocumentById,
   };
 }
 

@@ -64,15 +64,21 @@ function TableEmployeesComponent({ data }) {
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const handleChangePage = (event, newPage) => {
+    event.preventDefault();
+
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (event) => {
+    event.preventDefault();
+
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
 
   const deleteEmployee = (event, employeeId) => {
+    event.preventDefault();
+    
     deleteEmployeeById(employeeId)
       .then((response) => {
         console.log(response.status);

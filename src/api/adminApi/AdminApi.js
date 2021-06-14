@@ -32,7 +32,7 @@ export const getAllDocumentsApi = async () => {
 
 // Get document
 export const getDocumentApi = async (documentId) => {
-  return await axios.get(`${BASE_API}/admin/v1/document` + documentId);
+  return await axios.get(`${BASE_API}/admin/v1/document/` + documentId);
 };
 
 // Get all flights

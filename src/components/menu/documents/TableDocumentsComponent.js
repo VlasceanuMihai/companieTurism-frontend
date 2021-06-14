@@ -23,7 +23,7 @@ import FirstPageIcon from "@material-ui/icons/FirstPage";
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import LastPageIcon from "@material-ui/icons/LastPage";
-import AdminService from "../../../services/AdminService";
+import DocumentAdminService from "../../../services/DocumentAdminService";
 
 const useStylesPagination = makeStyles((theme) => ({
   root: {
@@ -53,15 +53,19 @@ const useStyles = makeStyles({
 function TableDocumentsComponent({ data, ...rest }) {
   const classes = useStyles();
   let history = useHistory();
-  const { deleteDocumentById } = AdminService();
+  const { deleteDocumentById } = DocumentAdminService();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const handleChangePage = (event, newPage) => {
+    event.preventDefault();
+
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (event) => {
+    event.preventDefault();
+
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
@@ -112,13 +116,13 @@ function TableDocumentsComponent({ data, ...rest }) {
               <TableCell align="center">{element.documentName}</TableCell>
               <TableCell align="center">
                 <ButtonGroup>
-                  <Button>
-                    <EditIcon onClick={() => pushTo("/admin/document/" + element.id)}/>
+                  <Button
+                    onClick={() => pushTo("/admin/document/" + element.id)}
+                  >
+                    <EditIcon />
                   </Button>
-                  <Button>
-                    <DeleteIcon
-                      onClick={() => deleteDocument(this, element.id)}
-                    />
+                  <Button onClick={() => deleteDocument(this, element.id)}>
+                    <DeleteIcon />
                   </Button>
                 </ButtonGroup>
               </TableCell>
