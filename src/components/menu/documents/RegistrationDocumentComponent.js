@@ -10,7 +10,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import NavbarComponent from "../../menu/navbar/NavbarComponent";
-import AdminService from "../../../services/AdminService";
+import DocumentAdminService from "../../../services/DocumentAdminService";
+
 const useStyles = makeStyles({
   paper: {
     justifyContent: "center",
@@ -53,30 +54,32 @@ const useStyles = makeStyles({
   },
 });
 
-export default function RegistrationEmployeeComponent(props) {
+export default function RegistrationDocumentComponent(props) {
   const classes = useStyles();
   let history = useHistory();
-  const { getEmployee, createEmployee, updateEmployee } = AdminService();
+  const { getDocument, createDocument, updateDocumentApi } =
+    DocumentAdminService();
 
-  const [employeeData, setEmployeeData] = useState({
-    id: "",
-    lastName: "",
-    firstName: "",
+  const [documentData, setDocumentData] = useState({
+    documentId: "",
     cnp: "",
-    phoneNumber: "",
-    email: "",
-    password: "",
-    dateOfEmployment: "",
-    employeeType: "",
-    wage: "",
+    path: "",
+    documentName: "",
   });
   const [showPasswordField, setShowPasswordField] = useState(true);
+
+  const initialState = {
+    documentId: "",
+    cnp: "",
+    path: "",
+    documentName: "",
+  };
 
   function handleChange(event) {
     event.preventDefault();
 
-    setEmployeeData((employeeData) => ({
-      ...employeeData,
+    setDocumentData((documentData) => ({
+      ...documentData,
       [event.target.name]: event.target.value,
     }));
   }
@@ -84,33 +87,26 @@ export default function RegistrationEmployeeComponent(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    console.log("Body: ", employeeData);
-    createEmployee({
-      lastName: employeeData.lastName,
-      firstName: employeeData.firstName,
-      cnp: employeeData.cnp,
-      phoneNumber: employeeData.phoneNumber,
-      email: employeeData.email,
-      password: employeeData.password,
-      dateOfEmployment: employeeData.dateOfEmployment,
-      employeeType: employeeData.employeeType,
-      wage: employeeData.wage,
+    console.log("Body: ", documentData);
+    createDocument({
+      cnp: documentData.cnp,
+      path: documentData.path,
+      documentName: documentData.documentName,
     })
       .then((response) => {
-        console.log("Create new employee with cnp: " + employeeData.cnp);
+        console.log(
+          "Create new document for employee with cnp: " + documentData.cnp
+        );
         if (response.status === 200) {
-          alert("Create new employee with cnp: " + employeeData.cnp);
-          history.push("/admin/employees");
-          setEmployeeData({
-            lastName: "",
-            firstName: "",
+          alert(
+            "Create new document for employee with cnp: " + documentData.cnp
+          );
+          history.push("/admin/documents");
+          setDocumentData({
+            documentId: "",
             cnp: "",
-            phoneNumber: "",
-            email: "",
-            password: "",
-            dateOfEmployment: "",
-            employeeType: "",
-            wage: "",
+            path: "",
+            documentName: "",
           });
         }
       })
@@ -123,32 +119,23 @@ export default function RegistrationEmployeeComponent(props) {
   const handleUpdate = (event) => {
     event.preventDefault();
 
-    console.log(employeeData.id);
-    updateEmployee(employeeData.id, {
-      lastName: employeeData.lastName,
-      firstName: employeeData.firstName,
-      cnp: employeeData.cnp,
-      phoneNumber: employeeData.phoneNumber,
-      email: employeeData.email,
-      dateOfEmployment: employeeData.dateOfEmployment,
-      employeeType: employeeData.employeeType,
-      wage: employeeData.wage,
+    console.log(documentData.documentId);
+    updateDocumentApi(documentData.documentId, {
+      documentId: documentData.id,
+      cnp: documentData.cnp,
+      path: documentData.path,
+      documentName: documentData.documentName,
     })
       .then((response) => {
-        console.log("Update employee with cnp: " + employeeData.cnp);
+        console.log("Update employee with cnp: " + documentData.cnp);
         if (response.status === 200) {
-          alert("Update employee with cnp: " + employeeData.cnp);
+          alert("Update employee with cnp: " + documentData.cnp);
           history.push("/admin/employees");
-          setEmployeeData({
-            lastName: "",
-            firstName: "",
+          setDocumentData({
+            documentId: "",
             cnp: "",
-            phoneNumber: "",
-            email: "",
-            password: "",
-            dateOfEmployment: "",
-            employeeType: "",
-            wage: "",
+            path: "",
+            documentName: "",
           });
         }
       })
@@ -158,23 +145,15 @@ export default function RegistrationEmployeeComponent(props) {
       });
   };
 
-  const findEmployeeById = (employeeId) => {
-    getEmployee(employeeId)
+  const findDocumentById = (documentId) => {
+    getDocument(documentId)
       .then((response) => {
         if (response.data != null) {
-          console.log("Date: ", response.data.dateOfEmployment);
-          console.log("Type: ", response.data.employeeType);
-          setEmployeeData({
-            id: response.data.id,
-            lastName: response.data.lastName,
-            firstName: response.data.firstName,
-            cnp: response.data.cnp,
-            phoneNumber: response.data.phoneNumber,
-            email: response.data.email,
-            // password: response.data.id,
-            dateOfEmployment: response.data.dateOfEmployment,
-            employeeType: response.data.employeeType,
-            wage: response.data.wage,
+        //   console.log("Date: ", response.data.dateOfEmployment);
+          setDocumentData({
+            cnp: documentData.cnp,
+            path: documentData.path,
+            documentName: documentData.documentName,
           });
         }
       })
@@ -184,10 +163,10 @@ export default function RegistrationEmployeeComponent(props) {
   };
 
   useEffect(() => {
-    const employeeId = +props.match.params.id;
-    if (employeeId) {
+    const documentId = +props.match.params.id;
+    if (documentId) {
       setShowPasswordField(false);
-      findEmployeeById(employeeId);
+      findDocumentById(documentId);
     }
   }, []);
 
@@ -197,7 +176,7 @@ export default function RegistrationEmployeeComponent(props) {
       <div className={classes.paper}>
         <div className={classes.container}>
           <form>
-            <div>Date Angajat</div>
+            <div>Adaugare document</div>
             <br />
             <div class="form-row">
               <div class="form-group col-md-6">
@@ -210,7 +189,7 @@ export default function RegistrationEmployeeComponent(props) {
                   required
                   autoFocus
                   autoComplete="off"
-                  defaultValue={employeeData.lastName || ""}
+                  defaultValue={documentData.lastName || ""}
                   onChange={handleChange}
                 />
               </div>
@@ -222,7 +201,7 @@ export default function RegistrationEmployeeComponent(props) {
                   class="form-control"
                   placeholder="Prenume"
                   required
-                  defaultValue={employeeData.firstName}
+                  defaultValue={documentData.firstName}
                   onChange={handleChange}
                 />
               </div>
@@ -237,7 +216,7 @@ export default function RegistrationEmployeeComponent(props) {
                   name="cnp"
                   required
                   readOnly={showPasswordField === false}
-                  defaultValue={employeeData.cnp}
+                  defaultValue={documentData.cnp}
                   onChange={handleChange}
                 />
               </div>
@@ -249,7 +228,7 @@ export default function RegistrationEmployeeComponent(props) {
                   placeholder="Numar Telefon"
                   name="phoneNumber"
                   required
-                  defaultValue={employeeData.phoneNumber}
+                  defaultValue={documentData.phoneNumber}
                   onChange={handleChange}
                 />
               </div>
@@ -263,7 +242,7 @@ export default function RegistrationEmployeeComponent(props) {
                 placeholder="Email"
                 name="email"
                 required
-                defaultValue={employeeData.email}
+                defaultValue={documentData.email}
                 onChange={handleChange}
               />
             </div>
@@ -276,7 +255,7 @@ export default function RegistrationEmployeeComponent(props) {
                   placeholder="Parola"
                   name="password"
                   required
-                  defaultValue={employeeData.password}
+                  defaultValue={documentData.password}
                   onChange={handleChange}
                 />
               </div>
@@ -293,14 +272,14 @@ export default function RegistrationEmployeeComponent(props) {
                 InputLabelProps={{
                   shrink: true,
                 }}
-                defaultValue={employeeData.dateOfEmployment}
+                defaultValue={documentData.dateOfEmployment}
                 onChange={handleChange}
               />
             </form>
             <div>
               <FormControl className={classes.formControl}>
                 <Select
-                  defaultValue={employeeData.employeeType}
+                  defaultValue={documentData.employeeType}
                   onChange={handleChange}
                   displayEmpty
                   name="employeeType"
@@ -324,7 +303,7 @@ export default function RegistrationEmployeeComponent(props) {
                 placeholder="Salariu Net"
                 name="wage"
                 required
-                defaultValue={employeeData.wage}
+                defaultValue={documentData.wage}
                 onChange={handleChange}
               />
             </div>
@@ -339,9 +318,11 @@ export default function RegistrationEmployeeComponent(props) {
             <button
               type="submit"
               class="btn btn-primary"
-              onClick={employeeData.id ? handleUpdate : handleSubmit}
+              onClick={documentData.documentId ? handleUpdate : handleSubmit}
             >
-              {employeeData.id ? "Actualizare angajat" : "Adauga angajat nou"}
+              {documentData.documentId
+                ? "Actualizare angajat"
+                : "Adauga angajat nou"}
             </button>
           </form>
         </div>

@@ -1,12 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
-import AdminService from "../../../services/AdminService";
+import DocumentAdminService from "../../../services/DocumentAdminService";
 import NavbarComponent from "../navbar/NavbarComponent";
 import TableDocumentsComponent from "./TableDocumentsComponent";
 import AddButtonComponent from "../buttons/AddButtonComponent";
 
 function DocumentsComponent() {
-  const { getAllDocuments } = AdminService();
+  const { getAllDocuments } = DocumentAdminService();
   const [documents, setDocuments] = useState(null);
   const [documentsError, setDocumentsError] = useState(null);
 
@@ -25,7 +25,7 @@ function DocumentsComponent() {
   return (
     <div>
       <NavbarComponent />
-      {<AddButtonComponent name={"Adaugare document"} />}
+      {<AddButtonComponent name={"Adaugare document"} path={"/admin/documents/form"}/>}
       {documentsError !== null && <div>{documentsError}</div>}
       {documents && <TableDocumentsComponent data={documents} />}
     </div>
