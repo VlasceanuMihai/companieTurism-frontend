@@ -15,11 +15,6 @@ export const getEmployeeApi = async (employeeId) => {
   return await axios.get(`${BASE_API}/admin/v1/employee/` + employeeId);
 };
 
-// Get employees by pageable
-export const getEmployeesByPageableApi = async (params) => {
-  return await axios.get(`${BASE_API}/admin/v1/employees`, { params });
-};
-
 // Get all employees
 export const getAllEmployeesApi = async () => {
   return await axios.get(`${BASE_API}/admin/v1/getAllEmployees`);
@@ -45,6 +40,11 @@ export const getAllFlightsApi = async () => {
   return await axios.get(`${BASE_API}/admin/v1/flights`);
 };
 
+// Get hotel
+export const getHotelApi = async (hotelId) => {
+  return await axios.get(`${BASE_API}/admin/v1/hotel/` + hotelId);
+};
+
 // Get all hotels
 export const getAllHotelsApi = async () => {
   return await axios.get(`${BASE_API}/admin/v1/getAllHotels`);
@@ -65,6 +65,11 @@ export const createDocumentApi = async (body) => {
 // Create new flight
 export const createFlightApi = async (body) => {
   return await axios.post(`${BASE_API}/admin/v1/createFlight`, body);
+};
+
+// Create new hotel
+export const createHotelApi = async (body) => {
+  return await axios.post(`${BASE_API}/admin/v1/createHotel`, body);
 };
 
 /* PUT */
@@ -88,6 +93,11 @@ export const updateDocumentApi = async (documentId, body) => {
 // Update flight
 export const updateFlightApi = async (flightId, body) => {
   return await axios.put(`${BASE_API}/admin/v1/updateFlight/` + flightId, body);
+};
+
+// Update hotel
+export const updateHotelApi = async (hotelId, body) => {
+  return await axios.put(`${BASE_API}/admin/v1/updateHotel/` + hotelId, body);
 };
 
 /* DELETE */

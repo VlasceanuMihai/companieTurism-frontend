@@ -22,14 +22,19 @@ function FlightsComponent() {
       });
   }, []);
 
-  return(
+  return (
     <div>
-    <NavbarComponent />
-    {<AddButtonComponent name={"Adaugare zbor"} path={"/admin/flights/form"}/>}
-    {flightsError !== null && <div>{flightsError}</div>}
-    {flights && <TableFlightsComponent data={flights} />}
-  </div>
-  )
+      <NavbarComponent />
+      {
+        <AddButtonComponent
+          name={"Adaugare zbor"}
+          path={"/admin/flights/form"}
+        />
+      }
+      {flightsError !== null && <div>{flightsError}</div>}
+      {flights && <TableFlightsComponent data={flights} />}
+    </div>
+  );
 }
 
 export default FlightsComponent;

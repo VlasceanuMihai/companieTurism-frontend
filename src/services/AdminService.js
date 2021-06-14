@@ -1,13 +1,10 @@
 import {
   getAdminProfileApi,
   getEmployeeApi,
-  getEmployeesByPageableApi,
   getAllEmployeesApi,
-  getAllHotelsApi,
   createEmployeeApi,
   updateEmployeeApi,
   deleteEmployeeApi,
-  deleteHotelApi,
 } from "../api/adminApi/AdminApi";
 import AuthenticationService from "../auth/AuthenticationService";
 
@@ -26,19 +23,9 @@ function AdminService() {
     return getEmployeeApi(employeeId);
   }
 
-  function getEmployeesByPageable(params) {
-    setupAxiosInterceptors();
-    return getEmployeesByPageableApi(params);
-  }
-
   function getAllEmployees() {
     setupAxiosInterceptors();
     return getAllEmployeesApi();
-  }
-
-  function getAllHotels() {
-    setupAxiosInterceptors();
-    return getAllHotelsApi();
   }
 
   // POST
@@ -59,21 +46,13 @@ function AdminService() {
     return deleteEmployeeApi(employeeId);
   }
 
-  function deleteHotelById(hotelId) {
-    setupAxiosInterceptors();
-    return deleteHotelApi(hotelId);
-  }
-
   return {
     getAdminProfile,
     getEmployee,
-    getEmployeesByPageable,
     getAllEmployees,
-    getAllHotels,
     createEmployee,
     updateEmployee,
     deleteEmployeeById,
-    deleteHotelById,
   };
 }
 
