@@ -9,8 +9,7 @@ import HomeComponent from "./components/menu/home/HomeComponent";
 import FlightsComponent from "./components/menu/flights/FlightsComponent";
 import HotelsComponent from "./components/menu/hotels/HotelsComponent";
 import RegistrationEmployeeComponent from "./components/menu/employees/RegistrationEmployeeComponent";
-
-
+import RegistrationDocumentComponent from "./components/menu/documents/RegistrationDocumentComponent";
 
 const App = withRouter(({ location }) => {
   return (
@@ -52,6 +51,16 @@ const App = withRouter(({ location }) => {
               path="/admin/documents"
               exact
               component={DocumentsComponent}
+            />
+            <Route
+              path={"/admin/documents/form"}
+              exact
+              component={RegistrationDocumentComponent}
+            />
+            <Route
+              path={"/admin/document/:id"}
+              exact
+              component={RegistrationDocumentComponent}
             />
             <AuthenticatedRoute
               path="/admin/flights"

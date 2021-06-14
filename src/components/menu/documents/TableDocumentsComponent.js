@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { useHistory } from "react-router";
 import PropTypes from "prop-types";
 import {
   Table,
@@ -51,6 +52,7 @@ const useStyles = makeStyles({
 
 function TableDocumentsComponent({ data, ...rest }) {
   const classes = useStyles();
+  let history = useHistory();
   const { deleteDocumentById } = AdminService();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -76,6 +78,10 @@ function TableDocumentsComponent({ data, ...rest }) {
         console.log(error);
         alert(error);
       });
+  };
+
+  const pushTo = (path) => {
+    history.push(path);
   };
 
   return (
@@ -107,7 +113,7 @@ function TableDocumentsComponent({ data, ...rest }) {
               <TableCell align="center">
                 <ButtonGroup>
                   <Button>
-                    <EditIcon />
+                    <EditIcon onClick={() => pushTo("/admin/document/" + element.id)}/>
                   </Button>
                   <Button>
                     <DeleteIcon
@@ -143,7 +149,7 @@ function TableDocumentsComponent({ data, ...rest }) {
 }
 
 TableDocumentsComponent.propTypes = {
-  employees: PropTypes.array.isRequired,
+  data: PropTypes.array.isRequired,
 };
 
 function TablePaginationActions(props) {

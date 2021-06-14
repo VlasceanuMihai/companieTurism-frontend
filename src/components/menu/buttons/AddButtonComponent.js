@@ -1,8 +1,9 @@
 import React from "react";
+import { useHistory } from "react-router";
+import { makeStyles } from "@material-ui/core";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
-import { makeStyles } from "@material-ui/core";
-import { useHistory } from "react-router";
+// import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
   button: {
@@ -25,7 +26,7 @@ function AddButtonComponent(props, ...rest) {
   const classes = useStyles();
   let history = useHistory();
 
-  const pushToRegistrationEmployee = (path) => {
+  const pushTo = (path) => {
     history.push(path);
   };
 
@@ -33,8 +34,9 @@ function AddButtonComponent(props, ...rest) {
     <Button
       component={Paper}
       className={classes.button}
-      onClick={() => pushToRegistrationEmployee(props.path)}
+      onClick={() => pushTo(props.path)}
     >
+      {/* <Link to={props.path} className="btn btn-sm"></Link> */}
       {props.name}
     </Button>
   );

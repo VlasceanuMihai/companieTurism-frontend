@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { useHistory } from "react-router";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
 import {
   Table,
   TableBody,
@@ -53,6 +53,7 @@ const useStyles = makeStyles({
 
 function TableEmployeesComponent({ data }) {
   const classes = useStyles();
+  let history = useHistory();
   const { deleteEmployeeById } = AdminService();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -79,6 +80,10 @@ function TableEmployeesComponent({ data }) {
         console.log(error);
         alert(error);
       });
+  };
+
+  const pushTo = (path) => {
+    history.push(path);
   };
 
   // useEffect(() => {
@@ -124,16 +129,10 @@ function TableEmployeesComponent({ data }) {
               <TableCell align="center">
                 <ButtonGroup>
                   <Button>
-                    <Link
-                      to={"/admin/employee/" + element.id}
-                      className="btn btn-sm"
-                    >
-                      <EditIcon />
-                    </Link>
+                    <EditIcon
+                      onClick={() => pushTo("/admin/employee/" + element.id)}
+                    />
                   </Button>
-                  {/* <Button>
-                    <EditIcon />
-                  </Button> */}
                   <Button>
                     <DeleteIcon
                       onClick={() => deleteEmployee(this, element.id)}
