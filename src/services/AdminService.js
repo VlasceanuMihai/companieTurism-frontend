@@ -3,13 +3,11 @@ import {
   getEmployeeApi,
   getEmployeesByPageableApi,
   getAllEmployeesApi,
-  getAllDocumentsApi,
   getAllFlightsApi,
   getAllHotelsApi,
   createEmployeeApi,
   updateEmployeeApi,
   deleteEmployeeApi,
-  deleteDocumentApi,
   deleteFlightApi,
   deleteHotelApi,
 } from "../api/adminApi/AdminApi";
@@ -40,10 +38,15 @@ function AdminService() {
     return getAllEmployeesApi();
   }
 
-  function getAllDocuments() {
-    setupAxiosInterceptors();
-    return getAllDocumentsApi();
-  }
+  // function getDocument(documentId){
+  //   setupAxiosInterceptors();
+  //   return getDocumentApi();
+  // }
+
+  // function getAllDocuments() {
+  //   setupAxiosInterceptors();
+  //   return getAllDocumentsApi();
+  // }
 
   function getAllFlights() {
     setupAxiosInterceptors();
@@ -64,7 +67,6 @@ function AdminService() {
   // PUT
   function updateEmployee(employeeId, body) {
     setupAxiosInterceptors();
-    console.log("EmployeeId: " + employeeId);
     return updateEmployeeApi(employeeId, body);
   }
 
@@ -74,10 +76,10 @@ function AdminService() {
     return deleteEmployeeApi(employeeId);
   }
 
-  function deleteDocumentById(documentId) {
-    setupAxiosInterceptors();
-    return deleteDocumentApi(documentId);
-  }
+  // function deleteDocumentById(documentId) {
+  //   setupAxiosInterceptors();
+  //   return deleteDocumentApi(documentId);
+  // }
 
   function deleteFlightById(flightId) {
     setupAxiosInterceptors();
@@ -94,13 +96,11 @@ function AdminService() {
     getEmployee,
     getEmployeesByPageable,
     getAllEmployees,
-    getAllDocuments,
     getAllFlights,
     getAllHotels,
     createEmployee,
     updateEmployee,
     deleteEmployeeById,
-    deleteDocumentById,
     deleteFlightById,
     deleteHotelById,
   };

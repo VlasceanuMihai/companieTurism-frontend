@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { useHistory } from "react-router";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
 import {
   Table,
   TableBody,
@@ -49,17 +49,16 @@ const useStyles = makeStyles({
   tablerow: {
     background: "linear-gradient(45deg, #F1CDB9 10%, #b6aeab 90%)",
   },
-  nohover:{
-    "&:hover":{
+  nohover: {
+    "&:hover": {
       backgroundColor: "black",
     },
   },
-
-  
 });
 
 function TableEmployeesComponent({ data }) {
   const classes = useStyles();
+  let history = useHistory();
   const { deleteEmployeeById } = AdminService();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -86,6 +85,10 @@ function TableEmployeesComponent({ data }) {
         console.log(error);
         alert(error);
       });
+  };
+
+  const pushTo = (path) => {
+    history.push(path);
   };
 
   // useEffect(() => {
@@ -130,17 +133,13 @@ function TableEmployeesComponent({ data }) {
               <TableCell align="center">{element.wage}</TableCell>
               <TableCell align="center">
                 <ButtonGroup>
-                  <Button>
-                    <Link style={{marginLeft:'0',}}
-                      to={"/admin/employee/" + element.id}
-                      className="btn btn-sm">
-                      <EditIcon/>
-                    </Link>
+                  <Button
+                    onClick={() => pushTo("/admin/employee/" + element.id)}
+                  >
+                    <EditIcon />
                   </Button>
-                  <Button >
-                    <DeleteIcon
-                      onClick={() => deleteEmployee(this, element.id)}
-                    />
+                  <Button onClick={() => deleteEmployee(this, element.id)}>
+                    <DeleteIcon />
                   </Button>
                 </ButtonGroup>
               </TableCell>
