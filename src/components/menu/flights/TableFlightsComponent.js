@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { useHistory } from "react-router";
 import PropTypes from "prop-types";
 import {
   Table,
@@ -22,7 +23,7 @@ import FirstPageIcon from "@material-ui/icons/FirstPage";
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import LastPageIcon from "@material-ui/icons/LastPage";
-import AdminService from "../../../services/AdminService";
+import FlightAdminService from "../../../services/FlightAdminService";
 
 const useStylesPagination = makeStyles((theme) => ({
   root: {
@@ -51,15 +52,20 @@ const useStyles = makeStyles({
 
 function TableFlightsComponent({ data, ...rest }) {
   const classes = useStyles();
-  const { deleteFlightById } = AdminService();
+  let history = useHistory();
+  const { deleteFlightById } = FlightAdminService();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const handleChangePage = (event, newPage) => {
+    event.preventDefault();
+
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (event) => {
+    event.preventDefault();
+
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
@@ -78,6 +84,10 @@ function TableFlightsComponent({ data, ...rest }) {
       });
   };
 
+  const pushTo = (path) => {
+    history.push(path);
+  };
+
   return (
     <TableContainer component={Paper} className={classes.paper}>
       <Table className={classes.table} aria-label="simple-table">
@@ -89,6 +99,7 @@ function TableFlightsComponent({ data, ...rest }) {
             <TableCell align="center">Aeroport sosire</TableCell>
             <TableCell align="center">Data sosire</TableCell>
             <TableCell align="center">Companie</TableCell>
+            <TableCell align="center">Angajat</TableCell>
             <TableCell align="center">
               <SettingsIcon className={classes.SettingsIcon}></SettingsIcon>
             </TableCell>
@@ -109,14 +120,15 @@ function TableFlightsComponent({ data, ...rest }) {
               <TableCell align="center">{element.dateOfArrival}</TableCell>
               <TableCell align="center">{element.company}</TableCell>
               <TableCell align="center">
+                {element.employee.lastName + " " + element.employee.firstName}
+              </TableCell>
+              <TableCell align="center">
                 <ButtonGroup>
-                  <Button>
+                  <Button onClick={() => pushTo("/admin/flight/" + element.id)}>
                     <EditIcon />
                   </Button>
-                  <Button>
-                    <DeleteIcon
-                      onClick={() => deleteFlight(this, element.id)}
-                    />
+                  <Button onClick={() => deleteFlight(this, element.id)}>
+                    <DeleteIcon />
                   </Button>
                 </ButtonGroup>
               </TableCell>
@@ -147,7 +159,7 @@ function TableFlightsComponent({ data, ...rest }) {
 }
 
 TableFlightsComponent.propTypes = {
-  employees: PropTypes.array.isRequired,
+  data: PropTypes.array.isRequired,
 };
 
 function TablePaginationActions(props) {

@@ -25,14 +25,19 @@ export const getAllEmployeesApi = async () => {
   return await axios.get(`${BASE_API}/admin/v1/getAllEmployees`);
 };
 
+// Get document
+export const getDocumentApi = async (documentId) => {
+  return await axios.get(`${BASE_API}/admin/v1/document/` + documentId);
+};
+
 // Get all documents
 export const getAllDocumentsApi = async () => {
   return await axios.get(`${BASE_API}/admin/v1/getAllDocuments`);
 };
 
-// Get document
-export const getDocumentApi = async (documentId) => {
-  return await axios.get(`${BASE_API}/admin/v1/document/` + documentId);
+// Get flight
+export const getFlightApi = async (flightId) => {
+  return await axios.get(`${BASE_API}/admin/v1/flight/` + flightId);
 };
 
 // Get all flights
@@ -57,6 +62,11 @@ export const createDocumentApi = async (body) => {
   return await axios.post(`${BASE_API}/admin/v1/createDocument`, body);
 };
 
+// Create new flight
+export const createFlightApi = async (body) => {
+  return await axios.post(`${BASE_API}/admin/v1/createFlight`, body);
+};
+
 /* PUT */
 
 // Update employee
@@ -73,6 +83,11 @@ export const updateDocumentApi = async (documentId, body) => {
     `${BASE_API}/admin/v1/updateDocument/` + documentId,
     body
   );
+};
+
+// Update flight
+export const updateFlightApi = async (flightId, body) => {
+  return await axios.put(`${BASE_API}/admin/v1/updateFlight/` + flightId, body);
 };
 
 /* DELETE */

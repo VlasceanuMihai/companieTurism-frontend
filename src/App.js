@@ -10,7 +10,7 @@ import FlightsComponent from "./components/menu/flights/FlightsComponent";
 import HotelsComponent from "./components/menu/hotels/HotelsComponent";
 import RegistrationEmployeeComponent from "./components/menu/employees/RegistrationEmployeeComponent";
 import RegistrationDocumentComponent from "./components/menu/documents/RegistrationDocumentComponent";
-import NavbarComponent from "./components/menu/navbar/NavbarComponent";
+import RegistrationFlightComponent from "./components/menu/flights/RegistrationFlightComponent";
 
 const App = withRouter(({ location }) => {
   return (
@@ -28,11 +28,7 @@ const App = withRouter(({ location }) => {
               component={LoginComponent}
             />
             {/* TODO: Aici vin toate AuthenticatedRoute */}
-            <AuthenticatedRoute
-              path="/home"
-              exact
-              component={HomeComponent}
-            />
+            <AuthenticatedRoute path="/home" exact component={HomeComponent} />
             <AuthenticatedRoute
               path="/admin/employees"
               exact
@@ -67,6 +63,16 @@ const App = withRouter(({ location }) => {
               path="/admin/flights"
               exact
               component={FlightsComponent}
+            />
+            <AuthenticatedRoute
+              path="/admin/flights/form"
+              exact
+              component={RegistrationFlightComponent}
+            />
+            <AuthenticatedRoute
+              path="/admin/flight/:id"
+              exact
+              component={RegistrationFlightComponent}
             />
             <AuthenticatedRoute
               path="/admin/hotels"
