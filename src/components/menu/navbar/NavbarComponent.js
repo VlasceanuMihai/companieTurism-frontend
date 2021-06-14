@@ -12,7 +12,7 @@ function NavbarComponent() {
   return (
     <div class="navBar">
       <div class="header-left">
-        <Link to="/admin/home">Home</Link>
+        <Link to="/home">Home</Link>
         <Link to="/admin/employees">Angajati</Link>
         <Link to="/admin/documents">Documente</Link>
         <Link to="/admin/flights">Zboruri</Link>
