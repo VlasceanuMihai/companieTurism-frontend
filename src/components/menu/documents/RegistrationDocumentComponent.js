@@ -3,12 +3,6 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { makeStyles } from "@material-ui/core";
-import TextField from "@material-ui/core/TextField";
-// import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-// import FormHelperText from "@material-ui/core/FormHelperText";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
 import NavbarComponent from "../../menu/navbar/NavbarComponent";
 import DocumentAdminService from "../../../services/DocumentAdminService";
 
@@ -19,23 +13,27 @@ const useStyles = makeStyles({
     display: "flex",
   },
   container: {
-    width: "700px",
+    width: "750px",
     height: "600px",
     fontFamily: "roboto",
     backgroundColor: "white",
     position: "relative",
     top: "150px",
     borderRadius: "10px",
-    backgroundColor: "rgba(241, 205, 185, 0.3)",
+    background: "linear-gradient(120deg, #BFADA9, #F0E2DD 40%, #ffffff)",
+    boxShadow:
+      "rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px",
+    display: "flex",
+    justifyContent: "center",
   },
   container2: {
     display: "flex",
     position: "relative",
-    left: "50px",
+    // left: "50px",
   },
   formControl: {
     position: "relative",
-    left: "230px",
+    left: "140px",
     bottom: "32px",
   },
   button: {
@@ -57,7 +55,7 @@ const useStyles = makeStyles({
 export default function RegistrationDocumentComponent(props) {
   const classes = useStyles();
   let history = useHistory();
-  const { getDocument, createDocument, updateDocumentApi } =
+  const { getDocument, createDocument, updateDocument } =
     DocumentAdminService();
 
   const [documentData, setDocumentData] = useState({
@@ -66,14 +64,14 @@ export default function RegistrationDocumentComponent(props) {
     path: "",
     documentName: "",
   });
-  const [showPasswordField, setShowPasswordField] = useState(true);
+  const [isUpdatePage, setIsUpdatePage] = useState(false);
 
-  const initialState = {
-    documentId: "",
-    cnp: "",
-    path: "",
-    documentName: "",
-  };
+  // const initialState = {
+  //   documentId: "",
+  //   cnp: "",
+  //   path: "",
+  //   documentName: "",
+  // };
 
   function handleChange(event) {
     event.preventDefault();
@@ -94,13 +92,9 @@ export default function RegistrationDocumentComponent(props) {
       documentName: documentData.documentName,
     })
       .then((response) => {
-        console.log(
-          "Create new document for employee with cnp: " + documentData.cnp
-        );
+        console.log("Document was created successfully!");
         if (response.status === 200) {
-          alert(
-            "Create new document for employee with cnp: " + documentData.cnp
-          );
+          alert("Document was created successfully!");
           history.push("/admin/documents");
           setDocumentData({
             documentId: "",
@@ -120,17 +114,17 @@ export default function RegistrationDocumentComponent(props) {
     event.preventDefault();
 
     console.log(documentData.documentId);
-    updateDocumentApi(documentData.documentId, {
+    updateDocument(documentData.documentId, {
       documentId: documentData.id,
       cnp: documentData.cnp,
       path: documentData.path,
       documentName: documentData.documentName,
     })
       .then((response) => {
-        console.log("Update employee with cnp: " + documentData.cnp);
+        console.log("Document updated!");
         if (response.status === 200) {
-          alert("Update employee with cnp: " + documentData.cnp);
-          history.push("/admin/employees");
+          alert("Document updated!");
+          history.push("/admin/documents");
           setDocumentData({
             documentId: "",
             cnp: "",
@@ -149,11 +143,11 @@ export default function RegistrationDocumentComponent(props) {
     getDocument(documentId)
       .then((response) => {
         if (response.data != null) {
-        //   console.log("Date: ", response.data.dateOfEmployment);
+          //   console.log("Date: ", response.data.dateOfEmployment);
           setDocumentData({
-            cnp: documentData.cnp,
-            path: documentData.path,
-            documentName: documentData.documentName,
+            cnp: response.data.employee.cnp,
+            path: response.data.path,
+            documentName: response.data.documentName,
           });
         }
       })
@@ -164,8 +158,9 @@ export default function RegistrationDocumentComponent(props) {
 
   useEffect(() => {
     const documentId = +props.match.params.id;
+    console.log("DocumentId: " + documentId);
     if (documentId) {
-      setShowPasswordField(false);
+      setIsUpdatePage(true);
       findDocumentById(documentId);
     }
   }, []);
@@ -176,153 +171,59 @@ export default function RegistrationDocumentComponent(props) {
       <div className={classes.paper}>
         <div className={classes.container}>
           <form>
-            <div>Adaugare document</div>
-            <br />
-            <div class="form-row">
-              <div class="form-group col-md-6">
-                <input
-                  type="text"
-                  id="nume"
-                  name="lastName"
-                  class="form-control"
-                  placeholder="Nume"
-                  required
-                  autoFocus
-                  autoComplete="off"
-                  defaultValue={documentData.lastName || ""}
-                  onChange={handleChange}
-                />
-              </div>
-              <div class="form-group col-md-6">
-                <input
-                  type="text"
-                  id="prenume"
-                  name="firstName"
-                  class="form-control"
-                  placeholder="Prenume"
-                  required
-                  defaultValue={documentData.firstName}
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group col-md-6">
-                <input
-                  type="text"
-                  id="cnp"
-                  class="form-control"
-                  placeholder="CNP"
-                  name="cnp"
-                  required
-                  readOnly={showPasswordField === false}
-                  defaultValue={documentData.cnp}
-                  onChange={handleChange}
-                />
-              </div>
-              <div class="form-group col-md-6">
-                <input
-                  type="tel"
-                  id="numarTelefon"
-                  class="form-control"
-                  placeholder="Numar Telefon"
-                  name="phoneNumber"
-                  required
-                  defaultValue={documentData.phoneNumber}
-                  onChange={handleChange}
-                />
-              </div>
+            <div style={{ fontSize: "21px", marginTop: "5px" }}>
+              Adaugare document pentru angajat
             </div>
             <br />
             <div class="form-group">
               <input
-                type="email"
-                id="email"
-                class="form-control"
-                placeholder="Email"
-                name="email"
-                required
-                defaultValue={documentData.email}
-                onChange={handleChange}
-              />
-            </div>
-            {showPasswordField === true && (
-              <div class="form-group">
-                <input
-                  type="password"
-                  id="password"
-                  class="form-control"
-                  placeholder="Parola"
-                  name="password"
-                  required
-                  defaultValue={documentData.password}
-                  onChange={handleChange}
-                />
-              </div>
-            )}
-            <br />
-            <form className={classes.container2} noValidate>
-              <TextField
-                id="date"
-                label="Data Angajarii"
-                type="date"
-                name="dateOfEmployment"
-                required
-                className={classes.textField}
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                defaultValue={documentData.dateOfEmployment}
-                onChange={handleChange}
-              />
-            </form>
-            <div>
-              <FormControl className={classes.formControl}>
-                <Select
-                  defaultValue={documentData.employeeType}
-                  onChange={handleChange}
-                  displayEmpty
-                  name="employeeType"
-                  className={classes.selectEmpty}
-                  inputProps={{ "aria-label": "Without label" }}
-                >
-                  <MenuItem value="" disabled>
-                    Tip Contract Angajat
-                  </MenuItem>
-                  <MenuItem value={"SUCURSALA"}>SUCURSALA</MenuItem>
-                  <MenuItem value={"TRAVEL_GUIDE"}>TRAVEL GUIDE</MenuItem>
-                  <MenuItem value={"LEAD"}>LEAD</MenuItem>
-                </Select>
-              </FormControl>
-            </div>
-            <div class="form-group">
-              <input
+                id="cnp"
+                name="cnp"
                 type="text"
-                id="salariu"
                 class="form-control"
-                placeholder="Salariu Net"
-                name="wage"
+                placeholder="CNP"
+                readOnly={isUpdatePage === true}
                 required
-                defaultValue={documentData.wage}
+                defaultValue={documentData.cnp}
                 onChange={handleChange}
               />
             </div>
             <div class="form-group">
-              {/* <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="gridCheck" />
-              <label class="form-check-label" for="gridCheck">
-                Accept termenele si conditiile
-              </label>
-            </div> */}
+              <input
+                id="path"
+                name="path"
+                type="text"
+                class="form-control"
+                placeholder="Path"
+                required
+                defaultValue={documentData.path}
+                onChange={handleChange}
+              />
+            </div>
+            <div class="form-group">
+              <input
+                id="documentName"
+                name="documentName"
+                type="text"
+                class="form-control"
+                placeholder="Document"
+                required
+                defaultValue={documentData.documentName}
+                onChange={handleChange}
+              />
             </div>
             <button
               type="submit"
               class="btn btn-primary"
+              style={{
+                background: "linear-gradient(45deg, #F1CDB9 10%, #b6aeab 90%)",
+                border: "none",
+              }}
               onClick={documentData.documentId ? handleUpdate : handleSubmit}
             >
               {documentData.documentId
-                ? "Actualizare angajat"
-                : "Adauga angajat nou"}
+                ? "Actualizare document"
+                : "Adauga document nou"}
             </button>
           </form>
         </div>
