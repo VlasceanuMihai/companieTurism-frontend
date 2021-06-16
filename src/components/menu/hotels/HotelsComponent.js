@@ -25,12 +25,10 @@ function HotelsComponent() {
   return (
     <div>
       <NavbarComponent />
-      {
         <AddButtonComponent
           name={"Adaugare hotel"}
           path={"/admin/hotels/form"}
         />
-      }
       {hotelsError !== null && <div>{hotelsError}</div>}
       {hotels && <TableHotelsComponent data={hotels} />}
     </div>

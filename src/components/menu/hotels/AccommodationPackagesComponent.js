@@ -50,7 +50,7 @@ const useStyles = makeStyles({
   },
 });
 
-function TableFlightsComponent({ data, ...rest }) {
+function TableAccommodationPackagesComponent({ data, ...rest }) {
   const classes = useStyles();
   let history = useHistory();
   const { deleteHotelById } = HotelAdminService();
@@ -125,7 +125,7 @@ function TableFlightsComponent({ data, ...rest }) {
               <TableCell align="center">
                 {element.destination.covidScenario}
               </TableCell>
-              <TableCell align="center">{element.destination.employee.email}</TableCell>
+              <TableCell align="center">{element.employee.email}</TableCell>
               <TableCell align="center">
                 <ButtonGroup>
                   <Button onClick={() => pushTo("/admin/accommodationPackages/" + element.id)}>
@@ -169,7 +169,7 @@ function TableFlightsComponent({ data, ...rest }) {
   );
 }
 
-TableFlightsComponent.propTypes = {
+TableAccommodationPackagesComponent.propTypes = {
   data: PropTypes.array.isRequired,
 };
 
@@ -243,4 +243,4 @@ TablePaginationActions.propTypes = {
   rowsPerPage: PropTypes.number.isRequired,
 };
 
-export default TableFlightsComponent;
+export default TableAccommodationPackagesComponent;
