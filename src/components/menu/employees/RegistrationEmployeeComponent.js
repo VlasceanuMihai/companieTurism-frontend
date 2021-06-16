@@ -305,7 +305,7 @@ export default function RegistrationEmployeeComponent(props) {
             <div>
               <FormControl className={classes.formControl}>
                 <Select
-                  defaultValue={employeeData.employeeType}
+                  value={employeeData.employeeType}
                   onChange={handleChange}
                   displayEmpty
                   name="employeeType"

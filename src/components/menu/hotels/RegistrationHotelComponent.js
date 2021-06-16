@@ -3,7 +3,9 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { makeStyles } from "@material-ui/core";
-import TextField from "@material-ui/core/TextField";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
 import NavbarComponent from "../../menu/navbar/NavbarComponent";
 import HotelAdminService from "../../../services/HotelAdminService";
 
@@ -35,8 +37,8 @@ const useStyles = makeStyles({
   },
   formControl: {
     position: "relative",
-    left: "140px",
-    bottom: "32px",
+    left: "100px",
+    // bottom: "12px",
   },
   button: {
     position: "relative",
@@ -66,7 +68,7 @@ export default function RegistrationHotelComponent(props) {
     destinationCountry: "",
     destinationCity: "",
     covidScenario: "",
-    employeeCnp: "",
+    cnp: "",
   });
   const [isUpdatePage, setIsUpdatePage] = useState(false);
 
@@ -94,7 +96,7 @@ export default function RegistrationHotelComponent(props) {
 
     console.log("Body: ", hotelData);
     createHotel({
-      cnp: hotelData.employeeCnp,
+      cnp: hotelData.cnp,
       hotelName: hotelData.hotelName,
       rating: hotelData.rating,
       destination: {
@@ -115,7 +117,7 @@ export default function RegistrationHotelComponent(props) {
             destinationCountry: "",
             destinationCity: "",
             covidScenario: "",
-            employeeCnp: "",
+            cnp: "",
           });
         }
       })
@@ -141,7 +143,7 @@ export default function RegistrationHotelComponent(props) {
       .then((response) => {
         console.log("Hotel updated successfully!");
         if (response.status === 200) {
-          alert("Flight updated successfully!");
+          alert("Hotel updated successfully!");
           history.push("/admin/hotels");
           setHotelData({
             hotelId: "",
@@ -150,7 +152,7 @@ export default function RegistrationHotelComponent(props) {
             destinationCountry: "",
             destinationCity: "",
             covidScenario: "",
-            employeeCnp: "",
+            cnp: "",
           });
         }
       })
@@ -163,7 +165,7 @@ export default function RegistrationHotelComponent(props) {
   const findHotelById = (hotelId) => {
     getHotel(hotelId)
       .then((response) => {
-        if (response.data != null) {
+        if (response.data !== null) {
           //   console.log("Date: ", response.data.dateOfEmployment);
           setHotelData({
             hotelId: response.data.id,
@@ -172,7 +174,7 @@ export default function RegistrationHotelComponent(props) {
             destinationCountry: response.data.destination.country,
             destinationCity: response.data.destination.city,
             covidScenario: response.data.destination.covidScenario,
-            employeeCnp: response.data.employee.cnp,
+            cnp: response.data.destination.employee.cnp,
           });
         }
       })
@@ -208,83 +210,93 @@ export default function RegistrationHotelComponent(props) {
                   class="form-control"
                   placeholder="CNP"
                   required
-                  defaultValue={hotelData.employeeCnp}
+                  defaultValue={hotelData.cnp}
                   onChange={handleChange}
                 />
               </div>
             )}
             <br />
             <div class="form-row">
-              <div class="form-group col-md-5">
+              <div class="form-group col-md-6">
                 <input
-                  id="airportDeparture"
-                  name="airportDeparture"
+                  id="hotelName"
+                  name="hotelName"
                   type="text"
                   class="form-control"
-                  placeholder="Aeroport plecare"
+                  placeholder="Hotel"
                   required
-                  defaultValue={hotelData.airportDeparture}
+                  defaultValue={hotelData.hotelName}
                   onChange={handleChange}
                 />
               </div>
-              <form className={classes.container2} noValidate>
-                <TextField
-                  id="dateOfDeparture"
-                  name="dateOfDeparture"
-                  label="Data plecarii"
-                  type="datetime-local"
-                  required
-                  className={classes.textField}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  value={hotelData.dateOfDeparture}
-                  onChange={handleChange}
-                />
-              </form>
+              <div class="form-group col-md-6">
+                <FormControl className={classes.formControl}>
+                  <Select
+                    name="rating"
+                    value={hotelData.rating}
+                    onChange={handleChange}
+                    displayEmpty
+                    className={classes.selectEmpty}
+                    inputProps={{ "aria-label": "Without label" }}
+                  >
+                    <MenuItem value="" disabled>
+                      Stele
+                    </MenuItem>
+                    <MenuItem value={1}>1</MenuItem>
+                    <MenuItem value={2}>2</MenuItem>
+                    <MenuItem value={3}>3</MenuItem>
+                    <MenuItem value={4}>4</MenuItem>
+                    <MenuItem value={5}>5</MenuItem>
+                  </Select>
+                </FormControl>
+              </div>
             </div>
-            <br />
+            {/* <br /> */}
             <div class="form-row">
-              <div class="form-group col-md-5">
+              <div class="form-group col-md-6">
                 <input
-                  id="airportArrival"
-                  name="airportArrival"
+                  id="destinationCountry"
+                  name="destinationCountry"
                   type="text"
                   class="form-control"
-                  placeholder="Aeroport sosire"
+                  placeholder="Tara"
                   required
-                  defaultValue={hotelData.airportArrival}
+                  defaultValue={hotelData.destinationCountry}
                   onChange={handleChange}
                 />
               </div>
-              <form className={classes.container2} noValidate>
-                <TextField
-                  id="dateOfArrival"
-                  name="dateOfArrival"
-                  label="Data sosirii"
-                  type="datetime-local"
+              <div class="form-group col-md-6">
+                <input
+                  id="destinationCity"
+                  name="destinationCity"
+                  type="text"
+                  class="form-control"
+                  placeholder="Oras"
                   required
-                  className={classes.textField}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  value={hotelData.dateOfArrival}
+                  defaultValue={hotelData.destinationCity}
                   onChange={handleChange}
                 />
-              </form>
+              </div>
             </div>
             <br />
-            <div class="form-group">
-              <input
-                id="company"
-                name="company"
-                type="text"
-                class="form-control"
-                placeholder="Companie"
-                required
-                defaultValue={hotelData.company}
-                onChange={handleChange}
-              />
+            <div class="form-group col-md-6">
+              <FormControl className={classes.formControl}>
+                <Select
+                  name="covidScenario"
+                  value={hotelData.covidScenario}
+                  onChange={handleChange}
+                  displayEmpty
+                  className={classes.selectEmpty}
+                  inputProps={{ "aria-label": "Without label" }}
+                >
+                  <MenuItem value="" disabled>
+                    Scenariu covid
+                  </MenuItem>
+                  <MenuItem value={"SAFE"}>SAFE</MenuItem>
+                  <MenuItem value={"RED_SCENARIO"}>RED_SCENARIO</MenuItem>
+                  <MenuItem value={"TOTAL_QUARANTINE"}>TOTAL_QUARANTINE</MenuItem>
+                </Select>
+              </FormControl>
             </div>
             <button
               type="submit"
