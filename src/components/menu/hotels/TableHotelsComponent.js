@@ -17,6 +17,8 @@ import {
   Button,
 } from "@material-ui/core";
 import SettingsIcon from "@material-ui/icons/Settings";
+import AddIcon from "@material-ui/icons/Add";
+import ListIcon from "@material-ui/icons/List";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import FirstPageIcon from "@material-ui/icons/FirstPage";
@@ -125,17 +127,32 @@ function TableFlightsComponent({ data, ...rest }) {
               <TableCell align="center">
                 {element.destination.covidScenario}
               </TableCell>
-              <TableCell align="center">{element.destination.employee.email}</TableCell>
+              <TableCell align="center">
+                {element.destination.employee.email}
+              </TableCell>
               <TableCell align="center">
                 <ButtonGroup>
-                  <Button onClick={() => pushTo("/admin/accommodationPackages/" + element.id)}>
-                    Pachete cazare
+                  <Button
+                    onClick={() =>
+                      pushTo(
+                        "/admin/accommodationPackage/hotel/" + element.id + "/form"
+                      )
+                    }
+                  >
+                    <AddIcon />
+                  </Button>
+                  <Button
+                    onClick={() =>
+                      pushTo("/admin/accommodationPackages/hotel/" + element.id)
+                    }
+                  >
+                    <ListIcon />
                   </Button>
                 </ButtonGroup>
               </TableCell>
               <TableCell align="center">
                 <ButtonGroup>
-                  <Button onClick={() => pushTo("/admin/hotel/" + element.id)}>
+                  <Button onClick={() => pushTo("/admin/hotel/form/" + element.id)}>
                     <EditIcon />
                   </Button>
                   <Button onClick={() => deleteHotel(this, element.id)}>

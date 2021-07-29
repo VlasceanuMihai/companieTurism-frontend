@@ -4,7 +4,6 @@ export const BASE_API = "http://localhost:8080/api";
 // const ADMIN_PATH = "/admin"
 
 /* GET */
-
 // Admin profile
 export const getAdminProfileApi = async () => {
   return await axios.get(`${BASE_API}/admin/v1/profile`);
@@ -50,8 +49,14 @@ export const getAllHotelsApi = async () => {
   return await axios.get(`${BASE_API}/admin/v1/getAllHotels`);
 };
 
-/* POST */
+// Get all accommodation packages for hotel
+export const getAllAccommodationPackagesApi = async (hotelId) => {
+  return await axios.get(
+    `${BASE_API}/admin/v1/accommodationPackages/hotel/` + hotelId
+  );
+};
 
+/* POST */
 // Create new employee
 export const createEmployeeApi = async (body) => {
   return await axios.post(`${BASE_API}/admin/v1/createEmployee`, body);
@@ -72,8 +77,20 @@ export const createHotelApi = async (body) => {
   return await axios.post(`${BASE_API}/admin/v1/createHotel`, body);
 };
 
-/* PUT */
+// Generate totalPrice
+export const generateTotalPriceApi = async (body) => {
+  return await axios.post(`${BASE_API}/admin/v1/generateTotalPrice`, body);
+};
 
+// Create new accommodation package for hotel
+export const createAccommodationPackageApi = async (hotelId, body) => {
+  return await axios.post(
+    `${BASE_API}/admin/v1/accommodationPackage/create/hotel/` + hotelId,
+    body
+  );
+};
+
+/* PUT */
 // Update employee
 export const updateEmployeeApi = async (employeeId, body) => {
   return await axios.put(
@@ -100,8 +117,19 @@ export const updateHotelApi = async (hotelId, body) => {
   return await axios.put(`${BASE_API}/admin/v1/updateHotel/` + hotelId, body);
 };
 
-/* DELETE */
+// Update accommodation package for hotel
+export const updateAccommodationPackageApi = async (
+  accommodationPackageId,
+  body
+) => {
+  return await axios.put(
+    `${BASE_API}/admin/v1/accommodationPackage/update/` +
+      accommodationPackageId,
+    body
+  );
+};
 
+/* DELETE */
 // Delete employee
 export const deleteEmployeeApi = async (employeeId) => {
   return await axios.delete(
@@ -124,4 +152,11 @@ export const deleteFlightApi = async (flightId) => {
 // Delete hotel
 export const deleteHotelApi = async (hotelId) => {
   return await axios.delete(`${BASE_API}/admin/v1/deleteHotel/` + hotelId);
+};
+
+// Delete accommodation package for hotel
+export const deleteAccommodationPackageApi = async (accommodationPackageId) => {
+  return await axios.delete(
+    `${BASE_API}/admin/v1/accommodationPackage/delete/` + accommodationPackageId
+  );
 };

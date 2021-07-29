@@ -198,10 +198,10 @@ export default function RegistrationHotelComponent(props) {
         <div className={classes.container}>
           <form>
             <div style={{ fontSize: "21px", marginTop: "5px" }}>
-              Adaugare hotel
+              Date hotel
             </div>
             <br />
-            {isUpdatePage === false && (
+            {/* {isUpdatePage === false && ( */}
               <div class="form-group">
                 <input
                   id="cnp"
@@ -210,11 +210,12 @@ export default function RegistrationHotelComponent(props) {
                   class="form-control"
                   placeholder="CNP"
                   required
+                  readOnly={isUpdatePage === true}
                   defaultValue={hotelData.cnp}
                   onChange={handleChange}
                 />
               </div>
-            )}
+            {/* )} */}
             <br />
             <div class="form-row">
               <div class="form-group col-md-6">
@@ -292,9 +293,9 @@ export default function RegistrationHotelComponent(props) {
                   <MenuItem value="" disabled>
                     Scenariu covid
                   </MenuItem>
-                  <MenuItem value={"SAFE"}>SAFE</MenuItem>
-                  <MenuItem value={"RED_SCENARIO"}>RED_SCENARIO</MenuItem>
-                  <MenuItem value={"TOTAL_QUARANTINE"}>TOTAL_QUARANTINE</MenuItem>
+                  <MenuItem value={"SAFE"}>Safe</MenuItem>
+                  <MenuItem value={"RED_SCENARIO"}>Scenariu rosu</MenuItem>
+                  <MenuItem value={"TOTAL_QUARANTINE"}>Carantina totala</MenuItem>
                 </Select>
               </FormControl>
             </div>

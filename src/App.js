@@ -12,6 +12,8 @@ import RegistrationEmployeeComponent from "./components/menu/employees/Registrat
 import RegistrationDocumentComponent from "./components/menu/documents/RegistrationDocumentComponent";
 import RegistrationFlightComponent from "./components/menu/flights/RegistrationFlightComponent";
 import RegistrationHotelComponent from "./components/menu/hotels/RegistrationHotelComponent";
+import RegistrationAccommodationPackageComponent from "./components/menu/hotels/accommodationPackages/RegistrationAccommodationPackageComponent";
+import AccommodationPackagesComponent from "./components/menu/hotels/accommodationPackages/AccommodationPackagesComponent";
 
 const App = withRouter(({ location }) => {
   return (
@@ -81,14 +83,29 @@ const App = withRouter(({ location }) => {
               component={HotelsComponent}
             />
             <AuthenticatedRoute
-              path="/admin/hotels/form"
+              path="/admin/hotel/form"
               exact
               component={RegistrationHotelComponent}
             />
             <AuthenticatedRoute
-              path="/admin/hotel/:id"
+              path="/admin/hotel/form/:id"
               exact
               component={RegistrationHotelComponent}
+            />
+            <AuthenticatedRoute
+              path="/admin/accommodationPackages/hotel/:id"
+              exact
+              component={AccommodationPackagesComponent}
+            />
+            <AuthenticatedRoute
+              path="/admin/accommodationPackage/hotel/:id/form"
+              exact
+              component={RegistrationAccommodationPackageComponent}
+            />
+            <AuthenticatedRoute
+              path="/admin/accommodationPackage/form/:id"
+              exact
+              component={RegistrationAccommodationPackageComponent}
             />
           </Switch>
         </Route>

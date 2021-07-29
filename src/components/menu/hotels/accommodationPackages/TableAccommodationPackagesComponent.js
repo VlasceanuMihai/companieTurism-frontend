@@ -17,13 +17,12 @@ import {
   Button,
 } from "@material-ui/core";
 import SettingsIcon from "@material-ui/icons/Settings";
-import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import FirstPageIcon from "@material-ui/icons/FirstPage";
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import LastPageIcon from "@material-ui/icons/LastPage";
-import HotelAdminService from "../../../services/HotelAdminService";
+import HotelAdminService from "../../../../services/HotelAdminService";
 
 const useStylesPagination = makeStyles((theme) => ({
   root: {
@@ -53,7 +52,7 @@ const useStyles = makeStyles({
 function TableAccommodationPackagesComponent({ data, ...rest }) {
   const classes = useStyles();
   let history = useHistory();
-  const { deleteHotelById } = HotelAdminService();
+  const { deleteAccommodationPackage } = HotelAdminService();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
@@ -70,12 +69,12 @@ function TableAccommodationPackagesComponent({ data, ...rest }) {
     setPage(0);
   };
 
-  const deleteHotel = (event, hotelId) => {
-    deleteHotelById(hotelId)
+  const deleteAccommodationPackageById = (event, accommodationPackageId) => {
+    deleteAccommodationPackage(accommodationPackageId)
       .then((response) => {
         console.log(response.status);
         if (response.status === 200) {
-          alert("Hotel successful deleted.");
+          alert("Accommodation package successful deleted.");
           window.location.reload();
         }
       })
@@ -95,13 +94,15 @@ function TableAccommodationPackagesComponent({ data, ...rest }) {
         <TableHead>
           <TableRow className={classes.tablerow}>
             <TableCell>Id_Hotel</TableCell>
-            <TableCell align="center">Nume hotel</TableCell>
-            <TableCell align="center">Stele</TableCell>
-            <TableCell align="center">Tara</TableCell>
-            <TableCell align="center">Oras</TableCell>
-            <TableCell align="center">Scenariu covid</TableCell>
-            <TableCell align="center">Angajat</TableCell>
-            <TableCell align="center">Pachete cazare</TableCell>
+            <TableCell align="center">Hotel</TableCell>
+            <TableCell align="center">Locatie</TableCell>
+            <TableCell align="center">Tip pachet</TableCell>
+            <TableCell align="center">Pret/noapte</TableCell>
+            <TableCell align="center">Nr. nopti</TableCell>
+            <TableCell align="center">Nr. camere</TableCell>
+            <TableCell align="center">Nr. adulti</TableCell>
+            <TableCell align="center">Nr. copiii</TableCell>
+            <TableCell align="center">Pret total</TableCell>
             <TableCell align="center">
               <SettingsIcon className={classes.SettingsIcon}></SettingsIcon>
             </TableCell>
@@ -112,33 +113,37 @@ function TableAccommodationPackagesComponent({ data, ...rest }) {
             ? data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             : data
           ).map((element, index) => (
-            <TableRow key={element.id}>
+            <TableRow key={index}>
               <TableCell component="th" scope="row">
                 {element.id}
               </TableCell>
-              <TableCell align="center">{element.hotelName}</TableCell>
-              <TableCell align="center">{element.hotelRating}</TableCell>
+              <TableCell align="center">{element.hotel.name}</TableCell>
               <TableCell align="center">
-                {element.destination.country}
+                {element.hotel.destination.country +
+                  "/" +
+                  element.hotel.destination.city}
               </TableCell>
-              <TableCell align="center">{element.destination.city}</TableCell>
-              <TableCell align="center">
-                {element.destination.covidScenario}
-              </TableCell>
-              <TableCell align="center">{element.employee.email}</TableCell>
+              <TableCell align="center">{element.packageType}</TableCell>
+              <TableCell align="center">{element.pricePerNight}</TableCell>
+              <TableCell align="center">{element.nightsNumber}</TableCell>
+              <TableCell align="center">{element.roomsNumber}</TableCell>
+              <TableCell align="center">{element.adultsNumber}</TableCell>
+              <TableCell align="center">{element.kidsNumber}</TableCell>
+              <TableCell align="center">{element.totalPrice}</TableCell>
               <TableCell align="center">
                 <ButtonGroup>
-                  <Button onClick={() => pushTo("/admin/accommodationPackages/" + element.id)}>
-                    Pachete cazare
-                  </Button>
-                </ButtonGroup>
-              </TableCell>
-              <TableCell align="center">
-                <ButtonGroup>
-                  <Button onClick={() => pushTo("/admin/hotel/" + element.id)}>
+                  {/* <Button
+                    onClick={() =>
+                      pushTo("/admin/accommodationPackage/form/" + element.id)
+                    }
+                  >
                     <EditIcon />
-                  </Button>
-                  <Button onClick={() => deleteHotel(this, element.id)}>
+                  </Button> */}
+                  <Button
+                    onClick={() =>
+                      deleteAccommodationPackageById(this, element.id)
+                    }
+                  >
                     <DeleteIcon />
                   </Button>
                 </ButtonGroup>
