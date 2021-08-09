@@ -2,7 +2,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import { executeAuthenticationApi } from "../api/AuthApi";
-import { logoutReset } from "../redux/actions/adminActions";
+import { logoutReset } from "../redux/actions/actions";
 
 const USER_TOKEN = "user_token";
 

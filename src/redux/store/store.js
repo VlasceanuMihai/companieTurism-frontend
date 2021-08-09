@@ -1,6 +1,6 @@
-import { createStore, combineReducers } from "redux";
-import adminReducers from "../../redux/reducers/adminReducers";
+import { createStore } from "redux";
+import employeeReducers from "../../redux/reducers/employeeReducers";
 
-const rootReducer = combineReducers({ adminReducers});
+// const rootReducer = combineReducers({ employeeReducers});
 
-export default createStore(adminReducers);
+export default createStore(employeeReducers);

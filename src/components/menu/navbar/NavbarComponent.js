@@ -13,9 +13,9 @@ function NavbarComponent() {
     <div class="navBar">
       <div class="header-left">
         <Link to="/home">Home</Link>
-        <Link to="/admin/employees">Angajati</Link>
-        <Link to="/admin/documents">Documente</Link>
-        <Link to="/admin/flights">Zboruri</Link>
+        <Link to="/employees">Angajati</Link>
+        <Link to="/documents">Documente</Link>
+        <Link to="/flights">Zboruri</Link>
         <Link to="/admin/hotels">Hoteluri</Link>
         <Link to="/admin/hotels" id="userIcon" target="_blank">
           <i class="far fa-user-circle"></i>

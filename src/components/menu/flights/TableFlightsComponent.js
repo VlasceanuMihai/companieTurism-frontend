@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { useHistory } from "react-router";
+import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import {
   Table,
@@ -53,6 +54,7 @@ const useStyles = makeStyles({
 function TableFlightsComponent({ data, ...rest }) {
   const classes = useStyles();
   let history = useHistory();
+  const profile = useSelector((state) => state.employeeProfile);
   const { deleteFlightById } = FlightAdminService();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -100,9 +102,11 @@ function TableFlightsComponent({ data, ...rest }) {
             <TableCell align="center">Data sosire</TableCell>
             <TableCell align="center">Companie</TableCell>
             <TableCell align="center">Angajat</TableCell>
-            <TableCell align="center">
-              <SettingsIcon className={classes.SettingsIcon}></SettingsIcon>
-            </TableCell>
+            {profile.role === "ROLE_ADMIN" && (
+              <TableCell align="center">
+                <SettingsIcon className={classes.SettingsIcon}></SettingsIcon>
+              </TableCell>
+            )}
           </TableRow>
         </TableHead>
         <TableBody>
@@ -122,16 +126,20 @@ function TableFlightsComponent({ data, ...rest }) {
               <TableCell align="center">
                 {element.employee.lastName + " " + element.employee.firstName}
               </TableCell>
-              <TableCell align="center">
-                <ButtonGroup>
-                  <Button onClick={() => pushTo("/admin/flight/" + element.id)}>
-                    <EditIcon />
-                  </Button>
-                  <Button onClick={() => deleteFlight(this, element.id)}>
-                    <DeleteIcon />
-                  </Button>
-                </ButtonGroup>
-              </TableCell>
+              {profile.role === "ROLE_ADMIN" && (
+                <TableCell align="center">
+                  <ButtonGroup>
+                    <Button
+                      onClick={() => pushTo("/admin/flight/" + element.id)}
+                    >
+                      <EditIcon />
+                    </Button>
+                    <Button onClick={() => deleteFlight(this, element.id)}>
+                      <DeleteIcon />
+                    </Button>
+                  </ButtonGroup>
+                </TableCell>
+              )}
             </TableRow>
           ))}
         </TableBody>

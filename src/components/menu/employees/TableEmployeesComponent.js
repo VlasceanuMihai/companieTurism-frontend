@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { useHistory } from "react-router";
+import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import {
   Table,
@@ -59,6 +60,7 @@ const useStyles = makeStyles({
 function TableEmployeesComponent({ data }) {
   const classes = useStyles();
   let history = useHistory();
+  const profile = useSelector((state) => state.employeeProfile);
   const { deleteEmployeeById } = AdminService();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -78,7 +80,7 @@ function TableEmployeesComponent({ data }) {
 
   const deleteEmployee = (event, employeeId) => {
     event.preventDefault();
-    
+
     deleteEmployeeById(employeeId)
       .then((response) => {
         console.log(response.status);
@@ -115,9 +117,11 @@ function TableEmployeesComponent({ data }) {
             <TableCell align="center">Tip Contract</TableCell>
             <TableCell align="center">Data Angajarii</TableCell>
             <TableCell align="center">Salariu</TableCell>
-            <TableCell align="center">
-              <SettingsIcon className={classes.SettingsIcon}></SettingsIcon>
-            </TableCell>
+            {profile.role === "ROLE_ADMIN" && (
+              <TableCell align="center">
+                <SettingsIcon className={classes.SettingsIcon}></SettingsIcon>
+              </TableCell>
+            )}
           </TableRow>
         </TableHead>
         <TableBody>
@@ -137,18 +141,20 @@ function TableEmployeesComponent({ data }) {
               <TableCell align="center">{element.employeeType}</TableCell>
               <TableCell align="center">{element.dateOfEmployment}</TableCell>
               <TableCell align="center">{element.wage}</TableCell>
-              <TableCell align="center">
-                <ButtonGroup>
-                  <Button
-                    onClick={() => pushTo("/admin/employee/" + element.id)}
-                  >
-                    <EditIcon />
-                  </Button>
-                  <Button onClick={() => deleteEmployee(this, element.id)}>
-                    <DeleteIcon />
-                  </Button>
-                </ButtonGroup>
-              </TableCell>
+              {profile.role === "ROLE_ADMIN" && (
+                <TableCell align="center">
+                  <ButtonGroup>
+                    <Button
+                      onClick={() => pushTo("/admin/employee/" + element.id)}
+                    >
+                      <EditIcon />
+                    </Button>
+                    <Button onClick={() => deleteEmployee(this, element.id)}>
+                      <DeleteIcon />
+                    </Button>
+                  </ButtonGroup>
+                </TableCell>
+              )}
             </TableRow>
           ))}
         </TableBody>

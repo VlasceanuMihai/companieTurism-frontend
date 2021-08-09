@@ -1,5 +1,4 @@
 import {
-  getAdminProfileApi,
   getEmployeeApi,
   getAllEmployeesApi,
   createEmployeeApi,
@@ -13,11 +12,6 @@ function AdminService() {
   const { setupAxiosInterceptors } = AuthenticationService();
 
   // GET
-  function getAdminProfile() {
-    setupAxiosInterceptors();
-    return getAdminProfileApi();
-  }
-
   function getEmployee(employeeId) {
     setupAxiosInterceptors();
     return getEmployeeApi(employeeId);
@@ -47,7 +41,6 @@ function AdminService() {
   }
 
   return {
-    getAdminProfile,
     getEmployee,
     getAllEmployees,
     createEmployee,
