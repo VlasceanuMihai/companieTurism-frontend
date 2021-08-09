@@ -28,15 +28,16 @@ function LoginComponent() {
 
     executeAuthentication(userData.username, userData.password)
       .then((response) => {
-        console.log("response.data.token: ", response.data.token);
-        successfulLogin(userData.username, response.data.token);
-        history.push("/home");
-        setUserData({
-          username: "",
-          password: "",
-          hasLoginFailed: false,
-          showSuccessMessage: true,
-        });
+        if (response.status === 200) {
+          successfulLogin(userData.username, response.data.token);
+          history.push("/home");
+          setUserData({
+            username: "",
+            password: "",
+            hasLoginFailed: false,
+            showSuccessMessage: true,
+          });
+        }
       })
       .catch((error) => {
         console.log("Invalid credentials.");
@@ -52,10 +53,10 @@ function LoginComponent() {
   useEffect(() => {
     let isAuth = sessionStorage.getItem("user_token");
     console.log(isAuth);
-    if(isAuth && isAuth !== "undefined"){
-      history.push("/home")
+    if (isAuth && isAuth !== "undefined") {
+      history.push("/home");
     }
-  })
+  });
 
   return (
     <div className="limiter">

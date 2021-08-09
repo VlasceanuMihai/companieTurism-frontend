@@ -4,11 +4,6 @@ export const BASE_API = "http://localhost:8080/api";
 // const ADMIN_PATH = "/admin"
 
 /* GET */
-// Admin profile
-export const getAdminProfileApi = async () => {
-  return await axios.get(`${BASE_API}/admin/v1/profile`);
-};
-
 // Get employee
 export const getEmployeeApi = async (employeeId) => {
   return await axios.get(`${BASE_API}/admin/v1/employee/` + employeeId);
@@ -16,7 +11,7 @@ export const getEmployeeApi = async (employeeId) => {
 
 // Get all employees
 export const getAllEmployeesApi = async () => {
-  return await axios.get(`${BASE_API}/admin/v1/getAllEmployees`);
+  return await axios.get(`${BASE_API}/v1/employees`);
 };
 
 // Get document
@@ -26,7 +21,7 @@ export const getDocumentApi = async (documentId) => {
 
 // Get all documents
 export const getAllDocumentsApi = async () => {
-  return await axios.get(`${BASE_API}/admin/v1/getAllDocuments`);
+  return await axios.get(`${BASE_API}/v1/documents`);
 };
 
 // Get flight
@@ -36,7 +31,7 @@ export const getFlightApi = async (flightId) => {
 
 // Get all flights
 export const getAllFlightsApi = async () => {
-  return await axios.get(`${BASE_API}/admin/v1/flights`);
+  return await axios.get(`${BASE_API}/v1/flights`);
 };
 
 // Get hotel

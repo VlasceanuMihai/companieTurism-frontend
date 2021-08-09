@@ -33,7 +33,7 @@ const App = withRouter(({ location }) => {
             {/* TODO: Aici vin toate AuthenticatedRoute */}
             <AuthenticatedRoute path="/home" exact component={HomeComponent} />
             <AuthenticatedRoute
-              path="/admin/employees"
+              path="/employees"
               exact
               component={EmployeesComponent}
             />
@@ -48,7 +48,7 @@ const App = withRouter(({ location }) => {
               component={RegistrationEmployeeComponent}
             />
             <AuthenticatedRoute
-              path="/admin/documents"
+              path="/documents"
               exact
               component={DocumentsComponent}
             />
@@ -63,7 +63,7 @@ const App = withRouter(({ location }) => {
               component={RegistrationDocumentComponent}
             />
             <AuthenticatedRoute
-              path="/admin/flights"
+              path="/flights"
               exact
               component={FlightsComponent}
             />

@@ -1,7 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setProfile } from "../../../redux/actions/actions";
 import NavbarComponent from "../navbar/NavbarComponent";
 import { makeStyles } from "@material-ui/core";
-import React from "react";
 import logoPoli from "../../../media/logoPoli.png";
+import EmployeeService from "../../../services/EmployeeService";
 
 const useStyles = makeStyles({
   container1: {
@@ -42,6 +46,26 @@ const useStyles = makeStyles({
 
 function HomeComponent() {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const profile = useSelector((state) => state.employeeProfile);
+  const loggedInState = useSelector((state) => state.loggedIn);
+  const isAdmin = useSelector((state) => state.isAdmin);
+
+  const { getProfile } = EmployeeService();
+
+  useEffect(() => {
+    getProfile()
+      .then((response) => {
+        dispatch(setProfile(response.data));
+        console.log("LoggedInState: ", loggedInState);
+        console.log("IsAdmin: " + profile.role);
+        console.log(profile.role === "ROLE_ADMIN");
+        console.log("Profile: ", profile);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   return (
     <div>
@@ -70,7 +94,7 @@ function HomeComponent() {
             </p>
           </div>
           <div className={classes.general}>
-            <p style={{ fontSize: "20px" }}>COORDONATOR STIINTIFIC:</p>
+            <p style={{ fontSize: "20px" }}>COORDONATOR STIINTIFIC: {profile.email}</p>
           </div>
           <div className={classes.general}>
             <p style={{ fontSize: "17px" }}>Asolvent: Ghita Andrei Rafael</p>
