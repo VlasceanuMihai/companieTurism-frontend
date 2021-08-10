@@ -2,7 +2,6 @@
 import { useState } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { useHistory } from "react-router";
-import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import {
   Table,
@@ -60,7 +59,7 @@ const useStyles = makeStyles({
 function TableEmployeesComponent({ data }) {
   const classes = useStyles();
   let history = useHistory();
-  const profile = useSelector((state) => state.employeeProfile);
+  const role = sessionStorage.getItem("user_role");
   const { deleteEmployeeById } = AdminService();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -79,7 +78,7 @@ function TableEmployeesComponent({ data }) {
   };
 
   const deleteEmployee = (event, employeeId) => {
-    event.preventDefault();
+    // event.preventDefault();
 
     deleteEmployeeById(employeeId)
       .then((response) => {
@@ -117,7 +116,7 @@ function TableEmployeesComponent({ data }) {
             <TableCell align="center">Tip Contract</TableCell>
             <TableCell align="center">Data Angajarii</TableCell>
             <TableCell align="center">Salariu</TableCell>
-            {profile.role === "ROLE_ADMIN" && (
+            {role === "ROLE_ADMIN" && (
               <TableCell align="center">
                 <SettingsIcon className={classes.SettingsIcon}></SettingsIcon>
               </TableCell>
@@ -141,7 +140,7 @@ function TableEmployeesComponent({ data }) {
               <TableCell align="center">{element.employeeType}</TableCell>
               <TableCell align="center">{element.dateOfEmployment}</TableCell>
               <TableCell align="center">{element.wage}</TableCell>
-              {profile.role === "ROLE_ADMIN" && (
+              {role === "ROLE_ADMIN" && (
                 <TableCell align="center">
                   <ButtonGroup>
                     <Button

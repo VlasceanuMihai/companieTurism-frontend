@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import { useHistory } from "react-router";
+// import { useHistory } from "react-router";
 import PropTypes from "prop-types";
 import {
   Table,
@@ -51,7 +51,8 @@ const useStyles = makeStyles({
 
 function TableAccommodationPackagesComponent({ data, ...rest }) {
   const classes = useStyles();
-  let history = useHistory();
+  // let history = useHistory();
+  const role = sessionStorage.getItem("user_role");
   const { deleteAccommodationPackage } = HotelAdminService();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -84,9 +85,9 @@ function TableAccommodationPackagesComponent({ data, ...rest }) {
       });
   };
 
-  const pushTo = (path) => {
-    history.push(path);
-  };
+  // const pushTo = (path) => {
+  //   history.push(path);
+  // };
 
   return (
     <TableContainer component={Paper} className={classes.paper}>
@@ -103,9 +104,11 @@ function TableAccommodationPackagesComponent({ data, ...rest }) {
             <TableCell align="center">Nr. adulti</TableCell>
             <TableCell align="center">Nr. copiii</TableCell>
             <TableCell align="center">Pret total</TableCell>
-            <TableCell align="center">
-              <SettingsIcon className={classes.SettingsIcon}></SettingsIcon>
-            </TableCell>
+            {role === "ROLE_ADMIN" && (
+              <TableCell align="center">
+                <SettingsIcon className={classes.SettingsIcon}></SettingsIcon>
+              </TableCell>
+            )}
           </TableRow>
         </TableHead>
         <TableBody>
@@ -130,24 +133,26 @@ function TableAccommodationPackagesComponent({ data, ...rest }) {
               <TableCell align="center">{element.adultsNumber}</TableCell>
               <TableCell align="center">{element.kidsNumber}</TableCell>
               <TableCell align="center">{element.totalPrice}</TableCell>
-              <TableCell align="center">
-                <ButtonGroup>
-                  {/* <Button
+              {role === "ROLE_ADMIN" && (
+                <TableCell align="center">
+                  <ButtonGroup>
+                    {/* <Button
                     onClick={() =>
                       pushTo("/admin/accommodationPackage/form/" + element.id)
                     }
                   >
                     <EditIcon />
                   </Button> */}
-                  <Button
-                    onClick={() =>
-                      deleteAccommodationPackageById(this, element.id)
-                    }
-                  >
-                    <DeleteIcon />
-                  </Button>
-                </ButtonGroup>
-              </TableCell>
+                    <Button
+                      onClick={() =>
+                        deleteAccommodationPackageById(this, element.id)
+                      }
+                    >
+                      <DeleteIcon />
+                    </Button>
+                  </ButtonGroup>
+                </TableCell>
+              )}
             </TableRow>
           ))}
         </TableBody>

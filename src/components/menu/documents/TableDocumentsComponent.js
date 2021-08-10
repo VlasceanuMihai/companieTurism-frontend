@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { useHistory } from "react-router";
-import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import {
   Table,
@@ -54,7 +53,7 @@ const useStyles = makeStyles({
 function TableDocumentsComponent({ data, ...rest }) {
   const classes = useStyles();
   let history = useHistory();
-  const profile = useSelector((state) => state.employeeProfile);
+  const role = sessionStorage.getItem("user_role");
   const { deleteDocumentById } = DocumentAdminService();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -99,7 +98,7 @@ function TableDocumentsComponent({ data, ...rest }) {
             <TableCell align="center">Nume angajat</TableCell>
             <TableCell align="center">Prenume angajat</TableCell>
             <TableCell align="center">Nume document</TableCell>
-            {profile.role === "ROLE_ADMIN" && (
+            {role === "ROLE_ADMIN" && (
             <TableCell align="center">
               <SettingsIcon className={classes.SettingsIcon}></SettingsIcon>
             </TableCell>
@@ -118,7 +117,7 @@ function TableDocumentsComponent({ data, ...rest }) {
               <TableCell align="center">{element.employeeFirstName}</TableCell>
               <TableCell align="center">{element.employeeLastName}</TableCell>
               <TableCell align="center">{element.documentName}</TableCell>
-              {profile.role === "ROLE_ADMIN" && (
+              {role === "ROLE_ADMIN" && (
               <TableCell align="center">
                 <ButtonGroup>
                   <Button

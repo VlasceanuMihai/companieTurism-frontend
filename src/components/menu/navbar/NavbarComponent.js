@@ -16,11 +16,11 @@ function NavbarComponent() {
         <Link to="/employees">Angajati</Link>
         <Link to="/documents">Documente</Link>
         <Link to="/flights">Zboruri</Link>
-        <Link to="/admin/hotels">Hoteluri</Link>
-        <Link to="/admin/hotels" id="userIcon" target="_blank">
+        <Link to="/hotels">Hoteluri</Link>
+        <Link to="/profile" id="userIcon" target="_blank">
           <i class="far fa-user-circle"></i>
         </Link>
-        <Link to="/admin/hotels" class="logout" onClick={handleLogout}>
+        <Link to="/login" class="logout" onClick={handleLogout}>
           Logout
         </Link>
       </div>

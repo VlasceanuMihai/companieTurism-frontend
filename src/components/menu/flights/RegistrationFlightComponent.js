@@ -66,7 +66,7 @@ export default function RegistrationFlightComponent(props) {
     airportArrival: "",
     dateOfArrival: "",
     company: "",
-    employeeCnp: "",
+    cnp: "",
     employeeFullName: "",
   });
   const [isUpdatePage, setIsUpdatePage] = useState(false);
@@ -92,7 +92,7 @@ export default function RegistrationFlightComponent(props) {
 
     console.log("Body: ", flightData);
     createFlight({
-      cnp: flightData.employeeCnp,
+      cnp: flightData.cnp,
       airportDeparture: flightData.airportDeparture,
       dateOfDeparture: flightData.dateOfDeparture,
       airportArrival: flightData.airportArrival,
@@ -103,7 +103,7 @@ export default function RegistrationFlightComponent(props) {
         console.log("Flight was created successfully!");
         if (response.status === 200) {
           alert("Flight was created successfully!");
-          history.push("/admin/flights");
+          history.push("/flights");
           setFlightData({
             flightId: "",
             airportDeparture: "",
@@ -111,7 +111,7 @@ export default function RegistrationFlightComponent(props) {
             airportArrival: "",
             dateOfArrival: "",
             company: "",
-            employeeCnp: "",
+            cnp: "",
             employeeFullName: "",
           });
         }
@@ -137,7 +137,7 @@ export default function RegistrationFlightComponent(props) {
         console.log("Flight updated!");
         if (response.status === 200) {
           alert("Flight updated!");
-          history.push("/admin/flights");
+          history.push("/flights");
           setFlightData({
             flightId: "",
             airportDeparture: "",
@@ -145,7 +145,7 @@ export default function RegistrationFlightComponent(props) {
             airportArrival: "",
             dateOfArrival: "",
             company: "",
-            employeeCnp: "",
+            cnp: "",
             employeeFullName: "",
           });
         }
@@ -168,7 +168,7 @@ export default function RegistrationFlightComponent(props) {
             airportArrival: response.data.airportArrival,
             dateOfArrival: response.data.dateOfArrival,
             company: response.data.company,
-            employeeCnp: response.data.employee.cnp,
+            cnp: response.data.employee.cnp,
             employeeFullName:
               response.data.employee.lastName +
               "" +
@@ -196,23 +196,23 @@ export default function RegistrationFlightComponent(props) {
         <div className={classes.container}>
           <form>
             <div style={{ fontSize: "21px", marginTop: "5px" }}>
-              Adaugare zbor
+              Date zboruri
             </div>
             <br />
-            {isUpdatePage === false && (
-              <div class="form-group">
-                <input
-                  id="cnp"
-                  name="cnp"
-                  type="text"
-                  class="form-control"
-                  placeholder="CNP"
-                  required
-                  defaultValue={flightData.employeeCnp}
-                  onChange={handleChange}
-                />
-              </div>
-            )}
+            <div class="form-group">
+              <input
+                id="cnp"
+                name="cnp"
+                type="text"
+                class="form-control"
+                placeholder="CNP"
+                autoFocus
+                readOnly={isUpdatePage === true}
+                required
+                defaultValue={flightData.cnp}
+                onChange={handleChange}
+              />
+            </div>
             <br />
             <div class="form-row">
               <div class="form-group col-md-5">

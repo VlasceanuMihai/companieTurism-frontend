@@ -1,6 +1,6 @@
 import {
   getFlightApi,
-  getAllFlightsApi,
+  getFlightsApi,
   createFlightApi,
   updateFlightApi,
   deleteFlightApi,
@@ -18,7 +18,7 @@ function FlightAdminService() {
 
   function getAllFlights() {
     setupAxiosInterceptors();
-    return getAllFlightsApi();
+    return getFlightsApi();
   }
 
   // POST

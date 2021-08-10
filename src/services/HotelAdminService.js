@@ -1,6 +1,6 @@
 import {
   getHotelApi,
-  getAllHotelsApi,
+  getHotelsApi,
   generateTotalPriceApi,
   createHotelApi,
   updateHotelApi,
@@ -18,7 +18,7 @@ function HotelAdminService() {
   // GET
   function getAllHotels() {
     setupAxiosInterceptors();
-    return getAllHotelsApi();
+    return getHotelsApi();
   }
 
   function getHotel(hotelId) {

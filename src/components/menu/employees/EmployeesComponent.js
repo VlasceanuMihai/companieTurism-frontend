@@ -1,13 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import AdminService from "../../../services/AdminService";
 import NavbarComponent from "../navbar/NavbarComponent";
 import TableEmployeesComponent from "./TableEmployeesComponent";
 import AddButtonComponent from "../buttons/AddButtonComponent";
 
 function EmployeesComponent() {
-  const profile = useSelector((state) => state.employeeProfile);
+  const role = sessionStorage.getItem("user_role");
   const { getAllEmployees } = AdminService();
   const [employees, setEmployees] = useState(null);
   const [employeesError, setEmployeesError] = useState(null);
@@ -27,7 +26,7 @@ function EmployeesComponent() {
   return (
     <div>
       <NavbarComponent />
-      {profile.role === "ROLE_ADMIN" && <AddButtonComponent name={"Adaugare angajat"} path={"/employees/form"} />}
+      {role === "ROLE_ADMIN" && <AddButtonComponent name={"Adaugare angajat"} path={"/admin/employees/form"} />}
       {employeesError !== null && <div>{employeesError}</div>}
       {employees && <TableEmployeesComponent data={employees} />}
     </div>

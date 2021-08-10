@@ -95,7 +95,7 @@ export default function RegistrationDocumentComponent(props) {
         console.log("Document was created successfully!");
         if (response.status === 200) {
           alert("Document was created successfully!");
-          history.push("/admin/documents");
+          history.push("/documents");
           setDocumentData({
             documentId: "",
             cnp: "",
@@ -124,7 +124,7 @@ export default function RegistrationDocumentComponent(props) {
         console.log("Document updated!");
         if (response.status === 200) {
           alert("Document updated!");
-          history.push("/admin/documents");
+          history.push("/documents");
           setDocumentData({
             documentId: "",
             cnp: "",
@@ -145,6 +145,7 @@ export default function RegistrationDocumentComponent(props) {
         if (response.data != null) {
           //   console.log("Date: ", response.data.dateOfEmployment);
           setDocumentData({
+            documentId: documentId,
             cnp: response.data.employee.cnp,
             path: response.data.path,
             documentName: response.data.documentName,
@@ -172,7 +173,7 @@ export default function RegistrationDocumentComponent(props) {
         <div className={classes.container}>
           <form>
             <div style={{ fontSize: "21px", marginTop: "5px" }}>
-              Adaugare document
+              Date document
             </div>
             <br />
             {isUpdatePage === false && (

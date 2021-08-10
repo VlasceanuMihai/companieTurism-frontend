@@ -1,6 +1,6 @@
 import {
   getEmployeeApi,
-  getAllEmployeesApi,
+  getEmployeesApi,
   createEmployeeApi,
   updateEmployeeApi,
   deleteEmployeeApi,
@@ -19,7 +19,7 @@ function AdminService() {
 
   function getAllEmployees() {
     setupAxiosInterceptors();
-    return getAllEmployeesApi();
+    return getEmployeesApi();
   }
 
   // POST

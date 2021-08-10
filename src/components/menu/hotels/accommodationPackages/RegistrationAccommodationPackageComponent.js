@@ -84,7 +84,7 @@ export default function RegistrationAccommodationPackageComponent(props) {
     },
     cnp: "",
   });
-  const [isUpdatePage, setIsUpdatePage] = useState(false);
+  const [isUpdatePage] = useState(false);
   const [isTotalPriceGenerated, setTotalPriceIsGenerated] = useState(false);
 
   //   const initialState = {
@@ -140,7 +140,7 @@ export default function RegistrationAccommodationPackageComponent(props) {
               accommodationData.hotel.name +
               "!"
           );
-          history.push("/admin/hotels");
+          history.push("/hotels");
           setAccommodationData({
             packageType: "",
             pricePerNight: "",
@@ -192,7 +192,7 @@ export default function RegistrationAccommodationPackageComponent(props) {
               accommodationData.hotel.name +
               "!"
           );
-          history.push("/admin/hotels");
+          history.push("/hotels");
           setAccommodationData({
             hotel: {
               id: "",

@@ -55,6 +55,7 @@ const useStyles = makeStyles({
 function TableFlightsComponent({ data, ...rest }) {
   const classes = useStyles();
   let history = useHistory();
+  const role = sessionStorage.getItem("user_role");
   const { deleteHotelById } = HotelAdminService();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -104,9 +105,11 @@ function TableFlightsComponent({ data, ...rest }) {
             <TableCell align="center">Scenariu covid</TableCell>
             <TableCell align="center">Angajat</TableCell>
             <TableCell align="center">Pachete cazare</TableCell>
-            <TableCell align="center">
-              <SettingsIcon className={classes.SettingsIcon}></SettingsIcon>
-            </TableCell>
+            {role === "ROLE_ADMIN" && (
+              <TableCell align="center">
+                <SettingsIcon className={classes.SettingsIcon}></SettingsIcon>
+              </TableCell>
+            )}
           </TableRow>
         </TableHead>
         <TableBody>
@@ -132,15 +135,19 @@ function TableFlightsComponent({ data, ...rest }) {
               </TableCell>
               <TableCell align="center">
                 <ButtonGroup>
-                  <Button
-                    onClick={() =>
-                      pushTo(
-                        "/admin/accommodationPackage/hotel/" + element.id + "/form"
-                      )
-                    }
-                  >
-                    <AddIcon />
-                  </Button>
+                  {role === "ROLE_ADMIN" && (
+                    <Button
+                      onClick={() =>
+                        pushTo(
+                          "/admin/accommodationPackage/hotel/" +
+                            element.id +
+                            "/form"
+                        )
+                      }
+                    >
+                      <AddIcon />
+                    </Button>
+                  )}
                   <Button
                     onClick={() =>
                       pushTo("/admin/accommodationPackages/hotel/" + element.id)
@@ -150,16 +157,20 @@ function TableFlightsComponent({ data, ...rest }) {
                   </Button>
                 </ButtonGroup>
               </TableCell>
-              <TableCell align="center">
-                <ButtonGroup>
-                  <Button onClick={() => pushTo("/admin/hotel/form/" + element.id)}>
-                    <EditIcon />
-                  </Button>
-                  <Button onClick={() => deleteHotel(this, element.id)}>
-                    <DeleteIcon />
-                  </Button>
-                </ButtonGroup>
-              </TableCell>
+              {role === "ROLE_ADMIN" && (
+                <TableCell align="center">
+                  <ButtonGroup>
+                    <Button
+                      onClick={() => pushTo("/admin/hotel/form/" + element.id)}
+                    >
+                      <EditIcon />
+                    </Button>
+                    <Button onClick={() => deleteHotel(this, element.id)}>
+                      <DeleteIcon />
+                    </Button>
+                  </ButtonGroup>
+                </TableCell>
+              )}
             </TableRow>
           ))}
         </TableBody>

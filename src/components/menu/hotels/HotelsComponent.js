@@ -6,6 +6,7 @@ import TableHotelsComponent from "./TableHotelsComponent";
 import AddButtonComponent from "../buttons/AddButtonComponent";
 
 function HotelsComponent() {
+  const role = sessionStorage.getItem("user_role");
   const { getAllHotels } = HotelAdminService();
   const [hotels, setHotels] = useState(null);
   const [hotelsError, setHotelsError] = useState(null);
@@ -25,10 +26,12 @@ function HotelsComponent() {
   return (
     <div>
       <NavbarComponent />
+      {role === "ROLE_ADMIN" && (
         <AddButtonComponent
           name={"Adaugare hotel"}
           path={"/admin/hotel/form"}
         />
+      )}
       {hotelsError !== null && <div>{hotelsError}</div>}
       {hotels && <TableHotelsComponent data={hotels} />}
     </div>

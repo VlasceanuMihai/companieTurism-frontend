@@ -109,7 +109,7 @@ export default function RegistrationHotelComponent(props) {
         console.log("Hotel was created successfully!");
         if (response.status === 200) {
           alert("Hotel was created successfully!");
-          history.push("/admin/hotels");
+          history.push("/hotels");
           setHotelData({
             hotelId: "",
             hotelName: "",
@@ -144,7 +144,7 @@ export default function RegistrationHotelComponent(props) {
         console.log("Hotel updated successfully!");
         if (response.status === 200) {
           alert("Hotel updated successfully!");
-          history.push("/admin/hotels");
+          history.push("/hotels");
           setHotelData({
             hotelId: "",
             hotelName: "",
@@ -197,24 +197,22 @@ export default function RegistrationHotelComponent(props) {
       <div className={classes.paper}>
         <div className={classes.container}>
           <form>
-            <div style={{ fontSize: "21px", marginTop: "5px" }}>
-              Date hotel
-            </div>
+            <div style={{ fontSize: "21px", marginTop: "5px" }}>Date hotel</div>
             <br />
             {/* {isUpdatePage === false && ( */}
-              <div class="form-group">
-                <input
-                  id="cnp"
-                  name="cnp"
-                  type="text"
-                  class="form-control"
-                  placeholder="CNP"
-                  required
-                  readOnly={isUpdatePage === true}
-                  defaultValue={hotelData.cnp}
-                  onChange={handleChange}
-                />
-              </div>
+            <div class="form-group">
+              <input
+                id="cnp"
+                name="cnp"
+                type="text"
+                class="form-control"
+                placeholder="CNP"
+                required
+                readOnly={isUpdatePage === true}
+                defaultValue={hotelData.cnp}
+                onChange={handleChange}
+              />
+            </div>
             {/* )} */}
             <br />
             <div class="form-row">
@@ -295,7 +293,9 @@ export default function RegistrationHotelComponent(props) {
                   </MenuItem>
                   <MenuItem value={"SAFE"}>Safe</MenuItem>
                   <MenuItem value={"RED_SCENARIO"}>Scenariu rosu</MenuItem>
-                  <MenuItem value={"TOTAL_QUARANTINE"}>Carantina totala</MenuItem>
+                  <MenuItem value={"TOTAL_QUARANTINE"}>
+                    Carantina totala
+                  </MenuItem>
                 </Select>
               </FormControl>
             </div>

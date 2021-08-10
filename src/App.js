@@ -78,7 +78,7 @@ const App = withRouter(({ location }) => {
               component={RegistrationFlightComponent}
             />
             <AuthenticatedRoute
-              path="/admin/hotels"
+              path="/hotels"
               exact
               component={HotelsComponent}
             />

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { useHistory } from "react-router";
-import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import {
   Table,
@@ -54,7 +53,7 @@ const useStyles = makeStyles({
 function TableFlightsComponent({ data, ...rest }) {
   const classes = useStyles();
   let history = useHistory();
-  const profile = useSelector((state) => state.employeeProfile);
+  const role = sessionStorage.getItem("user_role");
   const { deleteFlightById } = FlightAdminService();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -102,7 +101,7 @@ function TableFlightsComponent({ data, ...rest }) {
             <TableCell align="center">Data sosire</TableCell>
             <TableCell align="center">Companie</TableCell>
             <TableCell align="center">Angajat</TableCell>
-            {profile.role === "ROLE_ADMIN" && (
+            {role === "ROLE_ADMIN" && (
               <TableCell align="center">
                 <SettingsIcon className={classes.SettingsIcon}></SettingsIcon>
               </TableCell>
@@ -126,7 +125,7 @@ function TableFlightsComponent({ data, ...rest }) {
               <TableCell align="center">
                 {element.employee.lastName + " " + element.employee.firstName}
               </TableCell>
-              {profile.role === "ROLE_ADMIN" && (
+              {role === "ROLE_ADMIN" && (
                 <TableCell align="center">
                   <ButtonGroup>
                     <Button
