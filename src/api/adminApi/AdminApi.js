@@ -10,7 +10,7 @@ export const getEmployeeApi = async (employeeId) => {
 };
 
 // Get all employees
-export const getAllEmployeesApi = async () => {
+export const getEmployeesApi = async () => {
   return await axios.get(`${BASE_API}/v1/employees`);
 };
 
@@ -20,7 +20,7 @@ export const getDocumentApi = async (documentId) => {
 };
 
 // Get all documents
-export const getAllDocumentsApi = async () => {
+export const getDocumentsApi = async () => {
   return await axios.get(`${BASE_API}/v1/documents`);
 };
 
@@ -30,7 +30,7 @@ export const getFlightApi = async (flightId) => {
 };
 
 // Get all flights
-export const getAllFlightsApi = async () => {
+export const getFlightsApi = async () => {
   return await axios.get(`${BASE_API}/v1/flights`);
 };
 
@@ -40,14 +40,14 @@ export const getHotelApi = async (hotelId) => {
 };
 
 // Get all hotels
-export const getAllHotelsApi = async () => {
-  return await axios.get(`${BASE_API}/admin/v1/getAllHotels`);
+export const getHotelsApi = async () => {
+  return await axios.get(`${BASE_API}/v1/hotels`);
 };
 
 // Get all accommodation packages for hotel
 export const getAllAccommodationPackagesApi = async (hotelId) => {
   return await axios.get(
-    `${BASE_API}/admin/v1/accommodationPackages/hotel/` + hotelId
+    `${BASE_API}/v1/accommodationPackages/hotel/` + hotelId
   );
 };
 

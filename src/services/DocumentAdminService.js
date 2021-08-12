@@ -1,6 +1,6 @@
 import {
   getDocumentApi,
-  getAllDocumentsApi,
+  getDocumentsApi,
   createDocumentApi,
   updateDocumentApi,
   deleteDocumentApi,
@@ -18,7 +18,7 @@ function DocumentAdminService() {
 
   function getAllDocuments() {
     setupAxiosInterceptors();
-    return getAllDocumentsApi();
+    return getDocumentsApi();
   }
 
   // POST

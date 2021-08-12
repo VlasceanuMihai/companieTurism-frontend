@@ -103,7 +103,7 @@ export default function RegistrationEmployeeComponent(props) {
         console.log("Create new employee with cnp: " + employeeData.cnp);
         if (response.status === 200) {
           alert("Create new employee with cnp: " + employeeData.cnp);
-          history.push("/admin/employees");
+          history.push("/employees");
           setEmployeeData({
             lastName: "",
             firstName: "",
@@ -141,7 +141,7 @@ export default function RegistrationEmployeeComponent(props) {
         console.log("Update employee with cnp: " + employeeData.cnp);
         if (response.status === 200) {
           alert("Update employee with cnp: " + employeeData.cnp);
-          history.push("/admin/employees");
+          history.push("/employees");
           setEmployeeData({
             lastName: "",
             firstName: "",

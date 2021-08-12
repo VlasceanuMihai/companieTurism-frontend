@@ -1,13 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import FlightAdminService from "../../../services/FlightAdminService";
 import NavbarComponent from "../navbar/NavbarComponent";
 import TableFlightsComponent from "./TableFlightsComponent";
 import AddButtonComponent from "../buttons/AddButtonComponent";
 
 function FlightsComponent() {
-  const profile = useSelector((state) => state.employeeProfile);
+  const role = sessionStorage.getItem("user_role");
   const { getAllFlights } = FlightAdminService();
   const [flights, setFlights] = useState(null);
   const [flightsError, setFlightsError] = useState(null);
@@ -27,7 +26,7 @@ function FlightsComponent() {
   return (
     <div>
       <NavbarComponent />
-      {profile.role === "ROLE_ADMIN" && (
+      {role === "ROLE_ADMIN" && (
         <AddButtonComponent
           name={"Adaugare zbor"}
           path={"/admin/flights/form"}

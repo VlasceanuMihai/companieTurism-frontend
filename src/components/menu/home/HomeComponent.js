@@ -49,7 +49,6 @@ function HomeComponent() {
   const dispatch = useDispatch();
   const profile = useSelector((state) => state.employeeProfile);
   const loggedInState = useSelector((state) => state.loggedIn);
-  const isAdmin = useSelector((state) => state.isAdmin);
 
   const { getProfile } = EmployeeService();
 
@@ -61,6 +60,7 @@ function HomeComponent() {
         console.log("IsAdmin: " + profile.role);
         console.log(profile.role === "ROLE_ADMIN");
         console.log("Profile: ", profile);
+        sessionStorage.setItem("user_role", response.data.role);
       })
       .catch((error) => {
         console.log(error);
