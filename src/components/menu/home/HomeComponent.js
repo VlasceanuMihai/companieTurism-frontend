@@ -2,8 +2,8 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setProfile } from "../../../redux/actions/actions";
-import NavbarComponent from "../navbar/NavbarComponent";
 import { makeStyles } from "@material-ui/core";
+import NavbarComponent from "../navbar/NavbarComponent";
 import logoPoli from "../../../media/logoPoli.png";
 import EmployeeService from "../../../services/EmployeeService";
 

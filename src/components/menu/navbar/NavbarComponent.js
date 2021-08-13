@@ -1,5 +1,21 @@
 import "./NavbarComponent.css";
-import { Link } from "react-router-dom";
+// import {
+//   Nav,
+//   NavLink,
+//   Bars,
+//   NavMenu,
+//   NavBtn,
+//   NavBtnLink,
+// } from "./NavbarElements";
+import {
+  Nav,
+  NavLink,
+  Bars,
+  NavMenu,
+  NavBtn,
+  NavBtnLink,
+} from "./NavbarElements";
+import travel from "../../../media/travel.png"
 import AuthenticationService from "../../../auth/AuthenticationService";
 
 function NavbarComponent() {
@@ -10,21 +26,60 @@ function NavbarComponent() {
   }
 
   return (
-    <div class="navBar">
-      <div class="header-left">
-        <Link to="/home">Home</Link>
-        <Link to="/employees">Angajati</Link>
-        <Link to="/documents">Documente</Link>
-        <Link to="/flights">Zboruri</Link>
-        <Link to="/hotels">Hoteluri</Link>
-        <Link to="/profile" id="userIcon" target="_blank">
-          <i class="far fa-user-circle"></i>
-        </Link>
-        <Link to="/login" class="logout" onClick={handleLogout}>
-          Logout
-        </Link>
-      </div>
-    </div>
+    <>
+      <Nav className="nav">
+        <NavLink to="/home">
+          <img src={travel} alt="Travel Company" />
+        </NavLink>
+        <Bars />
+        <NavMenu>
+          <NavLink to="/home" activeStyle>
+            Acasa
+          </NavLink>
+          <NavLink to="/employees" activeStyle>
+            Angajati
+          </NavLink>
+          <NavLink to="/documents" activeStyle>
+            Documente
+          </NavLink>
+          <NavLink to="/flights" activeStyle>
+            Zboruri
+          </NavLink>
+          <NavLink to="/hotels" activeStyle>
+            Hoteluri
+          </NavLink>
+          {/* Second Nav */}
+          {/* <NavBtnLink to='/sign-in'>Sign In</NavBtnLink> */}
+        </NavMenu>
+        <NavBtn>
+          <NavBtnLink to="/profile">
+            Profile
+          </NavBtnLink>
+        </NavBtn>
+        <NavBtn>
+          <NavBtnLink to="/signin" onClick={handleLogout}>
+            Logout
+          </NavBtnLink>
+        </NavBtn>
+      </Nav>
+    </>
+    // <div class="navBar">
+    //   <div class="header-left">
+    //     <Link to="/home">Home</Link>
+    //     <Link to="/employees">Angajati</Link>
+    //     <Link to="/documents">Documente</Link>
+    //     <Link to="/flights">Zboruri</Link>
+    //     <Link to="/hotels">Hoteluri</Link>
+    //     <Link to="/profile">
+    //     </Link>
+    //     <Link to="/login" onClick={handleLogout}>
+    //       Logout
+    //     </Link>
+    //     <Link to="/profile">
+    //       Profile
+    //     </Link>
+    //   </div>
+    // </div>
   );
 }
 

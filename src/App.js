@@ -14,6 +14,7 @@ import RegistrationFlightComponent from "./components/menu/flights/RegistrationF
 import RegistrationHotelComponent from "./components/menu/hotels/RegistrationHotelComponent";
 import RegistrationAccommodationPackageComponent from "./components/menu/hotels/accommodationPackages/RegistrationAccommodationPackageComponent";
 import AccommodationPackagesComponent from "./components/menu/hotels/accommodationPackages/AccommodationPackagesComponent";
+import ProfileComponent from "./components/menu/profile/ProfileComponent";
 
 const App = withRouter(({ location }) => {
   return (
@@ -106,6 +107,11 @@ const App = withRouter(({ location }) => {
               path="/admin/accommodationPackage/form/:id"
               exact
               component={RegistrationAccommodationPackageComponent}
+            />
+            <AuthenticatedRoute
+              path="/profile"
+              exact
+              component={ProfileComponent}
             />
           </Switch>
         </Route>
