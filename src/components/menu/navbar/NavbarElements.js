@@ -1,30 +1,32 @@
-import { FaBars } from "react-icons/fa";
-import { NavLink as Link } from "react-router-dom";
-import styled from "styled-components";
+import { FaBars } from 'react-icons/fa';
+import { NavLink as Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 export const Nav = styled.nav`
   background: linear-gradient(45deg, #f1cdb9 10%, #b6aeab 90%);
-  height: 80px;
+  height: 60px;
   display: flex;
-  justify-content: space-between;
-  padding: 0.5rem calc((100vw - 1000px) / 2);
   z-index: 10;
   /* Third Nav */
-  //   justify-content: flex-start;
+  // justify-content: center;
 `;
 
 export const NavLink = styled(Link)`
   font-size: 15px;
   display: flex;
   align-items: center;
-  a:hover {
-    text-decoration: none;
-  }
-  padding: 0 1rem;
+  padding: 20px;
   height: 100%;
   cursor: pointer;
+  color: rgb(0, 0, 0);
+  font-weight: bold;
   &.active {
-    // color: #15cdfc;
+    color: #fff;
+  }
+  &:hover {
+    color: #ffffff;
+    text-decoration: none;
+    transition: 0.4s ease;
   }
 `;
 
@@ -45,12 +47,6 @@ export const Bars = styled(FaBars)`
 export const NavMenu = styled.div`
   display: flex;
   align-items: center;
-  margin-right: -24px;
-  /* Second Nav */
-  /* margin-right: 24px; */
-  /* Third Nav */
-  /* width: 100vw;
-  white-space: nowrap; */
   @media screen and (max-width: 768px) {
     display: none;
   }
@@ -61,28 +57,32 @@ export const NavBtn = styled.nav`
   align-items: center;
   margin-right: 24px;
   /* Third Nav */
-  /* justify-content: flex-end;
-  width: 100vw; */
+  /* justify-content: center;
+  
+  width: 100%; */
   @media screen and (max-width: 768px) {
     display: none;
   }
 `;
 
 export const NavBtnLink = styled(Link)`
-  border-radius: 4px;
-  background: #4ac0d2;
-  padding: 10px 22px;
+  background: #f1cdb9;
+  padding: 5px 15px;
+  font-size: 16px;
+  font-weight: bold;
+  position: relative;
+  left: 1130px;
   color: #fff;
   outline: none;
-  border: none;
+  border-radius: 10px;
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
   text-decoration: none;
+
   /* Second Nav */
-  margin-left: 24px;
   &:hover {
-    transition: all 0.2s ease-in-out;
+    transition: all 0.6s ease-in-out;
     background: #fff;
     color: #010606;
+    text-decoration: none;
   }
 `;

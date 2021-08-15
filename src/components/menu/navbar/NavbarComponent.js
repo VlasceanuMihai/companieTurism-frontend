@@ -1,12 +1,4 @@
-import "./NavbarComponent.css";
-// import {
-//   Nav,
-//   NavLink,
-//   Bars,
-//   NavMenu,
-//   NavBtn,
-//   NavBtnLink,
-// } from "./NavbarElements";
+import './NavbarComponent.css';
 import {
   Nav,
   NavLink,
@@ -14,11 +6,18 @@ import {
   NavMenu,
   NavBtn,
   NavBtnLink,
-} from "./NavbarElements";
-import travel from "../../../media/travel.png"
-import AuthenticationService from "../../../auth/AuthenticationService";
+} from './NavbarElements';
+import travel from '../../../media/travelNew.png';
+import AuthenticationService from '../../../auth/AuthenticationService';
+import { makeStyles } from '@material-ui/core';
 
+const useStyles = makeStyles({
+  travelImg: {
+    width: '70%',
+  },
+});
 function NavbarComponent() {
+  const classes = useStyles();
   const { logout } = AuthenticationService();
 
   async function handleLogout() {
@@ -29,7 +28,11 @@ function NavbarComponent() {
     <>
       <Nav className="nav">
         <NavLink to="/home">
-          <img src={travel} alt="Travel Company" />
+          <img
+            className={classes.travelImg}
+            src={travel}
+            alt="Travel Company"
+          />
         </NavLink>
         <Bars />
         <NavMenu>
@@ -53,7 +56,7 @@ function NavbarComponent() {
         </NavMenu>
         <NavBtn>
           <NavBtnLink to="/profile">
-            Profile
+            <i className={classes.profileIcon} class="fas fa-user-circle"></i>
           </NavBtnLink>
         </NavBtn>
         <NavBtn>
