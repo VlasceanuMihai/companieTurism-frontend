@@ -2,7 +2,6 @@ import './NavbarComponent.css';
 import {
   Nav,
   NavLink,
-  Bars,
   NavMenu,
   NavBtn,
   NavBtnLink,
@@ -34,7 +33,6 @@ function NavbarComponent() {
             alt="Travel Company"
           />
         </NavLink>
-        <Bars />
         <NavMenu>
           <NavLink to="/home" activeStyle>
             Acasa
