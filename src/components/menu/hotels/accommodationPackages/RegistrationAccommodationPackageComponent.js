@@ -116,9 +116,6 @@ export default function RegistrationAccommodationPackageComponent(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // console.log("PackageType: ", accommodationData.packageType);
-    // console.log("pricePerNight: ", accommodationData.pricePerNight);
-    // console.log("Id: ", accommodationData.hotel.id);
     createAccommodationPackage(accommodationData.hotel.id, {
       packageType: accommodationData.packageType,
       pricePerNight: accommodationData.pricePerNight,
