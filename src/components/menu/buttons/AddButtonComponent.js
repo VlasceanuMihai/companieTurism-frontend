@@ -15,6 +15,7 @@ const useStyles = makeStyles({
     borderRadius: 5,
     border: 0,
     color: "black",
+    fontWeight: "bolder",
     height: 30,
     padding: "0 30px",
     boxShadow: "0 3px 5px 2px #989898",
