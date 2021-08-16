@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { setProfile } from "../../../redux/actions/actions";
 import clsx from "clsx";
@@ -13,6 +13,7 @@ import {
   TextField,
 } from "@material-ui/core";
 import EmployeeService from "../../../services/EmployeeService";
+import { updatePasswordApi } from "../../../api/userApi/UserApi";
 
 const useStyles = makeStyles({
   root: {
@@ -23,23 +24,16 @@ const useStyles = makeStyles({
 
 function UpdatePasswordComponent() {
   const classes = useStyles();
-  const { getProfile } = EmployeeService();
-  const [profileError, setProfileError] = useState(null);
-  const [profileData, setProfileData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phoneNumber: "",
-    cnp: "",
-    dateOfEmployment: "",
-    employeeType: "",
-  });
+  const { updatePassword } = EmployeeService();
   const [passwordData, setPasswordData] = useState({
     currentPassword: "",
     newPassword: "",
+    confirmNewPassword: "",
   });
 
   function handleChange(event) {
+    event.preventDefault();
+
     setPasswordData({
       ...passwordData,
       [event.target.name]: [event.target.value],
@@ -47,27 +41,20 @@ function UpdatePasswordComponent() {
   }
 
   function handleSubmit(event) {
-    setPasswordData({});
-  }
+    event.preventDefault();
 
-  useEffect(() => {
-    getProfile()
-      .then((response) => {
-        console.log("Profile" + response.data);
-        setProfile({
-          firstName: response.data.firstName,
-          lastName: response.data.lastName,
-          email: response.data.email,
-          phoneNumber: response.data.phoneNumber,
-          cnp: response.data.cnp,
-          dateOfEmployment: response.data.dateOfEmployment,
-          employeeType: response.data.employeeType,
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+    updatePassword({
+      currentPassword: passwordData.currentPassword,
+      newPassword: passwordData.newPassword,
+      confirmNewPassword: passwordData.confirmNewPassword,
+    });
+
+    setPasswordData({
+      currentPassword: "",
+      newPassword: "",
+      confirmNewPassword: "",
+    });
+  }
 
   return (
     <form className={clsx(classes.root)}>
