@@ -217,8 +217,60 @@ function UpdatePasswordComponent() {
         </Box>
       </Card>
     </form>
+        <Card className={classes.cardStyle}>
+          <CardHeader title="Actualizare parola" />
+          <Divider />
+          <CardContent>
+            <TextField
+              className={classes.inputColor}
+              fullWidth
+              id="currentPassword"
+              name="currentPassword"
+              type="input"
+              label="Parola curenta"
+              margin="normal"
+              variant="outlined"
+              onChange={handleChange}
+              value={passwordData.currentPassword || ""}
+            />
+            <TextField
+              className={classes.inputColor}
+              fullWidth
+              id="newPassword"
+              name="newPassword"
+              type="input"
+              label="Parola noua"
+              margin="normal"
+              variant="outlined"
+              onChange={handleChange}
+              value={passwordData.newPassword || ""}
+            />
+            <TextField
+              className={classes.inputColor}
+              fullWidth
+              id="confirmNewPassword"
+              name="confirmNewPassword"
+              type="input"
+              label="Confirmare parola noua"
+              margin="normal"
+              variant="outlined"
+              onChange={handleChange}
+              value={passwordData.confirmNewPassword || ""}
+            />
+          </CardContent>
+          <Divider />
+          <Box display="flex" justifyContent="flex-end" p={2}>
+            <Button
+              className={classes.btnStyle}
+              color="primary"
+              variant="contained"
+              onClick={handleSubmit}
+            >
+              Actualizare
+            </Button>
+          </Box>
+        </Card>
     </paper>
-  );
-}
+  )};
 
 export default UpdatePasswordComponent;

@@ -2,7 +2,7 @@
 /* eslint-disable no-dupe-keys */
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
-import { makeStyles } from "@material-ui/core";
+import { makeStyles, Divider } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
@@ -37,7 +37,7 @@ const useStyles = makeStyles({
   },
   formControl: {
     position: "relative",
-    left: "140px",
+    left: "120px",
     bottom: "32px",
   },
   button: {
@@ -203,7 +203,8 @@ export default function RegistrationEmployeeComponent(props) {
             <div style={{ fontSize: "21px", marginTop: "5px" }}>
               Date Angajat
             </div>
-            <br />
+            <Divider />
+            <br/>
             <div class="form-row">
               <div class="form-group col-md-6">
                 <input
@@ -259,7 +260,8 @@ export default function RegistrationEmployeeComponent(props) {
                 />
               </div>
             </div>
-            <br />
+            <Divider />
+            <br/>
             <div class="form-group">
               <input
                 type="email"
@@ -286,7 +288,8 @@ export default function RegistrationEmployeeComponent(props) {
                 />
               </div>
             )}
-            <br />
+            <Divider />
+            <br/>
             <form className={classes.container2} noValidate>
               <TextField
                 id="dateOfEmployment"
@@ -338,6 +341,8 @@ export default function RegistrationEmployeeComponent(props) {
                 />
               </div>
             </div>
+            <Divider />
+            <br/>
             <div class="form-group"></div>
             <button
               type="submit"
