@@ -1,4 +1,4 @@
-import { getProfileApi } from "../api/userApi/UserApi";
+import { getProfileApi, updatePasswordApi } from "../api/userApi/UserApi";
 import AuthenticationService from "../auth/AuthenticationService";
 
 function AdminService() {
@@ -9,8 +9,14 @@ function AdminService() {
     return getProfileApi();
   }
 
+  function updatePassword(body) {
+    setupAxiosInterceptors();
+    return updatePasswordApi(body);
+  }
+
   return {
     getProfile,
+    updatePassword,
   };
 }
 

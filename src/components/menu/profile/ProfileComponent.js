@@ -1,8 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
+import { useState, useEffect } from "react";
 import { Box, Container, makeStyles } from "@material-ui/core";
 import NavbarComponent from "../navbar/NavbarComponent";
 import UpdatePasswordComponent from "./UpdatePasswordComponent";
+import EmployeeService from "../../../services/EmployeeService";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -16,10 +18,41 @@ const useStyles = makeStyles((theme) => ({
 
 function ProfileComponent() {
   const classes = useStyles();
+  const { getProfile } = EmployeeService();
+  const [profileError, setProfileError] = useState(null);
+  const [profileData, setProfileData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phoneNumber: "",
+    cnp: "",
+    dateOfEmployment: "",
+    employeeType: "",
+  });
+
+  useEffect(() => {
+    getProfile()
+      .then((response) => {
+        console.log("Profile" + response.data);
+        setProfileData({
+          firstName: response.data.firstName,
+          lastName: response.data.lastName,
+          email: response.data.email,
+          phoneNumber: response.data.phoneNumber,
+          cnp: response.data.cnp,
+          dateOfEmployment: response.data.dateOfEmployment,
+          employeeType: response.data.employeeType,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        setProfileError(error.response);
+      });
+  }, []);
 
   return (
     <div>
-          <NavbarComponent/>
+      <NavbarComponent />
       <Container maxWidth="lg">
         <Box mt={3}>
           <UpdatePasswordComponent />
