@@ -59,12 +59,8 @@ const useStyles = makeStyles({
 export default function RegistrationAccommodationPackageComponent(props) {
   const classes = useStyles();
   let history = useHistory();
-  const {
-    getHotel,
-    generateTotalPrice,
-    createAccommodationPackage,
-    updateAccommodationPackage,
-  } = HotelAdminService();
+  const { getHotel, generateTotalPrice, createAccommodationPackage } =
+    HotelAdminService();
 
   const [accommodationData, setAccommodationData] = useState({
     packageType: "",
@@ -84,7 +80,6 @@ export default function RegistrationAccommodationPackageComponent(props) {
     },
     cnp: "",
   });
-  const [isUpdatePage] = useState(false);
   const [isTotalPriceGenerated, setTotalPriceIsGenerated] = useState(false);
 
   //   const initialState = {
@@ -164,50 +159,6 @@ export default function RegistrationAccommodationPackageComponent(props) {
       });
   };
 
-  const handleUpdate = (event) => {
-    event.preventDefault();
-
-    console.log(accommodationData.hotelId);
-    updateAccommodationPackage(accommodationData.hotelId, {
-      hotelName: accommodationData.hotelName,
-      rating: accommodationData.rating,
-      destination: {
-        country: accommodationData.destinationCountry,
-        city: accommodationData.destinationCity,
-        covidScenario: accommodationData.covidScenario,
-      },
-    })
-      .then((response) => {
-        console.log(
-          "Accommodation package was updated successfully for hotel " +
-            accommodationData.hotel.name +
-            "!"
-        );
-        if (response.status === 200) {
-          alert(
-            "Accommodation package was updated successfully for hotel " +
-              accommodationData.hotel.name +
-              "!"
-          );
-          history.push("/hotels");
-          setAccommodationData({
-            hotel: {
-              id: "",
-              name: "",
-              rating: "",
-              destinationCountry: "",
-              destinationCity: "",
-              covidScenario: "",
-            },
-          });
-        }
-      })
-      .catch((error) => {
-        console.log("Error: ", error.response.data.message);
-        alert("Error: " + error.response.data.message);
-      });
-  };
-
   const findHotelById = (hotelId) => {
     getHotel(hotelId)
       .then((response) => {
@@ -268,12 +219,6 @@ export default function RegistrationAccommodationPackageComponent(props) {
     const hotelId = +props.match.params.id;
 
     if (hotelId) {
-      // setIsUpdatePage(true);
-      setAccommodationData({
-        hotel: {
-          id: hotelId,
-        },
-      });
       findHotelById(hotelId);
     }
   }, []);
@@ -377,7 +322,6 @@ export default function RegistrationAccommodationPackageComponent(props) {
                   class="form-control"
                   placeholder="Pret/noapte"
                   required
-                  readOnly={isTotalPriceGenerated === true}
                   defaultValue={accommodationData.pricePerNight}
                   onChange={handleChange}
                 />
@@ -389,7 +333,6 @@ export default function RegistrationAccommodationPackageComponent(props) {
                     value={accommodationData.packageType}
                     onChange={handleChange}
                     displayEmpty
-                    readOnly={isTotalPriceGenerated === true}
                     className={classes.selectEmpty}
                     inputProps={{ "aria-label": "Without label" }}
                   >
@@ -413,7 +356,6 @@ export default function RegistrationAccommodationPackageComponent(props) {
                   class="form-control"
                   placeholder="Nr. nopti"
                   required
-                  readOnly={isTotalPriceGenerated === true}
                   defaultValue={accommodationData.nightsNumber}
                   onChange={handleChange}
                 />
@@ -426,7 +368,6 @@ export default function RegistrationAccommodationPackageComponent(props) {
                   class="form-control"
                   placeholder="Nr. camere"
                   required
-                  readOnly={isTotalPriceGenerated === true}
                   defaultValue={accommodationData.roomsNumber}
                   onChange={handleChange}
                 />
@@ -441,7 +382,6 @@ export default function RegistrationAccommodationPackageComponent(props) {
                   class="form-control"
                   placeholder="Nr. adulti"
                   required
-                  readOnly={isTotalPriceGenerated === true}
                   defaultValue={accommodationData.adultsNumber}
                   onChange={handleChange}
                 />
@@ -454,7 +394,6 @@ export default function RegistrationAccommodationPackageComponent(props) {
                   class="form-control"
                   placeholder="Nr. copii"
                   required
-                  readOnly={isTotalPriceGenerated === true}
                   defaultValue={accommodationData.kidsNumber}
                   onChange={handleChange}
                 />
@@ -481,20 +420,18 @@ export default function RegistrationAccommodationPackageComponent(props) {
             <button
               type="submit"
               class="btn btn-primary"
+              disabled={isTotalPriceGenerated === false}
               style={{
                 background: "linear-gradient(45deg, #F1CDB9 10%, #b6aeab 90%)",
                 border: "none",
               }}
-              onClick={isUpdatePage ? handleUpdate : handleSubmit}
+              onClick={handleSubmit}
             >
-              {isUpdatePage
-                ? "Actualizare pachet cazare"
-                : "Adauga pachet cazare nou"}
+              Adauga pachet cazare nou
             </button>
             <button
               type="submit"
               class="btn btn-primary"
-              disabled={isTotalPriceGenerated === true}
               style={{
                 background: "linear-gradient(45deg, #F1CDB9 10%, #b6aeab 90%)",
                 border: "none",

@@ -39,6 +39,8 @@ function HotelAdminService() {
 
   function createAccommodationPackage(hotelId, body) {
     setupAxiosInterceptors();
+    console.log("Body:" + body);
+    console.log("Body:", body);
     return createAccommodationPackageApi(hotelId, body);
   }
 
