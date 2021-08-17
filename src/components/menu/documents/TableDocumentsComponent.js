@@ -99,9 +99,9 @@ function TableDocumentsComponent({ data, ...rest }) {
             <TableCell align="center">Prenume angajat</TableCell>
             <TableCell align="center">Nume document</TableCell>
             {role === "ROLE_ADMIN" && (
-            <TableCell align="center">
-              <SettingsIcon className={classes.SettingsIcon}></SettingsIcon>
-            </TableCell>
+              <TableCell align="center">
+                <SettingsIcon className={classes.SettingsIcon}></SettingsIcon>
+              </TableCell>
             )}
           </TableRow>
         </TableHead>
@@ -110,26 +110,26 @@ function TableDocumentsComponent({ data, ...rest }) {
             ? data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             : data
           ).map((element, index) => (
-            <TableRow key={element.id}>
+            <TableRow key={index + 1}>
               <TableCell component="th" scope="row">
-                {element.id}
+                {index + 1}
               </TableCell>
               <TableCell align="center">{element.employeeFirstName}</TableCell>
               <TableCell align="center">{element.employeeLastName}</TableCell>
               <TableCell align="center">{element.documentName}</TableCell>
               {role === "ROLE_ADMIN" && (
-              <TableCell align="center">
-                <ButtonGroup>
-                  <Button
-                    onClick={() => pushTo("/admin/document/" + element.id)}
-                  >
-                    <EditIcon />
-                  </Button>
-                  <Button onClick={() => deleteDocument(this, element.id)}>
-                    <DeleteIcon />
-                  </Button>
-                </ButtonGroup>
-              </TableCell>
+                <TableCell align="center">
+                  <ButtonGroup>
+                    <Button
+                      onClick={() => pushTo("/admin/document/" + element.id)}
+                    >
+                      <EditIcon />
+                    </Button>
+                    <Button onClick={() => deleteDocument(this, element.id)}>
+                      <DeleteIcon />
+                    </Button>
+                  </ButtonGroup>
+                </TableCell>
               )}
             </TableRow>
           ))}
