@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { setProfile } from "../../../redux/actions/actions";
 import clsx from "clsx";
 import {
   Box,
@@ -13,7 +12,6 @@ import {
   TextField,
 } from "@material-ui/core";
 import EmployeeService from "../../../services/EmployeeService";
-import { updatePasswordApi } from "../../../api/userApi/UserApi";
 
 const useStyles = makeStyles({
   root: {
@@ -82,7 +80,7 @@ function UpdatePasswordComponent() {
     <paper className={classes.paper}>
       <form className={clsx(classes.root)}>
         <Card className={classes.cardStyle}>
-          <CardHeader title="Change Password" />
+          <CardHeader title="Actualizare parola" />
           <Divider />
           <CardContent>
             <TextField

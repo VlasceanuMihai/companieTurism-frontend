@@ -128,9 +128,9 @@ function TableEmployeesComponent({ data }) {
             ? data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             : data
           ).map((element, index) => (
-            <TableRow key={element.id}>
+            <TableRow key={index + 1}>
               <TableCell component="th" scope="row">
-                {element.id}
+                {index + 1}
               </TableCell>
               <TableCell align="center">{element.lastName}</TableCell>
               <TableCell align="center">{element.firstName}</TableCell>
