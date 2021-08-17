@@ -164,6 +164,7 @@ export default function RegistrationAccommodationPackageComponent(props) {
       .then((response) => {
         if (response.data !== null) {
           setAccommodationData({
+            ...accommodationData,
             hotel: {
               id: response.data.id,
               name: response.data.name,
@@ -194,17 +195,8 @@ export default function RegistrationAccommodationPackageComponent(props) {
     })
       .then((response) => {
         setAccommodationData({
+          ...accommodationData,
           totalPrice: response.data.totalPrice,
-          packageType: accommodationData.packageType,
-          hotel: {
-            id: accommodationData.hotel.id,
-            name: accommodationData.hotel.name,
-            rating: accommodationData.hotel.rating,
-            destinationCountry: accommodationData.hotel.destinationCountry,
-            destinationCity: accommodationData.hotel.destinationCity,
-            covidScenario: accommodationData.hotel.covidScenario,
-          },
-          cnp: accommodationData.cnp,
         });
         if (response.status === 200) {
           setTotalPriceIsGenerated(true);
