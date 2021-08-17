@@ -12,5 +12,5 @@ export const getProfileApi = async () => {
 /* PUT */
 // Update password
 export const updatePasswordApi = async (body) => {
-  return await axios.put("/v1/updatePassword", body);
+  return await axios.put(`${BASE_API}/v1/updatePassword`, body);
 };
