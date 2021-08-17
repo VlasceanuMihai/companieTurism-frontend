@@ -12,6 +12,8 @@ const useStyles = makeStyles({
     display: "flex",
     justifyContent: "center",
     allignItems: "center",
+    position: "relative",
+    top: '50px'
   },
   container2: {
     display: "flex",
