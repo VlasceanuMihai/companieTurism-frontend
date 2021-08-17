@@ -10,14 +10,15 @@ import {
   CardHeader,
   Divider,
   TextField,
-} from "@material-ui/core";
+} from "@material-ui/core/";
 import EmployeeService from "../../../services/EmployeeService";
 
 const useStyles = makeStyles({
   root: {
     width: "400px",
     position: "relative",
-    top: "50px",
+    top: '50px',
+    margin:"0px 20px 0px 20px"
   },
   paper: {
     display: "flex",
@@ -78,6 +79,138 @@ function UpdatePasswordComponent() {
 
   return (
     <paper className={classes.paper}>
+    <div>
+    <form className={classes.root}>
+      <Card className={classes.cardStyle}>
+        <CardHeader title="Profil" />
+        <Divider />
+        <CardContent>
+          <TextField 
+          className={classes.inputColor}
+          fullWidth
+          id="outlined-basic"
+          label="Nume"
+          variant="outlined"
+          margin="normal"
+          type="input"
+          />
+          <TextField 
+          className={classes.inputColor}
+          fullWidth
+          id="outlined-basic"
+          label="Prenume"
+          variant="outlined"
+          margin="normal"
+          type="input"
+          />
+          <TextField 
+          className={classes.inputColor}
+          fullWidth
+          id="outlined-basic"
+          label="Email"
+          variant="outlined"
+          margin="normal"
+          type="email"
+          />
+          <TextField 
+          className={classes.inputColor}
+          fullWidth
+          id="outlined-basic"
+          label="Telefon"
+          variant="outlined"
+          margin="normal"
+          type="tel" pattern="[0-9]{4}-[0-9]{3}-[0-9]{3}"
+          />
+          <TextField 
+          className={classes.inputColor}
+          fullWidth
+          id="outlined-basic"
+          label="CNP"
+          variant="outlined"
+          margin="normal"
+          type="number" 
+          maxlength="13"
+          minlength="13"
+          oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+          />
+          <TextField 
+          className={classes.inputColor}
+          fullWidth
+          id="outlined-basic"
+          variant="outlined"
+          margin="normal"
+          type="date"
+          />
+          <TextField 
+          className={classes.inputColor}
+          fullWidth
+          id="outlined-basic"
+          label="Tip angajat"
+          variant="outlined"
+          margin="normal"
+          type="input"
+          />
+        </CardContent>
+        <Divider />
+        <Box display="flex" justifyContent="flex-end" p={2}>
+          <Button className={classes.btnStyle} color="primary" variant="contained" onClick={handleSubmit}>
+            Confirm
+          </Button>
+        </Box>
+      </Card>
+    </form>
+    </div>
+    <form className={clsx(classes.root)} >
+      <Card className={classes.cardStyle}>
+        <CardHeader title="Change Password" />
+        <Divider />
+        <CardContent>
+          <TextField
+            className={classes.inputColor}
+            fullWidth
+            id="oldPassword"
+            name="oldPassword"
+            type="input"
+            label="Parola Curenta"
+            margin="normal"
+            variant="outlined"
+            onChange={handleChange}
+            value={passwordData.password || ""}
+          />
+          <TextField
+            className={classes.inputColor}
+            fullWidth
+            id="newPassword"
+            name="newPassword"
+            type="input"
+            label="Parola Noua"
+            margin="normal"
+            variant="outlined"
+            onChange={handleChange}
+            value={passwordData.password || ""}
+          />
+          <TextField
+            className={classes.inputColor}
+            fullWidth
+            id="confirmPassword"
+            name="confirmPassword"
+            type="input"
+            label="Confirmare Parola"
+            margin="normal"
+            variant="outlined"
+            onChange={handleChange}
+            value={passwordData.confirmPassword || ""}
+          />
+        </CardContent>
+        <Divider />
+        <Box display="flex" justifyContent="flex-end" p={2}>
+          <Button className={classes.btnStyle} color="primary" variant="contained" onClick={handleSubmit}>
+            Confirm
+          </Button>
+        </Box>
+      </Card>
+    </form>
+=======
       <form className={clsx(classes.root)}>
         <Card className={classes.cardStyle}>
           <CardHeader title="Actualizare parola" />
