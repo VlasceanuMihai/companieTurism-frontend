@@ -1,18 +1,14 @@
 import './NavbarComponent.css';
-import {
-  Nav,
-  NavLink,
-  NavMenu,
-  NavBtn,
-  NavBtnLink,
-} from './NavbarElements';
+import { Nav, NavLink, NavMenu, NavBtn, NavBtnLink} from './NavbarElements';
 import travel from '../../../media/travelNew.png';
 import AuthenticationService from '../../../auth/AuthenticationService';
 import { makeStyles } from '@material-ui/core';
+import {Link} from 'react-router-dom';
 
 const useStyles = makeStyles({
   travelImg: {
-    width: '70%',
+    width: '50px',
+    marginLeft: '20px',
   },
 });
 function NavbarComponent() {
@@ -26,13 +22,13 @@ function NavbarComponent() {
   return (
     <>
       <Nav className="nav">
-        <NavLink to="/home">
-          <img
-            className={classes.travelImg}
-            src={travel}
-            alt="Travel Company"
-          />
-        </NavLink>
+        <Link to="/home" >
+        <img
+          className={classes.travelImg}
+          src={travel}
+          alt="Travel Company"
+        />
+        </Link>
         <NavMenu>
           <NavLink to="/home" activeStyle>
             Acasa
@@ -49,17 +45,13 @@ function NavbarComponent() {
           <NavLink to="/hotels" activeStyle>
             Hoteluri
           </NavLink>
-          {/* Second Nav */}
-          {/* <NavBtnLink to='/sign-in'>Sign In</NavBtnLink> */}
         </NavMenu>
-        <NavBtn>
-          <NavBtnLink to="/profile">
-            <i className={classes.profileIcon} class="fas fa-user-circle"></i>
-          </NavBtnLink>
-        </NavBtn>
         <NavBtn>
           <NavBtnLink to="/signin" onClick={handleLogout}>
             Logout
+          </NavBtnLink>
+          <NavBtnLink to="/profile">
+            <i className={classes.profileIcon} class="fas fa-user-circle"></i>
           </NavBtnLink>
         </NavBtn>
       </Nav>

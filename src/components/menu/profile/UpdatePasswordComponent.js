@@ -17,9 +17,23 @@ import { updatePasswordApi } from "../../../api/userApi/UserApi";
 
 const useStyles = makeStyles({
   root: {
-    display: "flex",
-    justifyContent: "center",
+    width: "400px",
+    position: "relative",
+    top: '50px'
   },
+  paper:{
+    display:'flex',
+    justifyContent:'center',
+  },
+  cardStyle:{
+    background: "linear-gradient(120deg, #BFADA9, #F0E2DD 40%, #ffffff)"
+  },
+  btnStyle:{
+    background: "linear-gradient(45deg, #F1CDB9 10%, #b6aeab 90%)"
+  },
+  inputColor:{
+    backgroundColor:"white",
+  }
 });
 
 function UpdatePasswordComponent() {
@@ -57,28 +71,43 @@ function UpdatePasswordComponent() {
   }
 
   return (
-    <form className={clsx(classes.root)}>
-      <Card>
-        <CardHeader title="Update password" />
+    <paper className={classes.paper}>
+    <form className={clsx(classes.root)} >
+      <Card className={classes.cardStyle}>
+        <CardHeader title="Change Password" />
         <Divider />
-        <CardContent>
+        <CardContent >
           <TextField
+            className={classes.inputColor}
             fullWidth
-            id="password"
-            name="password"
-            type="password"
-            label="Password"
+            id="oldPassword"
+            name="oldPassword"
+            type="input"
+            label="Current Password"
             margin="normal"
             variant="outlined"
             onChange={handleChange}
             value={passwordData.password || ""}
           />
           <TextField
+            className={classes.inputColor}
+            fullWidth
+            id="newPassword"
+            name="newPassword"
+            type="input"
+            label="New Password"
+            margin="normal"
+            variant="outlined"
+            onChange={handleChange}
+            value={passwordData.password || ""}
+          />
+          <TextField
+            className={classes.inputColor}
             fullWidth
             id="confirmPassword"
             name="confirmPassword"
-            type="password"
-            label="Confirm password"
+            type="input"
+            label="Confirm Password"
             margin="normal"
             variant="outlined"
             onChange={handleChange}
@@ -87,12 +116,13 @@ function UpdatePasswordComponent() {
         </CardContent>
         <Divider />
         <Box display="flex" justifyContent="flex-end" p={2}>
-          <Button color="primary" variant="contained" onClick={handleSubmit}>
-            Update
+          <Button className={classes.btnStyle} color="primary" variant="contained" onClick={handleSubmit}>
+            Confirm
           </Button>
         </Box>
       </Card>
     </form>
+    </paper>
   );
 }
 
