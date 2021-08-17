@@ -161,62 +161,13 @@ function UpdatePasswordComponent() {
         <Divider />
         <Box display="flex" justifyContent="flex-end" p={2}>
           <Button className={classes.btnStyle} color="primary" variant="contained" onClick={handleSubmit}>
-            Confirm
+            Actualizare
           </Button>
         </Box>
       </Card>
     </form>
     </div>
-    <form className={clsx(classes.root)} >
-      <Card className={classes.cardStyle}>
-        <CardHeader title="Change Password" />
-        <Divider />
-        <CardContent>
-          <TextField
-            className={classes.inputColor}
-            fullWidth
-            id="oldPassword"
-            name="oldPassword"
-            type="input"
-            label="Parola Curenta"
-            margin="normal"
-            variant="outlined"
-            onChange={handleChange}
-            value={passwordData.password || ""}
-          />
-          <TextField
-            className={classes.inputColor}
-            fullWidth
-            id="newPassword"
-            name="newPassword"
-            type="input"
-            label="Parola Noua"
-            margin="normal"
-            variant="outlined"
-            onChange={handleChange}
-            value={passwordData.password || ""}
-          />
-          <TextField
-            className={classes.inputColor}
-            fullWidth
-            id="confirmPassword"
-            name="confirmPassword"
-            type="input"
-            label="Confirmare Parola"
-            margin="normal"
-            variant="outlined"
-            onChange={handleChange}
-            value={passwordData.confirmPassword || ""}
-          />
-        </CardContent>
-        <Divider />
-        <Box display="flex" justifyContent="flex-end" p={2}>
-          <Button className={classes.btnStyle} color="primary" variant="contained" onClick={handleSubmit}>
-            Confirm
-          </Button>
-        </Box>
-      </Card>
-    </form>
+    <form className={clsx(classes.root)}>
         <Card className={classes.cardStyle}>
           <CardHeader title="Actualizare parola" />
           <Divider />
@@ -270,6 +221,7 @@ function UpdatePasswordComponent() {
             </Button>
           </Box>
         </Card>
+        </form>
     </paper>
   )};
 
