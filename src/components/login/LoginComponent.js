@@ -89,11 +89,11 @@ function LoginComponent() {
               ></input>
               <span className="focus-input"></span>
             </div>
-            <div className="forgotPassword-text">
+            {/* <div className="forgotPassword-text">
               <a href="https://google.ro" className="text1">
                 Forgot password ?
               </a>
-            </div>
+            </div> */}
             <div className="login-form-btn-container">
               <button className="login-form-btn" onClick={handleSubmit}>
                 Sign in
