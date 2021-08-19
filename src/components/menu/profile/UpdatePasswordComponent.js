@@ -21,7 +21,8 @@ const useStyles = makeStyles({
     margin: "0px 20px 0px 20px",
   },
   paper: {
-    display: "flex",
+    display: 'inline-block',
+    verticalAlign: 'text-top',
     justifyContent: "center",
   },
   cardStyle: {

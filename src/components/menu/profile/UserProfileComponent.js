@@ -20,7 +20,8 @@ const useStyles = makeStyles((theme) => ({
     margin: "0px 20px 0px 20px",
   },
   paper: {
-    display: "flex",
+    display: 'inline-block',
+    verticalAlign: 'text-top',
     justifyContent: "center",
   },
   cardStyle: {
@@ -30,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     background: "linear-gradient(45deg, #F1CDB9 10%, #b6aeab 90%)",
   },
   inputColor: {
-    backgroundColor: "white",
+    backgroundColor: "none",
   },
 }));
 
@@ -163,17 +164,6 @@ function UserProfileComponent() {
                 inputProps={{ readOnly: true }}
               />
             </CardContent>
-            {/* <Divider />
-            <Box display="flex" justifyContent="flex-end" p={2}>
-              <Button
-                className={classes.btnStyle}
-                color="primary"
-                variant="contained"
-                // onClick={handleSubmit}
-              >
-                Actualizare
-              </Button>
-            </Box> */}
           </Card>
         </form>
       </div>
