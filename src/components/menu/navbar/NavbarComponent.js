@@ -51,7 +51,7 @@ function NavbarComponent() {
             Logout
           </NavBtnLink>
           <NavBtnLink to="/profile">
-            {}<i className={classes.profileIcon} class="fas fa-user-circle"></i>
+            <i className={classes.profileIcon} class="fas fa-user-circle"></i>
           </NavBtnLink>
         </NavBtn>
       </Nav>
