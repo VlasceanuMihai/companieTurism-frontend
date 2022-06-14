@@ -98,12 +98,19 @@ function TableEmployeesComponent({ data }) {
     history.push(path);
   };
 
-  const isAdminOrManager = (role) =>{
-    if (role === "ROLE_ADMIN" || role === "ROLE_MANAGER_HR") {
+  const isAdmin = (role) =>{
+    if (role === "ROLE_ADMIN") {
       return true;
     }
     return false;
   }
+
+  // const isManager = (role) =>{
+  //   if (role === "ROLE_MANAGER_HR") {
+  //     return true;
+  //   }
+  //   return false;
+  // }
 
   // useEffect(() => {
   //   console.log("useEffect --- ", employees);
@@ -149,11 +156,11 @@ function TableEmployeesComponent({ data }) {
               <TableCell align="center">{element.wage}</TableCell>
               {(role === "ROLE_ADMIN" || role === "ROLE_MANAGER_HR") && (
                 <TableCell align="center">
-                  <ButtonGroup disabled={isAdminOrManager(element.role)}>
+                  <ButtonGroup>
                     <Button onClick={() => pushTo("/admin/employee/" + element.id)}>
                       <EditIcon />
                     </Button>
-                    <Button onClick={() => deleteEmployee(this, element.id)}>
+                    <Button onClick={() => deleteEmployee(this, element.id)} disabled={isAdmin(element.role)}>
                       <DeleteIcon />
                     </Button>
                   </ButtonGroup>

@@ -96,13 +96,13 @@ function HomeComponent() {
             </p>
           </div>
           <div className={classes.general}>
-            <p style={{ fontSize: "20px" }}>COORDONATOR STIINTIFIC: {profile.email}</p>
+            <p style={{ fontSize: "20px" }}>COORDONATOR STIINTIFIC: *Nume Profesor*</p>
           </div>
           <div className={classes.general}>
             <p style={{ fontSize: "17px" }}>Asolvent: Ghita Andrei Rafael</p>
           </div>
           <div className={classes.borderless}>
-            <p style={{ fontSize: "17px" }}>BUCURESTI 2021</p>
+            <p style={{ fontSize: "17px" }}>BUCURESTI 2022</p>
           </div>
         </div>
       </div>
