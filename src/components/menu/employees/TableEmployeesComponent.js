@@ -98,6 +98,13 @@ function TableEmployeesComponent({ data }) {
     history.push(path);
   };
 
+  const isAdminOrManager = (role) =>{
+    if (role === "ROLE_ADMIN" || role === "ROLE_MANAGER_HR") {
+      return true;
+    }
+    return false;
+  }
+
   // useEffect(() => {
   //   console.log("useEffect --- ", employees);
   // }, [employees]);
@@ -116,7 +123,7 @@ function TableEmployeesComponent({ data }) {
             <TableCell align="center">Tip Contract</TableCell>
             <TableCell align="center">Data Angajarii</TableCell>
             <TableCell align="center">Salariu</TableCell>
-            {role === "ROLE_ADMIN" && (
+            {(role === "ROLE_ADMIN" || role === "ROLE_MANAGER_HR") && (
               <TableCell align="center">
                 <SettingsIcon className={classes.SettingsIcon}></SettingsIcon>
               </TableCell>
@@ -140,12 +147,10 @@ function TableEmployeesComponent({ data }) {
               <TableCell align="center">{element.employeeType}</TableCell>
               <TableCell align="center">{element.dateOfEmployment}</TableCell>
               <TableCell align="center">{element.wage}</TableCell>
-              {role === "ROLE_ADMIN" && (
+              {(role === "ROLE_ADMIN" || role === "ROLE_MANAGER_HR") && (
                 <TableCell align="center">
-                  <ButtonGroup>
-                    <Button
-                      onClick={() => pushTo("/admin/employee/" + element.id)}
-                    >
+                  <ButtonGroup disabled={isAdminOrManager(element.role)}>
+                    <Button onClick={() => pushTo("/admin/employee/" + element.id)}>
                       <EditIcon />
                     </Button>
                     <Button onClick={() => deleteEmployee(this, element.id)}>
