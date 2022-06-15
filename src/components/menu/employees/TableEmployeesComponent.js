@@ -98,19 +98,20 @@ function TableEmployeesComponent({ data }) {
     history.push(path);
   };
 
-  const isAdmin = (role) =>{
+  const isAdmin = (role) => {
     if (role === "ROLE_ADMIN") {
       return true;
     }
     return false;
   }
 
-  // const isManager = (role) =>{
-  //   if (role === "ROLE_MANAGER_HR") {
-  //     return true;
-  //   }
-  //   return false;
-  // }
+  const isManager = (role) => {
+    if (role === "ROLE_MANAGER_HR") {
+      return true;
+    }
+    return false;
+  }
+
 
   // useEffect(() => {
   //   console.log("useEffect --- ", employees);
@@ -154,7 +155,7 @@ function TableEmployeesComponent({ data }) {
               <TableCell align="center">{element.employeeType}</TableCell>
               <TableCell align="center">{element.dateOfEmployment}</TableCell>
               <TableCell align="center">{element.wage}</TableCell>
-              {(role === "ROLE_ADMIN" || role === "ROLE_MANAGER_HR") && (
+              {((role === "ROLE_ADMIN") && (
                 <TableCell align="center">
                   <ButtonGroup>
                     <Button onClick={() => pushTo("/admin/employee/" + element.id)}>
@@ -165,7 +166,20 @@ function TableEmployeesComponent({ data }) {
                     </Button>
                   </ButtonGroup>
                 </TableCell>
-              )}
+              )) || ((role === "ROLE_MANAGER_HR") && (
+                <TableCell align="center">
+                  <ButtonGroup>
+                    <Button onClick={() => pushTo("/admin/employee/" + element.id)}>
+                      <EditIcon />
+                    </Button>
+                    <Button onClick={() => deleteEmployee(this, element.id)}
+                      disabled={isAdmin(element.role) || isManager(element.role)}>
+                      <DeleteIcon />
+                    </Button>
+                  </ButtonGroup>
+                </TableCell>
+              ))
+              }
             </TableRow>
           ))}
         </TableBody>
